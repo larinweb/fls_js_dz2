@@ -4,21 +4,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LVS_UA L2 DZ task 2</title>
+    <title>LVS_UA L2 DZ task 0.3</title>
   </head>
   <body>
-    <h1>Завдання 2</h1>
-    <p>
-      Дано рік народження (дата: 1 січня) та поточний рік. Знайти кількість
-      років.
-    </p>
+    <h1>Завдання 0.3</h1>
+    <p>Задача 0.3. Обчислити значення виразів</p>
     <script>
       // 1. Введення необхідних даних
-      let yearOfBirth = parseInt(prompt("Enter year of birth", "0"));
-      let currentYear = new Date().getFullYear(); // нагуглив) чи краще булоб просто const = 2023???
+      let a = parseInt(prompt('Enter "a" value', "0"));
+      let b = parseInt(prompt('Enter "b" value', "0"));
+      let c = parseInt(prompt('Enter "c" value', "0"));
 
       // 2. Обчислення результату
-      let age = currentYear - yearOfBirth;
+      s3 = Math.cbrt((a + b) * c);
 
       // 3. Виведення результату
       document.write(`
@@ -28,8 +26,8 @@
              		<th>Result</th>
              	</tr>
              	<tr>
-             		<th>Age</th>
-             		<td>${age}</td>
+             		<th>Square root</th>
+             		<td>${s3}</td>
              	</tr>
              </table>
          `);

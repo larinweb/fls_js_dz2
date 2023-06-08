@@ -8,11 +8,41 @@
   </head>
   <body>
     <h1>Завдання 1</h1>
-    <p></p>
+    <p>
+      Знайти суму, добуток та частку двох дійсних чисел. Результат вивести у
+      формі таблиці
+    </p>
     <script>
-      // 1.Вводимо необхідні данні
-      // 2.Знаходимо результат
-      // 3.Виводимо результат
+      // 1. Введення необхідних даних
+      let firstNumber = parseFloat(prompt("Enter first number value", "0"));
+      let secondNumber = parseFloat(prompt("Enter second number value", "0"));
+
+      // 2. Обчислення результату
+      let add = firstNumber + secondNumber;
+      let multiple = firstNumber * secondNumber;
+      let divided = firstNumber / secondNumber;
+
+      // 3. Виведення результату
+      document.write(`
+        <table border="2px">
+             	<tr>
+             		<th>Task</th>
+             		<th>Result</th>
+             	</tr>
+             	<tr>
+             		<th>Add</th>2.6
+             		<td>${add}</td>
+             	</tr>
+             	<tr>
+             		<th>Multiple</th>
+             		<td>${multiple}</td>
+             	</tr>
+             	<tr>
+             		<th>Divided</th>
+             		<td>${divided.toFixed(4)}</td>
+             	</tr>
+             </table>
+         `);
     </script>
   </body>
 </html>

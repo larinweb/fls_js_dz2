@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L2 DZ task 5</title>
+  </head>
+  <body>
+    <h1>Завдання 5</h1>
+    <p>
+      Дано кількість секунд, що пройшла від початку доби. Визначити скільки це
+      годин і хвилин.
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+      let secondsPass = parseInt(prompt("Enter seconds amount", "0"));
+      const MINUTE = 60;
+      const HOUR = 3600;
+
+      // 2. Обчислення результату
+      let taskHour = Math.floor(secondsPass / HOUR); // Hours count
+      let taskSeconds = secondsPass % HOUR; // Seconds left after hours count.
+      let taskMinutes = Math.floor(taskSeconds / MINUTE); // Minutes count
+
+      // 3. Виведення результату
+      document.write(`
+        <table border="2px">
+             	<tr>
+             		<th>Task</th>
+             		<th>Result</th>
+             	</tr>
+             	<tr>
+             		<th>Seconds amount</th>
+             		<td>${taskHour} годин ${taskMinutes} хвилин</td>
+             	</tr>
+             </table>
+         `);
+    </script>
+  </body>
+</html>
