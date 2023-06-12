@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L3 DZ task 3</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result_body">
+    <h1>Завдання 7</h1>
+    <p>З клавіатури вводиться номер місяця. Вивести до якої пори він відноситься</p>
+    <script>
+      // 1. Введення необхідних даних
+
+      let monthNumber = parseInt(prompt("Введіть номер місяця", ""));
+      let timeOfYear;
+
+      //  2. Обчислення результату
+
+      timeOfYear =
+        monthNumber === 12 || monthNumber <= 2
+          ? "Зима"
+          : monthNumber <= 5
+          ? "Весна"
+          : monthNumber <= 8
+          ? "Літо"
+          : monthNumber <= 11
+          ? "Осінь"
+          : "Помилка, невірний ввід даних";
+
+      // switch (monthNumber) {
+      //   case 12:
+      //   case 1:
+      //   case 2:
+      //     timeOfYear = "Зима";
+      //     break;
+      //   case 3:
+      //   case 4:
+      //   case 5:
+      //     timeOfYear = "Весна";
+      //     break;
+      //   case 6:
+      //   case 7:
+      //   case 8:
+      //     timeOfYear = "Літо";
+      //     break;
+      //   case 9:
+      //   case 10:
+      //   case 11:
+      //     timeOfYear = "Осінь";
+      //     break;
+      //   default:
+      //     timeOfYear = "Помилка, невірний ввід даних";
+      //     break;
+      // }
+
+      // if (monthNumber === 12 || monthNumber <= 2) {
+      //   timeOfYear = "Зима";
+      // } else if (monthNumber <= 5) {
+      //   timeOfYear = "Весна";
+      // } else if (monthNumber <= 8) {
+      //   timeOfYear = "Літо";
+      // } else if (monthNumber <= 11) {
+      //   timeOfYear = "Осінь";
+      // } else {
+      //   timeOfYear = "Помилка, невірний ввод даних";
+      // }
+
+      // 3. Виведення результату
+      document.write(`
+      <table>
+      	<tr>
+      		<th>Task</th>
+      		<th>Result</th>
+      	</tr>
+      	<tr>
+      		<th>Цей місяз відноситься до наступної пори</th>
+      		<td>${timeOfYear}</td>
+      	</tr>
+      </table>
+      `);
+    </script>
+  </body>
+</html>

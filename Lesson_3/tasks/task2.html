@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L3 DZ task 2</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result_body">
+    <h1>Завдання 2</h1>
+    <p>
+      З клавіатури вводиться ціна товару і кількість грошей. Якщо грошей не вистачає то відмовляємо у покупці,
+      інакше, якщо ще залишаються гроші, то пропонуємо купити лотерею за 4 грн.
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+      const LOTERRY_PRICE = 4;
+      const productPrice = parseFloat(prompt("Введіть ціну товару:"));
+      const moneyAmount = parseFloat(prompt("Введіть кількість грошей:"));
+      const notEnoughMoney = "У вас недостатньо грошей для покупки товару.",
+        notEnoughMoneyLottery = "У вас недостатньо грошей для покупки лотереї.",
+        refuseMessage = "Ви відмовилися від покупки лотереї.",
+        buyLotteryMessage = "Ви купили лотерею!";
+
+      let result;
+
+      //  2. Обчислення результату
+      if (moneyAmount < productPrice) {
+        result = notEnoughMoney;
+      } else {
+        let changeAmount = moneyAmount - productPrice;
+        let changeMessage = "Ваша решта: " + changeAmount + " грн.";
+        if (changeAmount >= LOTERRY_PRICE) {
+          let buyLottery = confirm("У вас достатньо грошей. Бажаєте придбати лотерею за 4 грн?");
+          if (buyLottery) {
+            result = buyLotteryMessage;
+          } else {
+            result = refuseMessage;
+          }
+        } else {
+          result = notEnoughMoneyLottery;
+        }
+      }
+
+      // 3. Виведення результату
+      document.write(`
+      <table>
+      	<tr>
+      		<th>Task</th>
+      		<th>Result</th>
+      	</tr>
+      	<tr>
+      		<th>Чи купили ви лотерею</th>
+      		<td>${result}</td>
+      	</tr>
+      </table>
+      `);
+    </script>
+  </body>
+</html>

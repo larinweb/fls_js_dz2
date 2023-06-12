@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L3 DZ task 3</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result_body">
+    <h1>Завдання 5</h1>
+    <p>
+      З клавіатури вводиться назва категорії водія (А-мотоцикл, В-легковий автомобіль, С-вантажний
+      автомобіль). Вивести на екран назву транспортного засобу, яким він може керувати.
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+
+      let driveLicense = prompt("Ввкдіть водійську категорію", "").toUpperCase();
+      let inputError = "Помилка. Неввірний ввід данних";
+      //  2. Обчислення результату
+
+      let vehicleType =
+        driveLicense === "A"
+          ? "Мотоцикл"
+          : driveLicense === "B"
+          ? "Легковий автомобіль"
+          : driveLicense === "C"
+          ? "Вантажний автомобіль"
+          : inputError;
+
+      // if (driveLicense === "A") {
+      //   vehicleType = "Мотоцикл";
+      // } else if (driveLicense === "B") {
+      //   vehicleType = "Легковий автомобіль";
+      // } else if (driveLicense === "C") {
+      //   vehicleType = "Вантажний автомобіль";
+      // } else {
+      //   vehicleType = inputError;
+      // }
+
+      // switch (true) {
+      //   case driveLicense === "A":
+      //     vehicleType = "Мотоцикл";
+      //     break;
+      //   case driveLicense === "B":
+      //     vehicleType = "Легковий автомобіль";
+      //     break;
+      //   case driveLicense === "C":
+      //     vehicleType = "Вантажний автомобіль";
+      //     break;
+      //   default:
+      //     vehicleType = inputError;
+      //     break;
+      // }
+      // 3. Виведення результату
+      document.write(`
+		<table>
+			<tr>
+				<th>Task</th>
+				<th>Result</th>
+			</tr>
+			<tr>
+				<th>Транспортний засіб, яким ви може керувати.</th>
+				<td>${vehicleType}</td>
+			</tr>
+		</table>
+		`);
+    </script>
+  </body>
+</html>

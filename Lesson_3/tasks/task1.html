@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L3 DZ task 1</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result_body">
+    <h1>Завдання 1</h1>
+    <p>
+      З клавіатури вводяться імена двох дітей та кількість у них цукерок. Вивести не екран ім’я тієї дитини, у
+      якої кількість цукерок є більшою, або вивести, що кількість однакова.
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+      let firstChildName = prompt("Введіть ім’я першої дитини", "Ім’я першої дитини");
+      let firstChildCandyAmount = parseInt(prompt("Скільки в першої дитини цукерок"));
+      let secondChildName = prompt("Введіть ім’я другої дитини", "Ім’я другої дитини");
+      let secondChildCandyAmount = parseInt(prompt("Скільки в другої дитини цукерок"));
+
+      // 2. Обчислення результату
+
+      // if (firstChildCandyAmount < secondChildCandyAmount) {
+      //   biggerCandyAmountChildName = secondChildName;
+      // } else if (firstChildCandyAmount > secondChildCandyAmount) {
+      //   biggerCandyAmountChildName = firstChildName;
+      // } else {
+      //   biggerCandyAmountChildName = "Кількість цукерок однакова";
+      // }
+
+      let biggerCandyAmountChildName =
+        firstChildCandyAmount > secondChildCandyAmount
+          ? firstChildName
+          : firstChildCandyAmount < secondChildCandyAmount
+          ? secondChildName
+          : "Кількість цукерок однакова";
+
+      // 3. Виведення результату
+      document.write(`
+			<table>
+				<tr>
+					<th>Task</th>
+					<th>Result</th>
+				</tr>
+				<tr>
+					<th>Ім’я дини в якої більше цукерок</th>
+					<td>${biggerCandyAmountChildName}</td>
+				</tr>
+			</table>
+		`);
+    </script>
+  </body>
+</html>

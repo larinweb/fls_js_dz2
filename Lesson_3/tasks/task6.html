@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L3 DZ task 3</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result_body">
+    <h1>Завдання 6</h1>
+    <p>З клавіатури вводиться номер дня тижня. Вивести на екран назву дня.</p>
+    <script>
+      // 1. Введення необхідних даних
+
+      let dayNumber = parseInt(prompt("Введіть номер дня тижня", ""));
+      // let dayName;
+
+      //  2. Обчислення результату
+
+      let dayName =
+        dayNumber === 1
+          ? "Понеділок"
+          : dayNumber === 2
+          ? "Вівторок"
+          : dayNumber === 3
+          ? "Середа"
+          : dayNumber === 4
+          ? "Четвер"
+          : dayNumber === 5
+          ? "П'ятниця"
+          : dayNumber === 6
+          ? "Субота"
+          : dayNumber === 7
+          ? "Неділя"
+          : "Помилка, невірний ввод даних";
+
+      // switch (dayNumber) {
+      //   case 1:
+      //     dayName = "Понеділок";
+      //     break;
+      //   case 2:
+      //     dayName = "Вівторок";
+      //     break;
+      //   case 3:
+      //     dayName = "Середа";
+      //     break;
+      //   case 4:
+      //     dayName = "Четвер";
+      //     break;
+      //   case 5:
+      //     dayName = "П'ятниця";
+      //     break;
+      //   case 6:
+      //     dayName = "Субота";
+      //     break;
+      //   case 7:
+      //     dayName = "Неділя";
+      //     break;
+      //   default:
+      //     dayName = "Помилка, невірний ввод даних";
+      //     break;
+      // }
+
+      // if (dayNumber === 1) {
+      //   dayName = "Понеділок";
+      // } else if (dayNumber === 2) {
+      //   dayName = "Вівторок";
+      // } else if (dayNumber === 3) {
+      //   dayName = "Середа";
+      // } else if (dayNumber === 4) {
+      //   dayName = "Четвер";
+      // } else if (dayNumber === 5) {
+      //   dayName = "П'ятниця";
+      // } else if (dayNumber === 6) {
+      //   dayName = "Субота";
+      // } else if (dayNumber === 7) {
+      //   dayName = "Неділя";
+      // } else {
+      //   dayName = "Помилка, невірний ввод даних";
+      // }
+
+      // 3. Виведення результату
+      document.write(`
+      <table>
+      	<tr>
+      		<th>Task</th>
+      		<th>Result</th>
+      	</tr>
+      	<tr>
+      		<th>Назва дня</th>
+      		<td>${dayName}</td>
+      	</tr>
+      </table>
+      `);
+    </script>
+  </body>
+</html>

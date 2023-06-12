@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L3 DZ task 3</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result_body">
+    <h1>Завдання 4</h1>
+    <p>
+      З клавіатури вводиться вік людини. Вивести на екран ким він є (дитиною у садочку, школярем, студентом,
+      працівником, пенсіонером)
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+
+      let userAge = parseInt(prompt("Введіть ваш вік", "0"));
+      // let ageResult;
+
+      //  2. Обчислення результату
+
+      let ageResult =
+        userAge <= 6
+          ? "Ви маля"
+          : userAge <= 17
+          ? "Ви школяр"
+          : userAge <= 23
+          ? "Ви студент"
+          : userAge <= 55
+          ? "Ви працівник"
+          : "Ви пенсіонер";
+
+      // if (userAge <= 6) {
+      //   ageResult = "Ви маля";
+      // } else if (userAge <= 17) {
+      //   ageResult = "Ви школяр";
+      // } else if (userAge <= 23) {
+      //   ageResult = "Ви студент";
+      // } else if (userAge <= 55) {
+      //   ageResult = "Ви працівник";
+      // } else {
+      //   ageResult = "Ви пенсіонер";
+      // }
+
+      // switch (true) {
+      //   case userAge <= 6:
+      //     ageResult = "Ви маля";
+      //     break;
+      //   case userAge <= 17:
+      //     ageResult = "Ви школяр";
+      //     break;
+      //   case userAge <= 23:
+      //     ageResult = "Ви студент";
+      //     break;
+      //   case userAge <= 55:
+      //     ageResult = "Ви працівник";
+      //     break;
+      //   default:
+      //     ageResult = "Ви пенсіонер";
+      //     break;
+      // }
+
+      // 3. Виведення результату
+      document.write(`
+		<table>
+			<tr>
+				<th>Task</th>
+				<th>Result</th>
+			</tr>
+			<tr>
+				<th>Хто ви?</th>
+				<td>${ageResult}</td>
+			</tr>
+		</table>
+		`);
+    </script>
+  </body>
+</html>

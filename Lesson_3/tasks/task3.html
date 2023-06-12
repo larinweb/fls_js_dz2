@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L3 DZ task 3</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result_body">
+    <h1>Завдання 3</h1>
+    <p>Випадковим чином генерується число від 1 до 5. Спробуйте вгадати число за 2 спроби.</p>
+    <script>
+      // 1. Введення необхідних даних
+      const randomNumber = parseInt(Math.random() * 5) + 1;
+      const guessedMessage = "Вітаемо! Вгадали";
+      const didNotGuess = "Упс! Не вгадали";
+      const wrongInput = "Невірно. Число мае бути від 1 до 5";
+      let guessingResult;
+
+      //  2. Обчислення результату
+
+      let firstTry = parseInt(prompt("Спроба 1. Введіть число"), "");
+      if (firstTry >= 1 && firstTry <= 5) {
+        if (firstTry === randomNumber) {
+          guessingResult = guessedMessage;
+        } else {
+          let secondTry = parseInt(prompt("Не вгадали. Спроба 2. Введіть число"), "");
+          if (secondTry >= 1 && secondTry <= 5) {
+            if (secondTry === randomNumber) {
+              guessingResult = guessedMessage;
+            } else {
+              guessingResult = didNotGuess;
+            }
+          } else {
+            guessingResult = wrongInput + " (Спроба 2)";
+          }
+        }
+      } else {
+        guessingResult = wrongInput + " (Спроба 1)";
+      }
+
+      // if (randomNumber === parseInt(prompt("Спроба 1. Введіть число"), "")) {
+      //   guessingResult = guessedMessage;
+      // } else if (randomNumber === parseInt(prompt("Не вгадали. Спроба 2. Введіть число"), "")) {
+      //   guessingResult = guessedMessage;
+      // } else {
+      //   guessingResult = didNotGuess;
+      // }
+
+      // guessingResult =
+      //   randomNumber === parseInt(prompt("Спроба 1. Введіть число"), "")
+      //     ? guessedMessage
+      //     : randomNumber === parseInt(prompt("Не вгадали. Спроба 2. Введіть число"), "")
+      //     ? guessedMessage
+      //     : didNotGuess;
+
+      // 3. Виведення результату
+      document.write(`
+             <table>
+             	<tr>
+             		<th>Task</th>
+             		<th>Result</th>
+             	</tr>
+             	<tr>
+             		<th>Вгадали?</th>
+             		<td>${guessingResult}</td>
+             	</tr>
+             	<tr>
+             		<th>Загаданне випадкове число</th>
+             		<td>${randomNumber}</td>
+             	</tr>
+             </table>
+             `);
+    </script>
+  </body>
+</html>
