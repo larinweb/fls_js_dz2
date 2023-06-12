@@ -35,7 +35,9 @@
           ? firstChildName
           : firstChildCandyAmount < secondChildCandyAmount
           ? secondChildName
-          : "Кількість цукерок однакова";
+          : firstChildCandyAmount === secondChildCandyAmount
+          ? biggerCandyAmountChildName = "Кількість цукерок однакова"
+          : "Помилка вводу данних";
 
       // 3. Виведення результату
       document.write(`
