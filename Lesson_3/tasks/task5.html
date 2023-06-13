@@ -17,17 +17,33 @@
       // 1. Введення необхідних даних
 
       let driveLicense = prompt("Ввкдіть водійську категорію", "").toUpperCase();
-      let inputError = "Помилка. Неввірний ввід данних";
+      let vehicleType;
+
       //  2. Обчислення результату
 
-      let vehicleType =
-        driveLicense === "A"
-          ? "Мотоцикл"
-          : driveLicense === "B"
-          ? "Легковий автомобіль"
-          : driveLicense === "C"
-          ? "Вантажний автомобіль"
-          : inputError;
+      switch (driveLicense) {
+        case "A":
+          vehicleType = "Мотоцикл";
+          break;
+        case "B":
+          vehicleType = "Легковий автомобіль";
+          break;
+        case "C":
+          vehicleType = "Вантажний автомобіль";
+          break;
+        default:
+          vehicleType = "Помилка. Невірний ввід даних";
+          break;
+      }
+
+      // let vehicleType =
+      //   driveLicense === "A"
+      //     ? "Мотоцикл"
+      //     : driveLicense === "B"
+      //     ? "Легковий автомобіль"
+      //     : driveLicense === "C"
+      //     ? "Вантажний автомобіль"
+      //     : inputError;
 
       // if (driveLicense === "A") {
       //   vehicleType = "Мотоцикл";
@@ -39,20 +55,6 @@
       //   vehicleType = inputError;
       // }
 
-      // switch (true) {
-      //   case driveLicense === "A":
-      //     vehicleType = "Мотоцикл";
-      //     break;
-      //   case driveLicense === "B":
-      //     vehicleType = "Легковий автомобіль";
-      //     break;
-      //   case driveLicense === "C":
-      //     vehicleType = "Вантажний автомобіль";
-      //     break;
-      //   default:
-      //     vehicleType = inputError;
-      //     break;
-      // }
       // 3. Виведення результату
       document.write(`
 		<table>

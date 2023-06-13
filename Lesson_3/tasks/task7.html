@@ -18,16 +18,28 @@
 
       //  2. Обчислення результату
 
-      timeOfYear =
-        monthNumber === 12 || monthNumber <= 2
-          ? "Зима"
-          : monthNumber <= 5
-          ? "Весна"
-          : monthNumber <= 8
-          ? "Літо"
-          : monthNumber <= 11
-          ? "Осінь"
-          : "Помилка, невірний ввід даних";
+      if (monthNumber === 12 || monthNumber <= 2) {
+        timeOfYear = "Зима";
+      } else if (monthNumber <= 5) {
+        timeOfYear = "Весна";
+      } else if (monthNumber <= 8) {
+        timeOfYear = "Літо";
+      } else if (monthNumber <= 11) {
+        timeOfYear = "Осінь";
+      } else {
+        timeOfYear = "Помилка, невірний ввод даних";
+      }
+
+      // timeOfYear =
+      //   monthNumber === 12 || monthNumber <= 2
+      //     ? "Зима"
+      //     : monthNumber <= 5
+      //     ? "Весна"
+      //     : monthNumber <= 8
+      //     ? "Літо"
+      //     : monthNumber <= 11
+      //     ? "Осінь"
+      //     : "Помилка, невірний ввід даних";
 
       // switch (monthNumber) {
       //   case 12:
@@ -53,18 +65,6 @@
       //   default:
       //     timeOfYear = "Помилка, невірний ввід даних";
       //     break;
-      // }
-
-      // if (monthNumber === 12 || monthNumber <= 2) {
-      //   timeOfYear = "Зима";
-      // } else if (monthNumber <= 5) {
-      //   timeOfYear = "Весна";
-      // } else if (monthNumber <= 8) {
-      //   timeOfYear = "Літо";
-      // } else if (monthNumber <= 11) {
-      //   timeOfYear = "Осінь";
-      // } else {
-      //   timeOfYear = "Помилка, невірний ввод даних";
       // }
 
       // 3. Виведення результату

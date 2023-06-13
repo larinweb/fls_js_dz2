@@ -20,29 +20,28 @@
       // let ageResult;
 
       //  2. Обчислення результату
+      if (userAge <= 6) {
+        ageResult = "Ви маля";
+      } else if (userAge <= 17) {
+        ageResult = "Ви школяр";
+      } else if (userAge <= 23) {
+        ageResult = "Ви студент";
+      } else if (userAge <= 55) {
+        ageResult = "Ви працівник";
+      } else {
+        ageResult = "Ви пенсіонер";
+      }
 
-      let ageResult =
-        userAge <= 6
-          ? "Ви маля"
-          : userAge <= 17
-          ? "Ви школяр"
-          : userAge <= 23
-          ? "Ви студент"
-          : userAge <= 55
-          ? "Ви працівник"
-          : "Ви пенсіонер";
-
-      // if (userAge <= 6) {
-      //   ageResult = "Ви маля";
-      // } else if (userAge <= 17) {
-      //   ageResult = "Ви школяр";
-      // } else if (userAge <= 23) {
-      //   ageResult = "Ви студент";
-      // } else if (userAge <= 55) {
-      //   ageResult = "Ви працівник";
-      // } else {
-      //   ageResult = "Ви пенсіонер";
-      // }
+      // let ageResult =
+      //   userAge <= 6
+      //     ? "Ви маля"
+      //     : userAge <= 17
+      //     ? "Ви школяр"
+      //     : userAge <= 23
+      //     ? "Ви студент"
+      //     : userAge <= 55
+      //     ? "Ви працівник"
+      //     : "Ви пенсіонер";
 
       // switch (true) {
       //   case userAge <= 6:

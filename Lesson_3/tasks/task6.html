@@ -14,53 +14,53 @@
       // 1. Введення необхідних даних
 
       let dayNumber = parseInt(prompt("Введіть номер дня тижня", ""));
-      // let dayName;
+      let dayName;
 
       //  2. Обчислення результату
 
-      let dayName =
-        dayNumber === 1
-          ? "Понеділок"
-          : dayNumber === 2
-          ? "Вівторок"
-          : dayNumber === 3
-          ? "Середа"
-          : dayNumber === 4
-          ? "Четвер"
-          : dayNumber === 5
-          ? "П'ятниця"
-          : dayNumber === 6
-          ? "Субота"
-          : dayNumber === 7
-          ? "Неділя"
-          : "Помилка, невірний ввод даних";
+      switch (dayNumber) {
+        case 1:
+          dayName = "Понеділок";
+          break;
+        case 2:
+          dayName = "Вівторок";
+          break;
+        case 3:
+          dayName = "Середа";
+          break;
+        case 4:
+          dayName = "Четвер";
+          break;
+        case 5:
+          dayName = "П'ятниця";
+          break;
+        case 6:
+          dayName = "Субота";
+          break;
+        case 7:
+          dayName = "Неділя";
+          break;
+        default:
+          dayName = "Помилка, невірний ввод даних";
+          break;
+      }
 
-      // switch (dayNumber) {
-      //   case 1:
-      //     dayName = "Понеділок";
-      //     break;
-      //   case 2:
-      //     dayName = "Вівторок";
-      //     break;
-      //   case 3:
-      //     dayName = "Середа";
-      //     break;
-      //   case 4:
-      //     dayName = "Четвер";
-      //     break;
-      //   case 5:
-      //     dayName = "П'ятниця";
-      //     break;
-      //   case 6:
-      //     dayName = "Субота";
-      //     break;
-      //   case 7:
-      //     dayName = "Неділя";
-      //     break;
-      //   default:
-      //     dayName = "Помилка, невірний ввод даних";
-      //     break;
-      // }
+      // let dayName =
+      //   dayNumber === 1
+      //     ? "Понеділок"
+      //     : dayNumber === 2
+      //     ? "Вівторок"
+      //     : dayNumber === 3
+      //     ? "Середа"
+      //     : dayNumber === 4
+      //     ? "Четвер"
+      //     : dayNumber === 5
+      //     ? "П'ятниця"
+      //     : dayNumber === 6
+      //     ? "Субота"
+      //     : dayNumber === 7
+      //     ? "Неділя"
+      //     : "Помилка, невірний ввод даних";
 
       // if (dayNumber === 1) {
       //   dayName = "Понеділок";

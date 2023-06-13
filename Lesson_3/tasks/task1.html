@@ -15,6 +15,7 @@
     </p>
     <script>
       // 1. Введення необхідних даних
+
       let firstChildName = prompt("Введіть ім’я першої дитини", "Ім’я першої дитини");
       let firstChildCandyAmount = parseInt(prompt("Скільки в першої дитини цукерок"));
       let secondChildName = prompt("Введіть ім’я другої дитини", "Ім’я другої дитини");
@@ -22,22 +23,24 @@
 
       // 2. Обчислення результату
 
-      // if (firstChildCandyAmount < secondChildCandyAmount) {
-      //   biggerCandyAmountChildName = secondChildName;
-      // } else if (firstChildCandyAmount > secondChildCandyAmount) {
-      //   biggerCandyAmountChildName = firstChildName;
-      // } else {
-      //   biggerCandyAmountChildName = "Кількість цукерок однакова";
-      // }
+      if (firstChildCandyAmount < secondChildCandyAmount) {
+        biggerCandyAmountChildName = secondChildName;
+      } else if (firstChildCandyAmount > secondChildCandyAmount) {
+        biggerCandyAmountChildName = firstChildName;
+      } else if (firstChildCandyAmount === secondChildCandyAmount) {
+        biggerCandyAmountChildName = "Кількість цукерок однакова";
+      } else {
+        biggerCandyAmountChildName = "Помилка вводу данних";
+      }
 
-      let biggerCandyAmountChildName =
-        firstChildCandyAmount > secondChildCandyAmount
-          ? firstChildName
-          : firstChildCandyAmount < secondChildCandyAmount
-          ? secondChildName
-          : firstChildCandyAmount === secondChildCandyAmount
-          ? "Кількість цукерок однакова"
-          : "Помилка вводу данних";
+      // let biggerCandyAmountChildName =
+      //   firstChildCandyAmount > secondChildCandyAmount
+      //     ? firstChildName
+      //     : firstChildCandyAmount < secondChildCandyAmount
+      //     ? secondChildName
+      //     : firstChildCandyAmount === secondChildCandyAmount
+      //     ? "Кількість цукерок однакова"
+      //     : "Помилка вводу данних";
 
       // 3. Виведення результату
       document.write(`
