@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L5 DZ task -2</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання -2</h1>
+    <p>
+      Поступово генерувати 100 випадкових чисел від 1 до 1000. Підрахувати яких чисел більше: парних чи
+      непарних.
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+
+      let evenCount = 0;
+      let oddCount = 0;
+
+      // 2. Обчислення результату
+
+      for (let n = 0; n < 100; n++) {
+        const RANDOM_NUMBER = Math.floor(Math.random() * 1000) + 1;
+        if (RANDOM_NUMBER % 2 === 0) {
+          evenCount++;
+        } else {
+          oddCount++;
+        }
+      }
+
+      // Підраховую яких чисел більше: парних чи непарних
+      let result;
+      if (evenCount < oddCount) {
+        result = "Непарних чисел більше";
+      } else if (evenCount > oddCount) {
+        result = "Парних чисел більше";
+      } else {
+        result = "Парних та непарних чисел однаково";
+      }
+
+      // 3. Виведення результату
+
+      document.write(`
+			<table>
+				<tr>
+					<th>Task</th>
+					<th>Result</th>
+				</tr>
+				<tr>
+					<td>Кількість парних чисел</td>
+					<td>${evenCount}</td>
+				</tr>
+				<tr>
+					<td>Кількість непарних чисел</td>
+					<td>${oddCount}</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						${result}
+					</td>
+				</tr>
+			</table>
+		`);
+      // document.write('<table border="2px">');
+      // for (let i = 0; i < 10; i++) {
+      //   document.write("<tr>");
+      //   for (let j = 0; j < 10; j++) {
+      //     document.write(`<td> ... </td>`);
+      //   }
+      //   document.write("</tr>");
+      // }
+      // document.write("</table>");
+    </script>
+  </body>
+</html>

@@ -13,13 +13,15 @@ body {
 	padding: 0 50px 100px;
 }
 
-a {
+a,
+button {
 	color: #E57373;
 	text-decoration: none;
 	transition: all 0.25s ease 0s;
 }
 
-a:hover {
+a:hover,
+button:hover {
 	font-weight: 700 !important;
 	color: #EF5350;
 }
@@ -27,6 +29,10 @@ a:hover {
 ol {
 	padding: 0 50px;
 	list-style: none;
+}
+
+.styled__list {
+	list-style: disc;
 }
 
 ol li {
@@ -42,8 +48,10 @@ ol p {
 	margin: 0;
 }
 
-ol a {
+ol a,
+button {
 	display: inline-block;
+	color: #E57373;
 	height: 55px;
 	line-height: 58px;
 	border-radius: 6px;
@@ -53,24 +61,39 @@ ol a {
 	font-size: 36px;
 }
 
-ol a:hover {
+ol a:hover,
+button:hover {
 	background: #00838F;
+	cursor: pointer;
 }
 
-.result_body h1 {
+button {
+	line-height: 55px;
+	appearance: none;
+	border: none;
+	font: inherit;
+	margin: 0 15px 15px 0;
+}
+
+.result_body h1,
+.result__body h1 {
 	color: #3c6;
 	border-bottom: 2px solid #5C6BC0;
 
 }
 
-.result_body table {
+.result_body table,
+.result__body table {
 	border-spacing: 0;
 	text-align: left;
 }
 
 .result_body tr,
 .result_body th,
-.result_body td {
+.result_body td,
+.result__body tr,
+.result__body th,
+.result__body td {
 	padding: 8px 15px;
 	border: 2px solid #00838F;
 }

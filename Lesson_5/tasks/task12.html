@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L5 DZ task 12</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 12</h1>
+    <p>
+      Ігровий автомат. Випадково вибираємо зображення у 3 позиціях. Вибір у кожній позиції вибирається як одне
+      з чотирьох зображень. Вивести ці зображення і повідомити виграш користувача (три перших зображення 100
+      грн, три других – 200, три третіх – 500, три четвертих зображення – 1000грн). Використати цикли і switch
+      (для вибору зображення за номером). <br />
+      <img src="../../imges/dz5_ls12.png" width="212px" style="margin-top: 15px;" alt="" / >
+    </p>
+    <!-- Шок, якщо це зараз такі задачки - то що далі! Я цілу суботу ковиряв. Буду вдячний за відгук. -->
+
+    <script>
+      // 1. Введення необхідних даних
+
+      let slot_1, slot_2, slot_3, spinResult;
+
+      // 2. Обчислення результату
+
+      // Обертаемо 3 колеса (одна ітерація - одне колесо)
+      // Тіло цикла це результат з одного колеса
+      for (let spin = 0; spin < 3; spin++) {
+        const GET_RANDOM_SLOT = Math.floor(Math.random() * 4) + 1;
+
+        // Отримуемо 1 з 4 "зображен" с колеса
+        let slotValue;
+        switch (GET_RANDOM_SLOT) {
+          case 1:
+            slotValue = "Lemon";
+            break;
+          case 2:
+            slotValue = "Avocado";
+            break;
+          case 3:
+            slotValue = "Apple";
+            break;
+          default:
+            slotValue = "Cucumber";
+            break;
+        }
+
+        if (spin === 0) {
+          slot_1 = slotValue;
+        } else if (spin === 1) {
+          slot_2 = slotValue;
+        } else if (spin === 2) {
+          slot_3 = slotValue;
+        }
+      }
+
+      if (slot_1 === slot_2 && slot_2 === slot_3) {
+        switch (slot_1) {
+          case "Lemon":
+            spinResult = "Ви виграли 100 грн!";
+            break;
+          case "Avocado":
+            spinResult = "Ви виграли 200 грн!";
+            break;
+          case "Apple":
+            spinResult = "Ви виграли 500 грн!";
+            break;
+          case "Cucumber":
+            spinResult = "Ви виграли 1000 грн!";
+            break;
+        }
+      } else {
+        spinResult = "Ви не виграли. Спробуйте ще раз!";
+      }
+
+      // 3. Виведення результату
+      let result;
+      document.write(`
+           	<table>
+           		<tr>
+           			<td>${slot_1}</td>
+           			<td>${slot_2}</td>
+           			<td>${slot_3}</td>
+           		</tr>
+					<tr>
+						<td colspan="3">${spinResult}</td>
+					</tr>
+           	</table>
+           `);
+    </script>
+  </body>
+</html>

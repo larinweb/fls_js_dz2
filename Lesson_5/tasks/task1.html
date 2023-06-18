@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L5 DZ task 1</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 1</h1>
+    <p>
+      Вивести з використанням циклів маркований список з випадковими числами (1-100). Кількість випадкових
+      чисел вводиться користувачем. Приклад:
+      <br />
+      <img src="../../imges/dz5_ls1.png" style="margin-top: 15px" alt="" />
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+
+      const USER_INPUT_UNITS = prompt("Введіть кількіст пунктів меню для відображення");
+      let listItemResult = "";
+
+      // 2. Обчислення результату
+
+      // Змінна лічильника "listItem" як на мене більш змістовна ніж просте "i"
+      for (let listItem = 0; listItem < USER_INPUT_UNITS; listItem++) {
+        const RANDOM_NUMBER = Math.floor(Math.random() * 100) + 1;
+        listItemResult += `<li>${RANDOM_NUMBER}</li>`;
+      }
+
+      // 3. Виведення результату
+
+      document.write(`
+			<ol class="styled__list">
+				${listItemResult}
+			</ol>
+		`);
+    </script>
+  </body>
+</html>

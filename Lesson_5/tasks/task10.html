@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L5 DZ task 10</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 10</h1>
+    <p>Знайти суму всіх непарних чисел, що знаходяться між заданими користувачем числами.</p>
+
+    <script>
+      // 1. Введення необхідних даних
+
+      let userMinNumber = parseInt(prompt("Введіть число початок діапазону", "0"));
+      let userMaxNumber = parseInt(prompt("Введіть число кінец діапазону", `${userMinNumber + 1}`));
+      let sumOfOddNumbers = 0;
+
+      // 2. Обчислення результату
+
+      for (let number = userMinNumber; number <= userMaxNumber; number++) {
+        if (number % 2 !== 0) {
+          sumOfOddNumbers += number;
+        }
+      }
+
+      // 3. Виведення результату
+
+      let result = `Сума непарних чисел в діапазоні (включно) між ${userMinNumber} і ${userMaxNumber} дорівнює ${sumOfOddNumbers}.`;
+
+      document.write(`
+       	<table>
+       		<tr>
+       			<td colspan="2">${result}</td>
+       		</tr>
+       	</table>
+       `);
+    </script>
+  </body>
+</html>

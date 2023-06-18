@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L5 DZ task 4</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 3</h1>
+    <p>
+      Вивести таблицю з 3 рядків і 7 стовпців
+      <br />
+      <img src="../../imges/dz5_ls4.png" style="margin-top: 15px" alt="" />
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+      const TARGET_ROWS = 3;
+      const TARGET_COLUMNS = 7;
+      let tableResult = "";
+
+      // 2. Обчислення результату
+      for (let rows = 0; rows < TARGET_ROWS; rows++) {
+        let tableRow = "";
+        for (let columns = 0; columns < TARGET_COLUMNS; columns++) {
+          tableRow += `<td>${columns + 1}</td>`;
+        }
+        tableResult += `<tr>${tableRow}</tr>`;
+      }
+
+      // 3. Виведення результату
+      document.write(`
+			<table>
+				${tableResult}
+			</table>
+		`);
+    </script>
+  </body>
+</html>

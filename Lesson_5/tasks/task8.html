@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L5 DZ task 8</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 8</h1>
+    <p>
+      Користувач загадує число. За 3 спроби комп’ютер намагається вгадати число користувача (використати
+      confirm).
+    </p>
+
+    <script>
+      // 1. Введення необхідних даних
+
+      const USER_GUESSED_NUMBER = parseInt(prompt("Загадайте компьютеру число від 1 до 5", "0"));
+      let isNumberGuessed = false;
+      let result;
+
+      // 2. Обчислення результату
+
+      for (let aiTry = 0; aiTry < 3; aiTry++) {
+        let tryNumber = Math.floor(Math.random() * 5) + 1;
+        let tryConfirm = confirm(`Ви загадали ${tryNumber}?`);
+
+        if (tryConfirm) {
+          isNumberGuessed = true;
+          result = `Так, комп'ютер вгадав число ${USER_GUESSED_NUMBER}. <br> Спроб ${aiTry + 1}.`;
+          break;
+        } else {
+          result = `Ні, комп'ютер не вгадав число ${USER_GUESSED_NUMBER}`;
+        }
+      }
+
+      // 3. Виведення результату
+
+      document.write(`
+			<table>
+				<tr>
+					<th>Task</th>
+					<th>Result</th>
+				</tr>
+				<tr>
+					<td>Чи вгадав?</td>
+					<td>${result}</td>
+				</tr>
+			</table>
+		`);
+    </script>
+  </body>
+</html>

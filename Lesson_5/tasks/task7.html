@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L5 DZ task 7</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 7</h1>
+    <p>
+      Вивести на екран N абзаців (N вводиться користувачем) за зразком:
+      <br />
+      <img src="../../imges/dz5_ls7.png" width="212px" style="margin-top: 15px" alt="" />
+    </p>
+
+    <script>
+      // 1. Введення необхідних даних
+      const USER_PARAGRAPHS_AMOUNT = parseInt(prompt("Введіть кількість абзаців:"));
+
+      // 2. Обчислення результату
+      let result = ""; // Змінна для зберігання результату
+
+      for (let section = 1; section <= USER_PARAGRAPHS_AMOUNT; section++) {
+        result += `<h1>Заголовок ${section}</h1>`;
+        for (let paragraph = 1; paragraph <= section; paragraph++) {
+          result += `<p>Розділ ${section}, параграф ${paragraph}</p>`;
+        }
+        if (section <= USER_PARAGRAPHS_AMOUNT) {
+          result += "<hr>";
+        }
+      }
+
+      // 3. Виведення результату
+      document.write(`${result}`);
+    </script>
+  </body>
+</html>

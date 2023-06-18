@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L5 DZ task 6</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <style>
+      .dz5-ls6-table {
+        display: inline-table;
+        margin-right: 30px;
+      }
+    </style>
+    <h1>Завдання 6</h1>
+    <p>
+      Вивести 3 таблиці (по 3 рядки і 3 стовпці у кожній) за зразком
+      <br />
+      <img src="../../imges/dz5_ls6.png" style="margin-top: 15px" alt="" />
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+      const TARGET_ROWS = 3;
+      const TARGET_COLUMNS = 3;
+      let tableResult = "";
+      let currentNumber = 1;
+
+      // 2. Обчислення результату
+      for (let table = 0; table < 3; table++) {
+        let currentTable = "";
+        for (let rows = 0; rows < TARGET_ROWS; rows++) {
+          let tableRow = "";
+          for (let columns = 0; columns < TARGET_COLUMNS; columns++) {
+            tableRow += `<td>${currentNumber}</td>`;
+            currentNumber++;
+          }
+          currentTable += `<tr>${tableRow}</tr>`;
+        }
+        tableResult += `<table class="dz5-ls6-table">${currentTable}</table>`;
+      }
+
+      // 3. Виведення результату
+      document.write(`
+			${tableResult}
+		`);
+    </script>
+  </body>
+</html>

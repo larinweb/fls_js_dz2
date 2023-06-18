@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L5 DZ task 9</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 9</h1>
+    <p>
+      Користувач загадує число. Комп’ютер задає питання поки не вгадає число користувача (використати
+      confirm).
+    </p>
+
+    <script>
+      // 1. Введення необхідних даних
+
+      const USER_GUESSED_NUMBER = parseInt(prompt("Загадайте компьютеру число від 1 до 100", "0"));
+      let isNumberGuessed = false;
+      let result;
+      let tryCount = 0;
+      let min = 1;
+      let max = 100;
+      let tryNumber;
+
+      // 2. Обчислення результату
+
+      while (min <= max) {
+        tryNumber = Math.floor((min + max) / 2);
+        let tryConfirm = confirm(`Ви загадали число ${tryNumber}?`);
+        tryCount++;
+        if (tryConfirm) {
+          result = `Так, комп'ютер вгадав число ${USER_GUESSED_NUMBER}.`;
+          break;
+        } else if (USER_GUESSED_NUMBER < tryNumber) {
+          max = tryNumber - 1;
+          result = `Ні, комп'ютер не вгадав число ${USER_GUESSED_NUMBER}.`;
+        } else {
+          min = tryNumber + 1;
+          result = `Ні, комп'ютер не вгадав число ${USER_GUESSED_NUMBER}.`;
+        }
+      }
+
+      // Це мое перше рішення базоване на 8й задачі, але я почав шукать кращій метод і знайшов бінарний пошук - який набагато краще
+      // while (!isNumberGuessed) {
+      //   let tryNumber = Math.floor(Math.random() * 100) + 1;
+      //   let tryConfirm = confirm(`Ви загадали число ${tryNumber}?`);
+      //   tryCount++;
+
+      //   if (tryConfirm) {
+      //     isNumberGuessed = true;
+      //     result = `Так, комп'ютер вгадав число ${USER_GUESSED_NUMBER}. Спроб ${tryCount}.`;
+      //   } else {
+      //     result = `Ні, комп'ютер не вгадав число ${USER_GUESSED_NUMBER}.`;
+      //   }
+      // }
+
+      // 3. Виведення результату
+
+      document.write(`
+			<table>
+				<tr>
+					<th>Task</th>
+					<th>Result</th>
+				</tr>
+				<tr>
+					<td>Чи вгадав?</td>
+					<td>${result}</td>
+				</tr>
+				<tr>
+					<td>Спроб</td>
+					<td>${tryCount}</td>
+				</tr>
+			</table>
+		`);
+    </script>
+  </body>
+</html>
