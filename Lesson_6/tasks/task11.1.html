@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L6 DZ task 11</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 11.1</h1>
+    <p>
+      Вивести на екран усі трицифрові числа, у яких перша цифра є більшою або рівною за суму другої і третьої.
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+
+      // Змінна, в яку буде зберігатися результат
+      let result = "";
+
+      // 2. Обчислення результату
+
+      // Цикл для перебору чисел від 100 до 999
+      for (let n = 100; n <= 999; n++) {
+        // Отримання першої цифри числа
+        let firstNumber = Math.floor(n / 100);
+        // Отримання другої цифри числа
+        let secondNumber = Math.floor((n % 100) / 10);
+        // Отримання третьої цифри числа
+        let thirdNumber = n % 10;
+
+        // Додавання переносу рядка, якщо число кратне 100
+        if (n % 100 === 0) {
+          result += "<br>";
+        }
+
+        // Перевірка умови: перша цифра більша або рівна сумі другої і третьої цифр
+        if (firstNumber >= secondNumber + thirdNumber) {
+          // Додавання числа до результату
+          result += n + " ";
+        }
+      }
+
+      // 3. Виведення результату
+      document.write(`${result}`);
+    </script>
+  </body>
+</html>

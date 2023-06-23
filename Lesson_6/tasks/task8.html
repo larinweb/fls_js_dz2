@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L6 DZ task 8</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 8</h1>
+    <p>Вивести на екран послідовність символів "а о а о а о а о а o" Всього символів 82.</p>
+    <script>
+      // 1. Введення необхідних даних
+
+      // 2. Обчислення результату
+      let result = "";
+      for (let i = 0; i < 82; i++) {
+        if (i % 2 === 0) {
+          result += "а ";
+        } else {
+          result += "о ";
+        }
+      }
+      // 3. Виведення результату
+
+      document.write(`${result}`);
+    </script>
+  </body>
+</html>

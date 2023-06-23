@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L6 DZ task 5</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 5</h1>
+    <p>
+      Інвестор вклав тис. грн на 20 років під 20% річних. Визначити за допомогою циклів суму, яку він одержить
+      (без оподаткування).
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+
+      let userCapital = 1000;
+      const annualInterest = 0.2; // річна відсоткова ставка
+      const investmentPeriod = 20; // кількість років
+
+      // 2. Обчислення результату
+      for (let year = 1; year <= investmentPeriod; year++) {
+        userCapital = userCapital * (annualInterest + 1);
+      }
+      result = userCapital.toFixed(2) + " грн";
+      document.write(`
+      <table>
+			<tr>
+				<th>Task</th>
+				<th>Result</th>
+			</tr>
+			<tr>
+				<td>Якщо ви інвестуете 1000 грн то після ${investmentPeriod} років ваш капітал становитиме:</td>
+				<td>${result}</td>
+			</tr>
+		</table>
+      `);
+    </script>
+  </body>
+</html>

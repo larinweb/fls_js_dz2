@@ -9,7 +9,7 @@
 body {
 	background: #455a64;
 	color: #FBC02D;
-	font: 26px 'Courier New', Courier, monospace;
+	font: 24px 'Courier New', Courier, monospace;
 	padding: 0 50px 100px;
 }
 
@@ -27,7 +27,7 @@ button:hover {
 }
 
 ol {
-	padding: 0 50px;
+	padding: 0 25px;
 	list-style: none;
 }
 
@@ -36,7 +36,10 @@ ol {
 }
 
 ol li {
-	padding-bottom: 25px;
+	border: 1px solid #263238;
+	margin-bottom: 15px;
+	border-radius: 10px;
+	padding: 15px;
 }
 
 ol h3 {

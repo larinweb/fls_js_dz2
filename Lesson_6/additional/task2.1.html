@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L6 DZ task a2.1</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання додаткове 2.1</h1>
+    <p>
+      З клавіатури поступово вводяться символи поки не буде введено символ «а». Вивести рядок символів у
+      зворотному порядку.
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+      let inputString = "";
+      // 2. Обчислення результату
+      do {
+        let inputSymbol = prompt("Введіть символ: ");
+        inputString = inputSymbol + inputString;
+      } while (inputSymbol !== "a");
+      // 3. Виведення результату
+      document.write(`${inputString}`);
+    </script>
+  </body>
+</html>

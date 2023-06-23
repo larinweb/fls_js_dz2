@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L6 DZ task 0</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 0</h1>
+    <p>Вивести 3 таблиці (по 3 рядки і 3 стовпці у кожній) за зразком</p>
+    <script>
+      // 1. Введення необхідних даних
+
+      let startChar = "A".charCodeAt(0);
+      let listContent = "";
+
+      // 2. Обчислення результату
+
+      for (let i = 0; i < 5; i++) {
+        lettersRow = "";
+        for (let j = 0; j < 5; j++) {
+          let getLetter = String.fromCharCode(startChar++);
+          lettersRow += getLetter + " ";
+        }
+        listContent += lettersRow + "<br>";
+      }
+      // 3. Виведення результату
+
+      document.write(`
+      	<ol>
+				<li>
+					${listContent}
+				</li>
+      	</ol>
+      `);
+    </script>
+  </body>
+</html>

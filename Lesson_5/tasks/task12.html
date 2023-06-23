@@ -28,11 +28,11 @@
       // Обертаемо 3 колеса (одна ітерація - одне колесо)
       // Тіло цикла це результат з одного колеса
       for (let spin = 0; spin < 3; spin++) {
-        const GET_RANDOM_SLOT = Math.floor(Math.random() * 4) + 1;
+        const getRandomSlot = Math.floor(Math.random() * 4) + 1;
 
         // Отримуемо 1 з 4 "зображен" с колеса
         let slotValue;
-        switch (GET_RANDOM_SLOT) {
+        switch (getRandomSlot) {
           case 1:
             slotValue = "Lemon";
             break;

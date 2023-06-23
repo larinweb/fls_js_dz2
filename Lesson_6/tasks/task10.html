@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L6 DZ task 10</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 10</h1>
+    <p>Вивести на екран</p>
+    <script>
+      // 1. Введення необхідних даних
+
+      let result = "";
+
+      // 2. Обчислення результату
+
+      for (let row = 1; row <= 6; row++) {
+        result += row + "&nbsp"; // Записуємо в результат номер рядка на початку кожного рядка
+        for (let number = 1; number <= row * row; number++) {
+          result += number; // Записуємо в результат цифри у кількості номера рядка
+        }
+        result += "<br>"; // Створення  нового рядка
+      }
+
+      // 3. Виведення результату
+
+      document.write(`${result}`);
+    </script>
+  </body>
+</html>

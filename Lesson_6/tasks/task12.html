@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L6 DZ task 12</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 12</h1>
+    <p></p>
+    <script>
+      // 1. Введення необхідних даних
+
+      // Встановлюємо початковий символ як 'a'
+      let currentChar = "a";
+
+      // Ініціалізуємо рядок, в якому буде зберігатися результат
+      let result = "";
+      // 2. Обчислення результату
+      // Цикл продовжується доки поточний символ не буде 'z'
+      while (currentChar <= "z") {
+        // Отримуємо попередній символ. Якщо поточний символ 'a', то попереднього немає,
+        // тому використовуємо пробіл. В іншому випадку використовуємо методи charCodeAt і
+        // fromCharCode, щоб отримати попередній символ
+        let previousChar = currentChar === "a" ? " " : String.fromCharCode(currentChar.charCodeAt(0) - 1);
+
+        // Те саме робимо для наступного символу. Якщо поточний символ 'z', то наступного немає,
+        // тому використовуємо пробіл
+        let nextChar = currentChar === "z" ? " " : String.fromCharCode(currentChar.charCodeAt(0) + 1);
+
+        // Додаємо попередній, поточний і наступний символи до результату
+        result += `${previousChar} ${currentChar} ${nextChar} <br>`;
+
+        // Оновлюємо поточний символ на наступний
+        currentChar = String.fromCharCode(currentChar.charCodeAt(0) + 1);
+      }
+
+      // 3. Виведення результату
+      document.write(`${result}`);
+    </script>
+  </body>
+</html>

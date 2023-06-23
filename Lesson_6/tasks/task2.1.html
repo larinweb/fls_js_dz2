@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L6 DZ task 2.1</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 2.1</h1>
+    <p>Відобразити трикутник за допомогою символів «о»</p>
+    <script>
+      // 1. Введення необхідних даних
+
+      let targetRows = 7;
+      let result = " ";
+
+      // 2. Обчислення результату
+
+      for (let row = 0; row < targetRows; row++) {
+        let res = " ";
+        for (let spaces = 0; spaces < targetRows - row; spaces++) {
+          res += "&nbsp"; // &nbsp пробіл бо інакше у хтмл не працюе
+        }
+        for (let char = 0; char <= row; char++) {
+          res += "o ";
+        }
+        result += res + "<br>";
+      }
+
+      // 3. Виведення результату
+      document.write(`${result}`);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L6 DZ task 6</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 6</h1>
+    <p>
+      Інвестор вклав тис. грн на 20 років під 20% річних, податок складає 5% від суми прибутку. Визначити за
+      допомогою циклів суму, яку він одержить.
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+
+      let userCapital = 1000;
+      const annualProfit = 0.2; // річна відсоткова ставка
+      const investmentPeriod = 20; // кількість років
+      const tax = 0.05; // податок на прибуток
+
+      // 2. Обчислення результату
+      for (let year = 1; year <= investmentPeriod; year++) {
+        let perYearProfit = userCapital * annualProfit;
+        let taxedProfit = perYearProfit - perYearProfit * tax; // оподаткований прибуток
+        userCapital += taxedProfit; // після додавання прибутку до капіталу
+      }
+      result = userCapital.toFixed(2) + " грн";
+
+      // 3. Виведення результату
+      document.write(`
+            <table>
+            	<tr>
+            			<th>Task</th>
+            			<th>Result</th>
+            		</tr>
+            		<tr>
+            			<td>Якщо ви інвестуете 1000 грн то після ${investmentPeriod} років і сплати податків ваш капітал становитиме:</td>
+            			<td>${result}</td>
+            		</tr>
+            </table>
+            `);
+    </script>
+  </body>
+</html>

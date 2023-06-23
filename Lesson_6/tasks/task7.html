@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L6 DZ task 7</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 7</h1>
+    <p>
+      Інвестор вклав S тис. грн на 20 років під 20% річних, а потім на 17 років під 27% річних. Визначити за
+      допомогою циклів суму, яку він одержить
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+      let userCapital = 1000;
+      const interestRate1 = 20; // річна відсоткова ставка для першого періоду
+      const investmentPeriod1 = 20; // кількість років для першого періоду
+      const interestRate2 = 27; // річна відсоткова ставка для другого періоду
+      const investmentPeriod2 = 17; // кількість років для другого періоду
+      let finalAmount = 0;
+
+      // // 2. Обчислення результату
+
+      // Обчислення результату для обох періодів
+      for (let year = 1; year <= investmentPeriod1 + investmentPeriod2; year++) {
+        if (year <= investmentPeriod1) {
+          // Обчислення результату для першого періоду
+          userCapital += userCapital * (interestRate1 / 100);
+          finalAmount = userCapital;
+        } else {
+          // Обчислення результату для другого періоду
+          finalAmount += finalAmount * (interestRate2 / 100);
+        }
+      }
+
+      // Збереження результату у змінну finalAmount
+      finalAmount = finalAmount.toFixed(2) + " грн";
+
+      // 3. Виведення результату
+
+      document.write(`
+            <table>
+            	<tr>
+            			<th>Task</th>
+            			<th>Result</th>
+            		</tr>
+            		<tr>
+            			<td>Якщо ви інвестуете 1000 грн під ${interestRate1}% на ${investmentPeriod1} років ваш капітал становитиме:</td>
+            			<td>${userCapital.toFixed(2)} грн</td>
+            		</tr>
+            		<tr>
+            			<td>Якщо потім ви інвестуете ${userCapital.toFixed(2)} грн під ${interestRate2}%
+							на ${investmentPeriod2} років ваш капітал становитиме:</td>
+            			<td>${finalAmount}</td>
+            		</tr>
+            </table>
+            `);
+    </script>
+  </body>
+</html>
