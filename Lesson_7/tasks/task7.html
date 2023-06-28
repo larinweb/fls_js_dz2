@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L7 DZ task 7</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 7</h1>
+    <p>
+      Створити функцію, яка випадковим чином виводить на екран одне із 4 зображень (шляхи до зображень
+      передаються у функцію)
+    </p>
+    <script>
+      "use strict";
+      // 1. Оголошення необхідних даних (шляхи до зображень)
+      let path1 = "../img/task7/1.ico";
+      let path2 = "../img/task7/2.ico";
+      let path3 = "../img/task7/3.ico";
+      let path4 = "../img/task7/4.ico";
+
+      // 2. Визначення функції для випадкового зображення
+      function displayRandomImage(imagePath1, imagePath2, imagePath3, imagePath4) {
+        // 2.1. Генеруємо випадковий індекс від 1 до 4
+        let randomIndex = Math.floor(Math.random() * 4) + 1;
+
+        // 2.2. Вибір шляху до зображення залежно від випадкового індексу
+        let imagePath;
+        if (randomIndex === 1) {
+          imagePath = imagePath1;
+        } else if (randomIndex === 2) {
+          imagePath = imagePath2;
+        } else if (randomIndex === 3) {
+          imagePath = imagePath3;
+        } else {
+          imagePath = imagePath4;
+        }
+        // 2.3. Повертаємо HTML-рядок з тегом <img> для виведення зображення
+        return `<img src="${imagePath}" alt="" />`;
+      }
+
+      // 3. Виклик функції для отримання випадкового зображення
+      let imageReceived = displayRandomImage(path1, path2, path3, path4);
+
+      // 4. Виведення результату
+      document.write(imageReceived);
+    </script>
+  </body>
+</html>

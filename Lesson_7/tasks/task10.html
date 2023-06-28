@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L7 DZ task 10</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдача 10</h1>
+    <p>
+      Дано покази температур (довільна кількість). Розробити функцію, яка дозволить знайти середнє значення
+      для додатних показів температури.<br /><br />
+      Наприклад:<br />(11, 0, 22, -35, 0, -87, -9, 4, 41, -12)
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+
+      // Створення масиву температур, для якого обчислюється середнє значення.
+      let averageForPositive = findAverageForPositive(11, 0, 22, -35, 0, -87, -9, 4, 41, -12);
+
+      // 2. Обчислення результату
+
+      // Функція приймає довільну кількість температур і обчислює середнє значення для додатних.
+      function findAverageForPositive(...temps) {
+        // Ініціалізація двох змінних: одної для суми додатних температур, іншої - для їх кількості.
+        let sumOfPositive = 0;
+        let AmountOfPositive = 0;
+
+        // Проходження через кожну температуру в масиві.
+        for (let i = 0; i < temps.length; i++) {
+          // Якщо температура додатня, додається до суми і збільшується кількість додатних температур.
+          if (temps[i] > 0) {
+            sumOfPositive += temps[i];
+            AmountOfPositive++;
+          }
+        }
+        // Обчислення середнього значення, діленням суми на кількість, і повернення результату.
+        let res = sumOfPositive / AmountOfPositive;
+        return res;
+      }
+
+      // 3. Виведення результату
+      document.write(`
+          <table>
+          	<tr>
+          		<th>Task</th>
+          		<th>Result</th>
+          	</tr>
+          	<tr>
+          		<td>Середнє значення додатних температур</td>
+          		<td>${averageForPositive}</td>
+          	</tr>
+          </table>
+          `);
+    </script>
+  </body>
+</html>

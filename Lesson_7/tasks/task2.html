@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L7 DZ task 2</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Задача 2</h1>
+    <p>Створити функцію, яка за номером дня дозволяє з’ясувати чи є цей день робочим.</p>
+    <script>
+      "use strict";
+      // 1. Введення необхідних даних
+
+      // 1. Запитуємо у користувача номер дня та зберігаємо введене значення в змінну dayNumber
+      let dayNumber = parseInt(prompt("Введіть номер дня", ""));
+
+      // 2. Обчислення результату
+
+      function checkDayOff(dayNumber) {
+        // Перевірка, чи введене число в діапазоні від 1 до 7
+        if (dayNumber < 1 || dayNumber > 7) {
+          return "...неіснуючим. Введіть вірне число (від 1 до 7)";
+        }
+        // Перевірка, чи є введений день робочим (1-5) або вихідним (6-7)
+        return dayNumber >= 1 && dayNumber <= 5 ? "робочим" : "вихідним";
+      }
+
+      // Зберігаємо результат перевірки в змінну dayStatus
+      // let dayStatus = checkDayOff(dayNumber);
+
+      // 3. Виведення результату
+      document.write(`
+      <table>
+      	<tr>
+      		<th>Task</th>
+      		<th>Result</th>
+      	</tr>
+      	<tr>
+      		<td>${dayNumber}й день</td>
+      		<td>Цей день є ${checkDayOff(dayNumber)}</td>
+      	</tr>
+      </table>
+      `);
+    </script>
+  </body>
+</html>

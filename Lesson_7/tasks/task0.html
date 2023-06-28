@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L7 DZ task 0</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Задача 0</h1>
+    <p>Створити функцію, яка за номером місяця повертає пору року, до якої відноситься цей місяць.</p>
+    <script>
+      "use strict";
+      // 1. Введення необхідних даних
+      // Змінна monthNumber використовується для зберігання номера місяця, який вводиться користувачем
+      let monthNumber = parseInt(prompt("Введіть номер місяця", ""));
+
+      // 2. Обчислення результату
+      // Функція getTimeOfYear приймає один аргумент - номер місяця
+      function getTimeOfYear(monthNumber) {
+        // Перевіряємо, чи входить номер місяця в діапазон від 1 до 12
+        if (monthNumber >= 1 && monthNumber <= 12) {
+          // Згідно з введеним номером місяця, повертаємо відповідну пору року
+          return monthNumber === 12 || monthNumber <= 2
+            ? "Зима" // Для 12,1,2 місяців відповідає зима
+            : monthNumber <= 5
+            ? "Весна" // Для 3-5 місяців відповідає весна
+            : monthNumber <= 8
+            ? "Літо" // Для 6-8 місяців відповідає літо
+            : "Осінь"; // Для 9-11 місяців відповідає осінь
+        } else {
+          // Якщо номер місяця не входить в діапазон від 1 до 12, повертаємо повідомлення про помилку
+          return "Помилка, невірний ввід даних";
+        }
+      }
+
+      // Викликаємо функцію getTimeOfYear, передаємо їй введений користувачем номер місяця і зберігаємо результат в змінній timeOfYear
+      let timeOfYear = getTimeOfYear(monthNumber);
+
+      // 3. Виведення результату
+      document.write(`
+            <table>
+            	<tr>
+            		<th>Task</th>
+            		<th>Result</th>
+            	</tr>
+            	<tr>
+            		<td>Цей місяц відноситься до наступної пори</td>
+            		<td>${timeOfYear}</td>
+            	</tr>
+            </table>
+      `);
+    </script>
+  </body>
+</html>

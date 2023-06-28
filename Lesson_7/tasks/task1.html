@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L7 DZ task 1</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Задача 1</h1>
+    <p>Створити функцію, яка за номером місяця повертає його назву.</p>
+    <script>
+      "use strict";
+      // 1. Введення необхідних даних
+
+      let monthNumber = parseInt(prompt("Введіть номер місяця", ""));
+
+      // 2. Обчислення результату
+
+      // Оголошуємо функцію getMonthName, яка приймає номер місяця як параметр
+      function getMonthTitle(monthNumber) {
+        // Перевіряємо, чи входить номер місяця в діапазон від 1 до 12
+        if (monthNumber >= 1 && monthNumber <= 12) {
+          // Використовуємо оператор switch для кожного можливого місяця
+          switch (monthNumber) {
+            case 1:
+              return "Січень";
+            case 2:
+              return "Лютий";
+            case 3:
+              return "Березень";
+            case 4:
+              return "Квітень";
+            case 5:
+              return "Травень";
+            case 6:
+              return "Червень";
+            case 7:
+              return "Липень";
+            case 8:
+              return "Серпень";
+            case 9:
+              return "Вересень";
+            case 10:
+              return "Жовтень";
+            case 11:
+              return "Листопад";
+            case 12:
+              return "Грудень";
+          }
+        } else {
+          // Якщо номер місяця не входить в діапазон від 1 до 12, повертаємо повідомлення про помилку
+          return "Помилка, невірний ввід даних";
+        }
+      }
+      // Зберігаємо результат виклику функції getMonthName в змінну monthName
+      let monthName = getMonthTitle(monthNumber);
+
+      // 3. Виведення результату
+
+      document.write(`
+		<table>
+			<tr>
+				<th>Task</th>
+				<th>Result</th>
+			</tr>
+			<tr>
+				<td>Назва ${monthNumber} місяця</td>
+				<td>${monthName}</td>
+			</tr>
+		</table>
+		`);
+    </script>
+  </body>
+</html>

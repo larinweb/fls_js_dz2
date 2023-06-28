@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L7 DZ task 9</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Задача 9</h1>
+    <p>
+      Дано покази температур (довільна кількість). Розробити функцію, яка дозволить підрахувати кількість
+      від’ємних показів температури.<br /><br />
+      Наприклад:<br />(11, 0, 22, -35, 0, -87, -9, 4, 41, -12)
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+      let amountUnderZero = countUnderZero(11, 0, 22, -35, 0, -87, -9, 4, 41, -12);
+
+      // 2. Обчислення результату
+      function countUnderZero(...temps) {
+        let res = 0;
+        for (let i = 0; i < temps.length; i++) {
+          if (arguments[i] < 0) {
+            res++;
+          }
+        }
+        return res;
+      }
+
+      // 3. Виведення результату
+      document.write(`
+       <table>
+       	<tr>
+       		<th>Task</th>
+       		<th>Result</th>
+       	</tr>
+       	<tr>
+       		<td>Кількість від’ємних показів температури:</td>
+       		<td>${amountUnderZero}</td>
+       	</tr>
+       </table>
+       `);
+    </script>
+  </body>
+</html>

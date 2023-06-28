@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L7 DZ task 3</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Задача 3</h1>
+    <p>
+      Створити окремі функції, які для 4 чисел знаходять:<br />
+      1)суму;<br />
+      2)добуток;<br />
+      3)середнє арифметичне;<br />
+      4)мінімальне значення.
+    </p>
+    <script>
+      "use strict";
+      // 1) Сумма
+      let calcNumberSum = (a, b, c, d) => a + b + c + d;
+
+      // 2) Добуток
+      let calcNumberMultiply = (a, b, c, d) => a * b * c * d;
+
+      // 3) Cереднє арифметичне
+      let calcNumberAverage = (a, b, c, d) => (a + b + c + d) / 4;
+
+      // 4) Мінімальне значення
+      let findSmallest = (a, b, c, d) => Math.min(a, b, c, d);
+
+      // 3. Виведення результату
+      document.write(`
+          <table>
+          	<tr>
+          		<th>Task (числа: 44, 36, 78, 11)</th>
+          		<th>Result</th>
+          	</tr>
+          	<tr>
+          		<td>1) Сумма</td>
+          		<td>${calcNumberSum(44, 36, 78, 11)}</td>
+          	</tr>
+          	<tr>
+          		<td>2) Добуток</td>
+          		<td>${calcNumberMultiply(44, 36, 78, 11)}</td>
+          	</tr>
+          	<tr>
+          		<td>3) Cереднє арифметичне</td>
+          		<td>${calcNumberAverage(44, 36, 78, 11)}</td>
+          	</tr>
+          	<tr>
+          		<td>4) Мінімальне значення</td>
+          		<td>${findSmallest(44, 36, 78, 11)}</td>
+          	</tr>
+          </table>
+
+      `);
+    </script>
+  </body>
+</html>

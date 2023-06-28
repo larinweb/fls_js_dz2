@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L7 DZ task 5</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Задача 5.</h1>
+    <p>
+      Створити окремі функції, які переводять:<br />
+      1) Сантиметри у дюйми;<br />
+      2) Кілограми у фунти;<br />
+      3) Кілометри у милі.
+    </p>
+    <script>
+      "use strict";
+      // 1. Введення необхідних даних
+      let cm = parseFloat(prompt("Введіть довжину у сантіметрах", "0"));
+      let kg = parseFloat(prompt("Введіть вагу у кілограмах", "0"));
+      let km = parseFloat(prompt("Введіть довжину у кілометрах", "0"));
+
+      // 2. Обчислення результату
+
+      // 1) Сантиметри у дюйми
+      function convertCmToInches(cm) {
+        return (cm * 0.3937).toFixed(3);
+      }
+
+      // 2) Кілограми у фунти
+      function convertKgToPounds(kg) {
+        return (kg * 2.2046).toFixed(3);
+      }
+
+      // 3) Кілометри у милі
+      function convertKmToMiles(km) {
+        return (km * 0.62137).toFixed(3);
+      }
+
+      // let cmToInches = convertCmToInches(cm);
+      // let kgToPounds = convertKgToPounds(kg);
+      // let kmToMiles = convertKmToMiles(km);
+
+      // 3. Виведення результату
+
+      document.write(`
+      <table>
+      	<tr>
+      		<th>Task</th>
+      		<th>Result</th>
+      	</tr>
+      	<tr>
+      		<td>${cm} cантиметрів це:</td>
+      		<td>${convertCmToInches(cm)} дюймів</td>
+      	</tr>
+      	<tr>
+      		<td>${kg} кілограм це:</td>
+      		<td>${convertKgToPounds(kg)} фунтів</td>
+      	</tr>
+      	<tr>
+      		<td>${km} кілометрів це:</td>
+      		<td>${convertKmToMiles(km)} миль</td>
+      	</tr>
+      </table>
+      `);
+    </script>
+  </body>
+</html>

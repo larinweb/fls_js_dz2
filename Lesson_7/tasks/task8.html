@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L7 DZ task 8</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <style>
+      .banner {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        border-radius: 14px;
+      }
+      .banner img {
+        max-width: 100%;
+        display: block;
+      }
+      .banner h2 {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        margin: 15% 0 0;
+        color: #fbc02d;
+        transition: all 0.4s ease 0s;
+      }
+      .banner:hover h2 {
+        color: #3c6;
+        font-size: 46px;
+      }
+    </style>
+    <h1>Завдання 8</h1>
+    <p>
+      Створити функцію, яка виводить банер (у функцію передаються: зображення, заголовок та посилання, куди
+      переходимо при кліку на зображення (тег img повине знаходитись у середині тега a: &lt;a&gt; &lt;img
+      src=”шлях”&gt; &lt;/a&gt;
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+      let imagePath = "../img/task8/task8_banner.jpg";
+      let title = "Banner Title";
+      let link = "https://uk.javascript.info/";
+
+      // 2. Обчислення результату
+      function displayBanner(imagePath, title, link) {
+        let banner = `
+			<a href="${link}"  class="banner">
+				<h2>"${title}"</h2>
+				<img src="${imagePath}" alt="" />
+			</a>`;
+        return banner;
+      }
+      // 3. Виведення результату
+      let bannerResult = displayBanner(imagePath, title, link);
+
+      document.write(bannerResult);
+    </script>
+  </body>
+</html>

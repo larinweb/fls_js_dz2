@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L7 DZ task 4</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 4</h1>
+    <p>
+      Створити функцію, яка для 3 заданих чисел знаходить одночасно декілька результатів: кількість парних,
+      кількість додатних, кількість більших за 100.
+    </p>
+    <script>
+      "use strict";
+      // 1. Введення необхідних даних
+
+      // 2. Обчислення результату
+
+      function getTask(a, b, c) {
+        function countEven() {
+          let countEven = 0;
+          if (a % 2 === 0) countEven++;
+          if (b % 2 === 0) countEven++;
+          if (c % 2 === 0) countEven++;
+          return countEven;
+        }
+        function countPositive() {
+          let countPositive = 0;
+          if (a > 0) countPositive++;
+          if (b > 0) countPositive++;
+          if (c > 0) countPositive++;
+          return countPositive;
+        }
+
+        function countHundreds() {
+          let countHundreds = 0;
+          if (a > 100) countHundreds++;
+          if (b > 100) countHundreds++;
+          if (c > 100) countHundreds++;
+          return countHundreds;
+        }
+
+        // Виклик внутрішніх функцій та отримання їх результатів
+        let evens = countEven();
+        let positives = countPositive();
+        let hundreds = countHundreds();
+
+        // Повернутаю результати функцій
+        return { evens, positives, hundreds };
+      }
+
+      // 3. Виведення результату
+
+      // Зберігаємо результат виклику функції getMonthName в змінну monthName
+      let result = getTask(44, 37, 178);
+
+      document.write(`
+		<table>
+			<tr>
+				<th>Task (44, 37, 178)</th>
+				<th>Result</th>
+			</tr>
+			<tr>
+				<td>Кількість парних:</td>
+				<td>${result.evens}</td>
+			</tr>
+			<tr>
+				<td>Кількість додатних:</td>
+				<td>${result.positives}</td>
+			</tr>
+			<tr>
+				<td>Кількість більших за 100:</td>
+				<td>${result.hundreds}</td>
+			</tr>
+		</table>
+		`);
+    </script>
+  </body>
+</html>

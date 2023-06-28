@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L7 DZ task 6</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 6</h1>
+    <p>
+      Створити функцію, яка створює таблицю з вказаною кількістю рядків і стовпців (таблиця заповнюється
+      заданим фіксованим повідомленням).
+    </p>
+    <script>
+      "use strict";
+      // 1. Введення необхідних даних
+      let numberOfRows = parseInt(prompt("Введіть кількість рядків", "0"));
+      while (isNaN(numberOfRows) || numberOfRows <= 0) {
+        numberOfRows = parseInt(prompt("Некоректне значення. Введіть кількість рядків ще раз", "0"));
+      }
+
+      let numberOfColumns = parseInt(prompt("Введіть кількість стовбців", "0"));
+      while (isNaN(numberOfColumns) || numberOfColumns <= 0) {
+        numberOfColumns = parseInt(prompt("Некоректне значення. Введіть кількість стовбців ще раз", "0"));
+      }
+
+      let fixMessage = prompt("Введіть повідомлення", "UA!");
+      while (fixMessage.trim().length === 0) {
+        fixMessage = prompt("Повідомлення не може бути порожнім. Введіть повідомлення ще раз", "UA!");
+      }
+      // 2. Обчислення результату
+
+      // Створюю функцію createTable, яка приймає кількість рядків, кількість стовпців і фіксоване повідомлення як параметри.
+      function createTable(numberOfRows, numberOfColumns, fixMessage) {
+        // Змінна для збереження згенерованої таблиці
+        let currentTable = "";
+        // За допомогою циклу for, проходжу кожен рядок таблиці.
+        for (let rows = 0; rows < numberOfRows; rows++) {
+          // Ініціалізую порожній рядок для поточного рядка таблиці.
+          let tableRow = "";
+          // Всередині циклу для рядків, я використовую інший цикл for, щоб пройтися по кожному стовпцю поточного рядка.
+          for (let cols = 0; cols < numberOfColumns; cols++) {
+            // Додаю до поточного рядка код для комірки таблиці з фіксованим повідомленням.
+            tableRow += `<td>${fixMessage}</td>`;
+          }
+          // Після завершення циклу для стовпців, додаю поточний рядок до таблиці.
+          currentTable += `<tr>${tableRow}</tr>`;
+        }
+        // Після завершення циклу для рядків, повертаю згенеровану таблицю у функцію.
+        return currentTable;
+      }
+
+      let showTable = createTable(numberOfRows, numberOfColumns, fixMessage);
+
+      // 3. Виведення результату
+      document.write(`
+			<table>
+				${showTable}
+			</table>
+      `);
+    </script>
+  </body>
+</html>
