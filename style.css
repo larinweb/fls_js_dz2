@@ -1,3 +1,5 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&display=swap'); */
+
 *,
 *:before,
 *:after {
@@ -7,10 +9,11 @@
 }
 
 body {
-	background: #455a64;
+	background: #455a64 url('imges/bg.webp') 0 0 repeat;
 	color: #FBC02D;
 	font: 24px 'Courier New', Courier, monospace;
-	padding: 0 50px 100px;
+	/* font: 24px 'Anonymous Pro', monospace; */
+	padding: 0 30px 100px;
 }
 
 a,
