@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L8 DZ task 4</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 4</h1>
+    <p>
+      Створити функцію, яка для 3 заданих чисел знаходить одночасно декілька результатів: кількість парних,
+      кількість додатних, кількість більших за 100.
+    </p>
+    <script>
+      "use strict";
+      // 1. Введення необхідних даних
+
+      // Масив номерів
+      let carNumbers = ["AA1701BB", "AB0406AC", "AC1918AA", "AB9999AB", "AA444"];
+      const searchedChar = "A";
+
+      // 2. Обчислення результату
+
+      //=========================================================================================
+
+      // Функція для підрахунку номерів, що починаються на "A"
+      function countStartWith(carNumbers) {
+        let startWith = 0; // Ініціалізація лічильника
+
+        // Проходимося по масиву номерів автомобілів
+        for (let i = 0; i < carNumbers.length; i++) {
+          // Якщо поточний номер починається з "A", збільшуємо лічильник
+          if (carNumbers[i][0] === searchedChar) {
+            startWith++;
+          }
+        }
+        return startWith;
+      }
+
+      //=========================================================================================
+
+      // Функція для підрахунку номерів, у яких перша і остання літери співпадають
+      function countFirstLastSame(carNumbers) {
+        let firstLastSame = 0; // Ініціалізація лічильника
+
+        // Проходимося по масиву номерів автомобілів
+        for (let i = 0; i < carNumbers.length; i++) {
+          // Якщо перша та остання літери номеру співпадають, збільшуємо лічильник
+          if (carNumbers[i][0] === carNumbers[i][carNumbers[i].length - 1]) {
+            firstLastSame++;
+          }
+          // carNumbers[i][0] - звертаємося до першої літери поточного номера автомобіля (стрінга розглядаеться як масив). Тут індекс 0 вказує на перший символ номера автомобіля.
+          // carNumbers[i][carNumbers[i].length - 1] - отримуємо останню літеру поточного (ітеруемого) номера автомобіля, звертаючись до нього за індексом.Індексом останбого символу е довжина слова отримана через .length, а -1 бо індексація з 0.
+        }
+        return firstLastSame;
+      }
+
+      //=========================================================================================
+
+      // Функція для підрахунку номерів, що складаються з більше ніж 5 символів
+      function countMoreThanFive(carNumbers) {
+        let moreThanFive = 0; // Ініціалізація лічильника
+
+        // Проходимося по масиву номерів автомобілів
+        for (let i = 0; i < carNumbers.length; i++) {
+          // Якщо довжина номеру більше 5, збільшуємо лічильник
+          if (carNumbers[i].length > 5) {
+            moreThanFive++;
+          }
+        }
+        return moreThanFive;
+      }
+
+      //=========================================================================================
+
+      // 3. Виведення результату
+      // Створюємо таблицю з результатами використання трьох функцій
+      document.write(`
+				<table>
+					<tr>
+						<th>Task</th>
+						<th>Result</th>
+					</tr>
+					<tr>
+						<td colspan="2">${carNumbers.join(", ")}</td>
+					</tr>
+					<tr>
+						<td>Кількість які починаються на букву «А»:</td>
+						<td>${countStartWith(carNumbers)}</td>
+					</tr>
+					<tr>
+						<td>Кількістьу яких перша і остання літери співпадають:</td>
+						<td>${countFirstLastSame(carNumbers)}</td>
+					</tr>
+					<tr>
+						<td>Кількість які складаються з більше ніж 5 символів:</td>
+						<td>${countMoreThanFive(carNumbers)}</td>
+					</tr>
+				</table>
+			`);
+    </script>
+  </body>
+</html>

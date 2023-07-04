@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L8 DZ task 8</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 8</h1>
+    <p>
+      Дано одновимірний масив, у якому зберігається певна виграшна сума (елементи заповнюються випадковим
+      чином значеннями від -500 до 500). Надаючи користувачу можливість вибирати номери елементів (поки він не
+      відмовиться). Знаходити сумарний виграш.
+    </p>
+    <script>
+      // 1. Введення необхідних даних
+
+      let winningSum = [];
+      let totalWin = 0;
+      let userAgrees = true;
+      let userAtempt = 0;
+
+      // 2. Обчислення результату
+
+      for (let i = 0; i < 10; i++) {
+        winningSum.push(Math.floor(Math.random() * 1001) - 500);
+      }
+
+      while (userAgrees) {
+        let userTry = parseInt(prompt("Оберіть номер елемента від 0 до " + (winningSum.length - 1)));
+        if (userTry < 0 || userTry > winningSum.length - 1 || isNaN(userTry)) {
+          alert("Неправильний вибір, спробуйте ще раз!");
+          continue;
+        }
+        totalWin += winningSum[userTry];
+        userAtempt++;
+
+        userAgrees = confirm("Ваш поточний виграш " + totalWin + ". Хочете продовжувати?");
+      }
+
+      // 3. Виведення результату
+
+      document.write(`
+			<table>
+      	<tr>
+      		<th>Сумарну кількість грошей:</th>
+      		<th>Result</th>
+      	</tr>
+      	<tr>
+				<td colspan="2">
+					${winningSum}
+				</td>
+      	</tr>
+      	<tr> 
+      		<td>
+					Ваша вдача за ${userAtempt} спроб: 
+      		</td>
+				<td>
+					${totalWin}
+				</td>
+      	</tr>
+		`);
+    </script>
+  </body>
+</html>

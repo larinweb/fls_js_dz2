@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L8 DZ task 5</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Задача 5.</h1>
+    <p>
+      Дано послідовність оцінок учня. Підрахувати кількість:<br />
+      1) двійок<br />
+      2) кількість хороших оцінок (добре, відмінно);<br />
+      3) кількість оцінок, які нижче середнього.
+    </p>
+    <script>
+      "use strict";
+
+      // 1. Введення необхідних даних
+
+      const arrGrades = [2, 5, 3, 4, 2, 5, 5, 3, 4, 3];
+      const gradeE = 2;
+      const gradeC = 3; // хоч і не використовуеться - залишив для краси )))
+      const gradeB = 4;
+      const gradeA = 5;
+
+      // 2. Обчислення результату
+
+      //=========================================================================================
+
+      // Фуекція підраховуе скільки разів конкретна оцінка зустрічається в масиві grades
+      function countLowGrades(num, ...grades) {
+        let gradesCounter = 0; // Ініціалізація лічильника
+        grades.forEach((grade) => {
+          if (grade === num) gradesCounter++; // Збільшення лічильника, якщо поточна оцінка відповідає вхідній оцінці
+        });
+        return gradesCounter; // Повернення лічильника
+      }
+
+      //=========================================================================================
+
+      // Фуекція підраховуе скільки разів хороші оцінки зустрічаються в масиві grades
+      function countGoodGrades(num, ...grades) {
+        let gradesCounter = 0; // Ініціалізація лічильника
+        grades.forEach((grade) => {
+          if (grade >= num) gradesCounter++; // Збільшення лічильника, якщо поточна оцінка більша або рівна хорошій
+        });
+        return gradesCounter; // Повернення лічильника
+      }
+
+      //=========================================================================================
+
+      // Функція обчислює середнє значення оцінок в масиві grades
+      function calcAverageGrades(grades) {
+        let arrSum = 0; // Ініціалізація суми
+        grades.forEach((grade) => {
+          arrSum += grade; // Додавання поточної оцінки до суми
+        });
+        return arrSum / grades.length; // Обчислення і повернення середнього значення
+      }
+
+      //=========================================================================================
+
+      // Фуекція підраховуе скільки оцінок в масиві grades нижчі за вхідне середнє значення
+      function countBelowAverageGrades(grades, average) {
+        let count = 0; // Ініціалізація лічильника
+        grades.forEach((grade) => {
+          if (grade < average) {
+            count++; // Збільшення лічильника, якщо поточна оцінка нижча за середнє значення
+          }
+        });
+        return count; // Повернення лічильника
+      }
+
+      let average = calcAverageGrades(arrGrades); // Обчислення середньої оцінки
+
+      //=========================================================================================
+
+      // 3. Виведення результату
+      document.write(`
+      <table>
+      	<tr>
+      		<th>Task</th>
+      		<th>Result</th>
+      	</tr>
+      	<tr>
+      		<td colspan="2">
+      			Дано масив: ${arrGrades.join()}
+      		</td>
+      	</tr>
+      	<tr>
+      		<td>Кількість двійок</td>
+      		<td>${countLowGrades(gradeE, ...arrGrades)}</td>
+      	</tr>
+      	<tr>
+      		<td>Кількість хороших оцінок</td>
+      		<td>${countGoodGrades(gradeB, ...arrGrades)}</td>
+      	</tr>
+      	<tr>
+      		<td>Кількість оцінок нижче середнього (${calcAverageGrades(arrGrades)})</td>
+      		<td>${countBelowAverageGrades(arrGrades, average)}</td>
+      	</tr>
+      </table>
+      `);
+    </script>
+  </body>
+</html>

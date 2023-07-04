@@ -1,18 +1,13 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&display=swap'); */
-
 *,
 *:before,
 *:after {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
 body {
 	background: #455a64 url('imges/bg.webp') 0 0 repeat;
 	color: #FBC02D;
-	font: 24px 'Courier New', Courier, monospace;
-	/* font: 24px 'Anonymous Pro', monospace; */
+	font: 20px 'Courier New', Courier, monospace;
 	padding: 0 30px 100px;
 }
 

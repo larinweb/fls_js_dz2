@@ -28,14 +28,19 @@
 
         // 2.2. Вибір шляху до зображення залежно від випадкового індексу
         let imagePath;
-        if (randomIndex === 1) {
-          imagePath = imagePath1;
-        } else if (randomIndex === 2) {
-          imagePath = imagePath2;
-        } else if (randomIndex === 3) {
-          imagePath = imagePath3;
-        } else {
-          imagePath = imagePath4;
+        switch (randomIndex) {
+          case 1:
+            imagePath = imagePath1;
+            break;
+          case 2:
+            imagePath = imagePath2;
+            break;
+          case 3:
+            imagePath = imagePath3;
+            break;
+          default:
+            imagePath = imagePath4;
+            break;
         }
         // 2.3. Повертаємо HTML-рядок з тегом <img> для виведення зображення
         return `<img src="${imagePath}" alt="" />`;

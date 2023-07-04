@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L8 DZ task 9</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Задача 9</h1>
+    <p>
+      Морський бій. Користувач вводить кількість клітинок одновимірного масиву та кількість одиночних
+      кораблів. Комп’ютер довільно розміщує ці одиночні кораблі у масиві по один у клітинці (якщо у клітинці
+      0, то клітинка пуста, якщо 1 – то це означає, що там є корабель. Користувач вводить номер клітинки, куди
+      стріляє. Гра продовжується до тих пір, поки не будуть потоплені усі кораблі.
+    </p>
+    <script>
+      //====================================================================================
+
+      // Функція для перевірки правильності введених даних користувачем
+      function validInput(input, max) {
+        if (isNaN(input)) {
+          alert("Введене значення не є числом. Будь ласка, спробуйте знову");
+          // throw new Error("Введене значення не є числом. Будь ласка, спробуйте знову.");
+          return false;
+        }
+        if (input < 1 || input > max) {
+          alert("Введене значення знаходиться поза допустимим діапазоном. Будь ласка, спробуйте знову");
+          // throw new Error("Введене значення знаходиться поза допустимим діапазоном. Будь ласка, спробуйте знову");
+          return false;
+        }
+        return true;
+      }
+
+      //====================================================================================
+
+      // Запит вводу даних від користувача
+      let userCells;
+      do {
+        userCells = parseInt(prompt("Введіть кількість клітинок"));
+      } while (!validInput(userCells, Infinity));
+
+      let userShips;
+      do {
+        userShips = parseInt(prompt("Введіть кількість корабліків"));
+      } while (!validInput(userShips, userCells));
+
+      // Створення поля битви та збереження його початкового стану
+      let battleground = createBattleground(userCells, userShips);
+      let initialBattleground = [...battleground];
+
+      let shotsCounter = 0;
+
+      // Масив для зберігання історії ходів
+      let moveHistory = [];
+
+      //====================================================================================
+
+      // Функція створення поля битви (масиву) на основі введених користувачем даних
+      function createBattleground(userCells, userShips) {
+        // Створення масиву заданого розміру, ініціалізованого нулями
+        let battleground = new Array(userCells).fill(0);
+
+        // Заповнення масиву одиницями в випадкових позиціях для розташування кораблів
+        for (let i = 0; i < userShips; ) {
+          let shipRandomPosition = Math.floor(Math.random() * userCells);
+          if (battleground[shipRandomPosition] === 0) {
+            battleground[shipRandomPosition] = 1;
+            i++;
+          }
+        }
+
+        return battleground;
+      }
+
+      //====================================================================================
+
+      // Головний цикл гри
+      do {
+        let userShot;
+        do {
+          userShot = parseInt(prompt("Введіть номер клітинки куди стріляти"));
+        } while (!validInput(userShot, battleground.length));
+
+        // Адаптація номера клітинки до індексації JavaScript
+        userShot--;
+
+        // Додавання ходу до історії
+        moveHistory.push(userShot + 1);
+
+        // Перевірка результату стрільби
+        if (battleground[userShot] === 1) {
+          battleground[userShot] = 0;
+          userShips--;
+          alert("Влучили");
+        } else {
+          alert("Мимо");
+        }
+
+        shotsCounter++;
+      } while (userShips > 0);
+
+      // 3. Виведення результату
+      document.write(`
+       <table>
+       	<tr>
+       		<th>Task</th>
+       		<th>Result</th>
+       	</tr>
+       	<tr>
+				<td colspan="2">
+					Початковий стан масиву:<br> ${initialBattleground.join(", ")}
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					Історія ходів:<br> ${moveHistory.join(", ")}
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					Гра закінчена! Ви здійснили ${shotsCounter} пострілів.
+				</td>
+       	</tr>
+       </table>
+       `);
+    </script>
+  </body>
+</html>

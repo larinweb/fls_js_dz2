@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L8 DZ task 7</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 7</h1>
+    <p>
+      Задача 7. Дано послідовність платіжок протягом року. Знайти сумарну кількість грошей за:<br />
+      &nbsp; за весь рік;<br />
+      &nbsp; у першій половині року;<br />
+      &nbsp; у другій половині року;<br />
+      &nbsp; за літо;<br />
+      &nbsp; за ІІ квартал;<br />
+      &nbsp; за парні місяці (з парними номерами);<br />
+      &nbsp; за місяці, які є початковими у сезоні (весна, літо, осінь, зима).
+    </p>
+    <script>
+      "use strict";
+      // 1. Оголошення необхідних даних
+
+      // const sequenceOfPayments = [4500, 3950, 3560, 3120, 2686, 3816, 3520, 3230, 2736, 2730, 3300, 4444];
+
+      // Цей масив легше перевіряти 1-12
+      const sequenceOfPayments = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+      // Результати для перевірки:
+      // 78
+      // 21
+      // 57
+      // 21
+      // 15
+      // 42
+
+      // 2. Обчислення результату
+
+      //=========================================================================================
+
+      // Функція "сума за період"
+      function sumAmountOfMmoney(from, to, ...money) {
+        let periodSum = 0;
+        // До значень періода дописав "-1" щоб користувач передава данні у звичному форматі місяців 1-12 замість 0-11
+        for (let i = from - 1; i <= to - 1; i++) {
+          periodSum += money[i];
+        }
+        return periodSum;
+      }
+
+      //=========================================================================================
+
+      // Функція "сума за парні"
+      function sumOddMonths(money) {
+        let periodSum = 0;
+        for (let i = 0; i < money.length; i++) {
+          if (i % 2 !== 0) {
+            periodSum += money[i];
+          }
+        }
+        return periodSum;
+      }
+
+      //=========================================================================================
+
+      // Функція "сума за місяці, які є початковими у сезоні"
+      function sumStartOfSeasons(money) {
+        let periodSum = 0;
+        for (let i = 0; i < money.length; i++) {
+          if (i % 3 === 2) {
+            periodSum += money[i];
+          }
+        }
+        return periodSum;
+      }
+
+      //=========================================================================================
+
+      // 3. Виведення результату
+      document.write(`
+      <table>
+      	<tr>
+      		<th>Сумарну кількість грошей:</th>
+      		<th>Result</th>
+      	</tr>
+      	<tr>
+      		<td colspan="2">
+					Масив: ${sequenceOfPayments.join(", ")}
+      		</td>
+      	</tr>
+      	<tr>
+      		<td>за весь рік;</td>
+      		<td>${sumAmountOfMmoney(1, 12, ...sequenceOfPayments)}</td>
+      	</tr>
+      	<tr>
+      		<td>у першій половині року;</td>
+      		<td>${sumAmountOfMmoney(1, 6, ...sequenceOfPayments)}</td>
+      	</tr>
+      	<tr>
+      		<td>у другій половині року;</td>
+      		<td>${sumAmountOfMmoney(7, 12, ...sequenceOfPayments)}</td>
+      	</tr>
+      	<tr>
+      		<td>за літо;</td>
+      		<td>${sumAmountOfMmoney(6, 8, ...sequenceOfPayments)}</td>
+      	</tr>
+      	<tr>
+      		<td>за ІІ квартал;</td>
+      		<td>${sumAmountOfMmoney(4, 6, ...sequenceOfPayments)}</td>
+      	</tr>
+      	<tr>
+      		<td>за парні місяці;</td>
+      		<td>${sumOddMonths(sequenceOfPayments)}</td>
+      	</tr>
+      	<tr>
+      		<td>за місяці, які є початковими у сезоні:</td>
+      		<td>${sumStartOfSeasons(sequenceOfPayments)}</td>
+      	</tr>
+      </table>
+      `);
+    </script>
+  </body>
+</html>

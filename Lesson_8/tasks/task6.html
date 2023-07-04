@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L8 DZ task 6</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Завдання 6</h1>
+    <p>
+      Дано послідовність цін товарів та назв (у окремих масивах). Вивести на екран ті, які може собі дозволити
+      користувач (кількість грошей задається).
+    </p>
+    <script>
+      "use strict";
+      // 1. Введення необхідних даних
+
+      const productsPrice = [12.5, 34.99, 50, 75, 10, 23.5, 55, 110, 8.5, 5];
+      const productsTitle = [
+        "Борошно",
+        "Цукерки",
+        "Молоко",
+        "Сир",
+        "Хліб",
+        "Яйця",
+        "М'ясо",
+        "Риба",
+        "Картопля",
+        "Огірки",
+      ];
+      const userBudget = parseFloat(prompt("Скількі у вас грошей?"));
+
+      // 2. Обчислення результату
+
+      function getAfforableProduct(prices, titles) {
+        let afforableList = [];
+        for (let i = 0; i < prices.length; i++) {
+          if (prices[i] <= userBudget) afforableList.push(titles[i]);
+        }
+        return afforableList;
+      }
+
+      // 3. Виведення результату
+      document.write(`
+      	<table>
+      		<tr>
+      			<th>Task</th>
+      			<th>Result</th>
+      		</tr>
+      		<tr>
+      			<td colspan="2">Які продукти користувач може собі дозволити з сумою ${userBudget} грн
+      			</td>
+      		</tr>
+      		<tr>
+      			<td colspan="2">${getAfforableProduct(productsPrice, productsTitle)}</td>
+      		</tr>
+      	</table>
+      `);
+    </script>
+  </body>
+</html>

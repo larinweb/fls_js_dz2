@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LVS_UA L8 DZ task 3</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body class="result__body">
+    <h1>Задача 3</h1>
+    <p>Дано масив імен учнів. З’ясувати скільки разів зустрічається ім’я «Іван».</p>
+    <script>
+      "use strict";
+
+      // 1. Введення необхідних даних
+      let arrStudentsNames = [
+        "Іван",
+        "Олег",
+        "Софія",
+        "Юлія",
+        "Іван",
+        "Михайло",
+        "Юрій",
+        "Вікторія",
+        "Іван",
+        "Наталія",
+      ];
+      const searchName = "Іван";
+
+      // 2. Обчислення результату
+      function getIvanAmount(names) {
+        let nameCounter = 0;
+        names.forEach((i) => {
+          if (i === searchName) nameCounter++;
+        });
+        return nameCounter;
+      }
+		
+
+      // 3. Виведення результату
+      document.write(`
+          <table>
+          	<tr>
+          		<th>Task</th>
+          		<th>Result</th>
+          	</tr>
+          	<tr>
+          		<td>Скількі Іванів</td>
+          		<td>${getIvanAmount(arrStudentsNames)} штук</td>
+          	</tr>
+          </table>
+      `);
+    </script>
+  </body>
+</html>
