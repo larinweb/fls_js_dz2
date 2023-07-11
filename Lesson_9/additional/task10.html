@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L9 DZ task 10</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 10</h1>
+		<p>Дано масив цін у грн. Податок складає 20%. Сформувати масив, який буде містити величину сплаченого податку у грн.</p>
+		<script>
+			"use strict";
+			// 1. Введення необхідних даних
+
+			const arrPrices = [100, 50, 44, 101, 856, 23, 87, 52, 698, 2023, 985];
+			const taxRate = 20;
+
+			// 2. Обчислення результату
+
+			function calcTax(sourceArr, tax) {
+				let resArr = [];
+				for (const i of sourceArr) {
+					resArr.push((i * tax) / 100);
+				}
+				return resArr;
+			}
+
+			// 3. Виведення результату
+			document.write(`
+        <table>
+          <tr>
+          	<th colspan="2">Ціни: <br> ${arrPrices.join(", ")}</th>
+          </tr>
+          <tr>
+          	<td colspan="2">${calcTax(arrPrices, taxRate).join(" | ")}</td>
+          </tr>
+        </table>
+      `);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L9 DZ task 8</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 8</h1>
+		<p>Дано масив номерів авто. Сформувати новий масив тих, які починаються на «А»</p>
+		<script>
+			"use strict";
+			// 1. Введення необхідних даних
+
+			const carNumbers = ["AA1701BB", "B0406AC", "aC1918AA", "AB9999AB", "PIZZON"];
+			const targetChar = "a";
+			const targetIndex = 0;
+
+			// 2. Обчислення результату
+
+			function groupByChar(arr, target, index) {
+				let resArr = [];
+				target = target.toUpperCase();
+				for (const n of arr) {
+					if (n[index].toUpperCase() === target) {
+						resArr.push(n);
+					}
+				}
+				return resArr;
+			}
+
+			// 3. Виведення результату
+
+			document.write(`
+				<table>
+			    	<tr>
+			    		<th>Task</th>
+			    		<th>Result</th>
+			    	</tr>
+			    	<tr>
+							<td colspan="2">
+								Загальний масив номерів: <br>
+								${carNumbers.join(", ")}
+							</td>
+			    	</tr>
+			    	<tr>
+							<td>
+								Номери які починаються на «${targetChar.toUpperCase()}»
+							</td>
+							<td>
+								${groupByChar(carNumbers, targetChar, targetIndex).join("<br>")}
+							</td>
+			    	</tr>
+				</table>
+			`);
+		</script>
+	</body>
+</html>

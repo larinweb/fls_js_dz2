@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L9 DZ task 7</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 7</h1>
+		<p>Дано масив цін. Змінити цей масив так, що на ціни товарів, які більші за 1000 грн. дати 30% знижки.</p>
+		<script>
+			"use strict";
+			// 1. Оголошення необхідних даних
+
+			let arrProdPrice = [500, 333, 444, 999, 1001, 2563, 9856, 4586];
+			const prodDiscount = 0.3;
+			const prodFromPrice = 1000;
+
+			// 2. Обчислення результату
+
+			function calcDiscountedPrice(arr, discount, from) {
+				for (let i = 0; i < arr.length; i++) {
+					if (arr[i] > from) {
+						arr[i] = (arr[i] * (1 - discount)).toFixed(2);
+					}
+				}
+				return arr;
+			}
+
+			// 3. Виведення результату
+			document.write(`
+			   <table>
+			   	<tr>
+			   		<th colspan="2">Org arr: ${arrProdPrice}</th>
+			   	</tr>
+			   	<tr>
+			   		<td colspan="2">
+							${calcDiscountedPrice(arrProdPrice, prodDiscount, prodFromPrice)}
+			   		</td>
+			   	</tr>
+			   </table>
+			   `);
+		</script>
+	</body>
+</html>

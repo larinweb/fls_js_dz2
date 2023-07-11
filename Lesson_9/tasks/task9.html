@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L9 DZ task 9</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 9</h1>
+		<p>Дано масив імен. Сформувати масив з перших літер цих імен.</p>
+		<script>
+			"use strict";
+			// 1. Введення необхідних даних
+			const namerArr = [
+				"Анастасія",
+				"Олена",
+				"Ярослава",
+				"Василь",
+				"Катерина",
+				"Микола",
+				"Людмила",
+				"Олександра",
+				"Софія",
+				"В'ячеслав",
+				"Їжачок )))",
+			];
+
+			// 2. Обчислення результату
+
+			function createFirstNameLetterArr(sourceArr) {
+				let resArr = [];
+				for (const n of sourceArr) resArr.push(n[0]);
+				return resArr;
+			}
+
+			// 3. Виведення результату
+			document.write(`
+       <table>
+       	<tr>
+       		<th  colspan="2">${namerArr.join(", ")}</th>
+       	</tr>
+       	<tr>
+					<td colspan="2">
+						${createFirstNameLetterArr(namerArr)}
+					</td>
+				</tr>
+       </table>
+       `);
+		</script>
+	</body>
+</html>

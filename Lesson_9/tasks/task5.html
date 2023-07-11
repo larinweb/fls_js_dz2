@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L9 DZ task 5</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 5</h1>
+		<p>Дано масив елементів. Знайти добуток додатних елементів</p>
+		<script>
+			"use strict";
+			// 1. Введення необхідних даних
+
+			const arrOfNumbers = [100, 50, 44, 1, 8, 0, 87, -52, 698, 2023, -98955];
+
+			// 2. Обчислення результату
+			function productOfPositives(arr) {
+				let res = 1;
+				for (const i of arr) if (i > 0) res *= i;
+				return res;
+			}
+
+			// 3. Виведення результату
+			document.write(`
+      <table>
+      	<tr>
+      		<th>Task</th>
+      		<th>Result</th>
+      	</tr>
+      	<tr>
+      		<td colspan="2">
+						${productOfPositives(arrOfNumbers)}
+      		</td>
+      	</tr>
+      </table>
+      `);
+		</script>
+	</body>
+</html>

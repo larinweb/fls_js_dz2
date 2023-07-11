@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L9 DZ task 4</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 4</h1>
+		<p>Дано масив елементів. Вивести на екран елементи, що більші за 100</p>
+		<script>
+			"use strict";
+			// 1. Введення необхідних даних
+
+			const arrOfNumbers = [100, 50, 44, 101, 856, 23, 87, 52, 698, 2023, 98955478516654];
+
+			// 2. Обчислення результату
+
+			function filterGreaterThan(arr, from) {
+				const res = [];
+				for (const i of arr) {
+					if (i > from) {
+						res.push(i);
+					}
+				}
+				return res;
+			}
+
+			// 3. Виведення результату
+
+			document.write(`
+				<table>
+					<tr>
+						<th>Task</th>
+						<th>Result</th>
+					</tr>
+					<tr>
+						<td>Числа більше 100:</td>
+						<td>${filterGreaterThan(arrOfNumbers, 100)}</td>
+					</tr>
+				</table>
+			`);
+		</script>
+	</body>
+</html>
