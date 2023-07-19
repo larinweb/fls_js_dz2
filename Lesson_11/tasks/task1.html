@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L11 DZ task 1</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 1</h1>
+		<p>Знайти суми елементів у вказаній області (масиви розділені на 4 рівні частини</p>
+		<script>
+			"use strict";
+
+			// 1. Введення необхідних даних
+			const userArrSize = parseInt(prompt("Введіть бажаний розмір багатовимірного масиву", "4"));
+			const searchedQ = parseInt(prompt("Введіть шукану чверть багатовимірного масиву", "1"));
+			// let userArrSize = 4;
+			// const searchedQ = 1;
+			//=======================================================================================
+
+			// 2. Обчислення результату
+
+			//=======================================================================================
+
+			// ** Загальна функція створення двовимірного квадратного масиву з рандомних чисел
+			function gen2DArr(size = 4, from = 0, to = 10) {
+				const arr = [];
+				// Створюємо рядки. Кількість рядків це size.
+				for (let r = 0; r < size; r++) {
+					const row = [];
+					// Створюємо елементи в рядку. Кількість клітинок (масивів другого виміру) це size бо квадратний масив.
+					for (let c = 0; c < size; c++) {
+						// додаємо клітинку (тобто масив другого рівня) в рядок масиву arr.
+						row.push(Math.floor(Math.random() * (to - from + 1)) + from);
+					}
+					// додаємо рядок в масив arr.
+					arr.push(row);
+				}
+				return arr;
+			}
+
+			//=======================================================================================
+
+			// Функція малювання "таблиці"/"матриці" двовимірного масиву
+			function drawTable(arr2D) {
+				let tableCode = `<table style="text-align: center;">`;
+				for (let i = 0; i < arr2D.length; i++) {
+					tableCode += `<tr>`;
+					for (let n = 0; n < arr2D[i].length; n++) {
+						tableCode += `<td>${arr2D[i][n]}</td>`;
+					}
+					tableCode += `</tr>`;
+				}
+				tableCode += `</table>`;
+				document.write(tableCode);
+			}
+
+			const matrix = gen2DArr(userArrSize);
+			drawTable(matrix);
+
+			//=======================================================================================
+
+			// Функція суми елементів чвертей
+			function calcQuarterSum(quarter, arr) {
+				let sum = 0;
+				const half = Math.floor(arr.length / 2);
+
+				for (let r = 0; r < half; r++) {
+					for (let c = 0; c < half; c++) {
+						switch (quarter) {
+							case 1: // перша чверть: верхня ліва
+								sum += arr[r][c];
+								break;
+							case 2: // друга чверть: верхня права
+								sum += arr[r][c + half];
+								break;
+							case 3: // третя чверть: нижня ліва
+								sum += arr[r + half][c];
+								break;
+							case 4: // четверта чверть: нижня права
+								sum += arr[r + half][c + half];
+								break;
+						}
+					}
+				}
+				return sum;
+			}
+
+			//=======================================================================================
+
+			// Функція суми парних рядків
+			function calcEvenRowsSum(arr) {
+				let sum = 0;
+
+				for (let r = 0; r < arr.length; r += 2) {
+					for (let c = 0; c < arr[r].length; c++) {
+						sum += arr[r][c];
+					}
+				}
+				return sum;
+			}
+
+			//=======================================================================================
+
+			// Функція суми непарних стовпців
+
+			function calcOddColSum(arr) {
+				let sum = 0;
+
+				for (let r = 0; r < arr.length; r++) {
+					for (let c = 1; c < arr[r].length; c += 2) {
+						sum += arr[r][c];
+					}
+				}
+				return sum;
+			}
+
+			//=======================================================================================
+
+			// Сума непарних стовпців у парних рядках
+
+			function calcOddColInEvenRowSum(arr) {
+				let sum = 0;
+
+				for (let r = 0; r < arr.length; r += 2) {
+					for (let c = 1; c < arr[r].length; c += 2) {
+						sum += arr[r][c];
+					}
+				}
+				return sum;
+			}
+
+			//=======================================================================================
+
+			// Сума парних стовпців у непарних рядках
+
+			function calcEvenColInOddRowSum(arr) {
+				let sum = 0;
+
+				for (let r = 1; r < arr.length; r += 2) {
+					for (let c = 0; c < arr[r].length; c += 2) {
+						sum += arr[r][c];
+					}
+				}
+				return sum;
+			}
+
+			//=======================================================================================
+
+			// 3. Виведення результату
+			document.write(`
+			<table style="margin-top: 20px;">
+				<tr>
+					<td>Сума чисел у ${searchedQ}й чверті</td>
+					<td>${calcQuarterSum(searchedQ, matrix)}</td>
+				</tr>
+				<tr>
+					<td>Сума парних рядків</td>
+					<td>${calcEvenRowsSum(matrix)}</td>
+				</tr>
+				<tr>
+					<td>Сума непарних стовпців</td>
+					<td>${calcOddColSum(matrix)}</td>
+				</tr>
+				<tr>
+					<td>Сума непарних стовпців у парних рядках</td>
+					<td>${calcOddColInEvenRowSum(matrix)}</td>
+				</tr>
+				<tr>
+					<td>Сума парних стовпців у непарних рядках</td>
+					<td>${calcEvenColInOddRowSum(matrix)}</td>
+				</tr>
+			</table>
+			`);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L11 DZ task 2</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<style>
+			td {
+				font-size: 18px;
+				letter-spacing: -0.02em;
+			}
+			td b {
+				color: rgb(240, 82, 61);
+			}
+		</style>
+		<h1>Задача 2</h1>
+		<p>Дано інформацію про прибуток К магазинів протягом тижня. Знайти:<br /></p>
+		<script>
+			"use strict";
+
+			// 1. Введення необхідних даних
+
+			//=======================================================================================
+
+			// ** Загальна функція створення двовимірного квадратного масиву з рандомних чисел
+
+			function gen2DArr(size = 4, week = 7, from = 0, to = 444) {
+				const arr = [];
+				// Створюємо рядки. Кількість рядків це size.
+				for (let r = 0; r < size; r++) {
+					const row = [];
+					// Створюємо елементи в рядку. Кількість клітинок (масивів другого виміру) це size бо квадратний масив.
+					for (let c = 0; c < week; c++) {
+						// додаємо клітинку (тобто масив другого рівня) в рядок масиву arr.
+						row.push(Math.floor(Math.random() * (to - from + 1)) + from);
+					}
+					// додаємо рядок в масив arr.
+					arr.push(row);
+				}
+				return arr;
+			}
+
+			//=======================================================================================
+
+			// Функція малювання "таблиці"/"матриці" двовимірного масиву
+			function drawTable(arr2D) {
+				let tableCode = `<table style="text-align: center;">`;
+				for (let i = 0; i < arr2D.length; i++) {
+					tableCode += `<tr>`;
+					for (let n = 0; n < arr2D[i].length; n++) {
+						tableCode += `<td>${arr2D[i][n]}</td>`;
+					}
+					tableCode += `</tr>`;
+				}
+				tableCode += `</table>`;
+				document.write(tableCode);
+			}
+
+			const matrix = gen2DArr();
+			drawTable(matrix);
+
+			//=======================================================================================
+
+			// **** 2.1) Загальний прибуток кожного магазину за тиждень;
+
+			const calcTotalProfitOfEachShop = (arr) => arr.map((shop) => shop.reduce((sum, current) => sum + current, 0));
+
+			//=======================================================================================
+
+			// **** 2.2) загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.);
+
+			function calcTotalProfitByDays(arr) {
+				let daysOfWeek = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"];
+				return daysOfWeek.map((day, index) => {
+					let totalProfit = arr.reduce((acc, shop) => acc + shop[index], 0);
+					return `${day}: ${totalProfit}`;
+				});
+			}
+
+			//=======================================================================================
+
+			// **** 2.3) Загальний прибуток за робочі дні
+
+			function calcProfitWorkdays(arr) {
+				let totalProfitWorkdays = 0;
+				for (let day = 0; day < 5; day++) {
+					totalProfitWorkdays += matrix.reduce((acc, shop) => acc + shop[day], 0);
+				}
+				return totalProfitWorkdays;
+			}
+
+			//=======================================================================================
+
+			// **** 2.4) Загальний прибуток за вихідні дні
+
+			function calcProfitWeekend(arr) {
+				let totalProfitWeekend = 0;
+				for (let day = 5; day < 7; day++) {
+					totalProfitWeekend += matrix.reduce((acc, shop) => acc + shop[day], 0);
+				}
+				return totalProfitWeekend;
+			}
+
+			//=======================================================================================
+
+			// **** 2.5) Максимальний прибуток за середу
+
+			function getMaxWednesdayProfit(arr, day) {
+				return Math.max(...arr.map((shop) => shop[day]));
+			}
+
+			//=======================================================================================
+
+			// **** 2.6) Сформувати загальний список (одновимірний масив) зі значенням, які що більші за 200
+
+			function getAllOver(arr, number) {
+				return arr.flat().filter((item) => item > number);
+			}
+
+			//=======================================================================================
+
+			// **** 2.7) відсортувати кожен тиждень за зростанням
+
+			function sortEachWeek(arr) {
+				const sortedArr = JSON.parse(JSON.stringify(arr));
+				return sortedArr.map((shop) => shop.sort((a, b) => a - b));
+			}
+
+			//=======================================================================================
+
+			// **** 2.8) відсортувати тижні (рядки) за спаданням максимального елементи у цьому тижні (рядку), тобто при порівнянні рядків потрібно порівнювати максимальні елементи у кожному з цих рядків
+
+			function sortByWeekMax(arr) {
+				const sortedArr = JSON.parse(JSON.stringify(arr));
+				return sortedArr.sort((a, b) => Math.max(...b) - Math.max(...a));
+			}
+
+			//=======================================================================================
+
+			// **** 2.9) упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при порівнянні двох рядків треба знайти суму кожного з рядків
+
+			function sortByWeekSum(arr) {
+				const sortedArr = JSON.parse(JSON.stringify(arr));
+				return sortedArr.sort((a, b) => b.reduce((sum, current) => sum + current, 0) - a.reduce((sum, current) => sum + current, 0));
+			}
+
+			//=======================================================================================
+
+			// 3. Виведення результату
+			document.write(`
+				<table class="result_tbl" style="margin-top: 20px">
+				<tr>
+					<td colspan="4"><b>2.1:</b> Загальний прибуток кожного магазину за тиждень;</td>
+				</tr>
+				<tr colspan="4">
+					<td>1й: ${calcTotalProfitOfEachShop(matrix)[0]}грн</td>
+					<td>2й: ${calcTotalProfitOfEachShop(matrix)[1]}грн</td>
+					<td>3й: ${calcTotalProfitOfEachShop(matrix)[2]}грн</td>
+					<td>4й: ${calcTotalProfitOfEachShop(matrix)[3]}грн</td>
+				</tr>
+				<tr>
+					<td colspan="7">
+						<b>2.2:</b> загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.);
+					</td>
+				</tr>
+				<tr>
+					<td>${calcTotalProfitByDays(matrix).join("</td><td>")}</td>
+				</tr>
+				<tr>
+					<td colspan="7"><b>2.3:</b> загальний прибуток за робочі дні</td>
+				</tr>
+				<tr>
+					<td colspan="7">${calcProfitWorkdays(matrix)}</td>
+				</tr>
+				<tr>
+					<td colspan="7"><b>2.4:</b> загальний прибуток за вихідні дні</td>
+				</tr>
+				<tr>
+					<td colspan="7">${calcProfitWeekend(matrix)}</td>
+				</tr>
+				<tr>
+					<td colspan="7"><b>2.5:</b> максимальний прибуток за середу</td>
+				</tr>
+				<tr>
+					<td colspan="7">${getMaxWednesdayProfit(matrix, 2)}</td>
+				</tr>
+				<tr>
+					<td colspan="7"><b>2.6:</b> сформувати загальний список (одновимірний масив) зі значенням, які що більші за 200</td>
+				</tr>
+				<tr>
+					<td colspan="7">${getAllOver(matrix, 200)}</td>
+				</tr>
+				<tr>
+					<td colspan="7"><b>2.7:</b> Відсортувати кожен тиждень за зростанням</td>
+				</tr>
+				<tr>
+					<td colspan="7">
+						1й тиждень: ${sortEachWeek(matrix)[0]}<br />
+						2й тиждень: ${sortEachWeek(matrix)[1]}<br />
+						3й тиждень: ${sortEachWeek(matrix)[2]}<br />
+						4й тиждень: ${sortEachWeek(matrix)[3]}
+					</td>
+				</tr>
+				<tr>
+					<td colspan="7">
+						<b>2.8:</b> відсортувати тижні (рядки) за спаданням максимального елементи у цьому тижні (рядку), тобто при порівнянні рядків потрібно
+						порівнювати максимальні елементи у кожному з цих рядків
+					</td>
+				</tr>
+				<tr>
+					<td colspan="7">
+						${sortByWeekMax(matrix)[0]}<br />
+						${sortByWeekMax(matrix)[1]}<br />
+						${sortByWeekMax(matrix)[2]}<br />
+						${sortByWeekMax(matrix)[3]}
+					</td>
+				</tr>
+				<tr>
+					<td colspan="7">
+						<b>2.9:</b> упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при порівнянні двох рядків треба знайти суму кожного
+						з рядків і порівнювати ці суми, на основі цих сум буде зрозуміло, який з елементів повинен іти раніше).
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan="7">
+						${sortByWeekSum(matrix)[0]}<br />
+						${sortByWeekSum(matrix)[1]}<br />
+						${sortByWeekSum(matrix)[2]}<br />
+						${sortByWeekSum(matrix)[3]}
+					</td>
+				</tr>
+			</table>
+		`);
+		</script>
+	</body>
+</html>
