@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L12 DZ task 3</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 3</h1>
+		<p>Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування включеннями.</p>
+		<script>
+			"use strict";
+			//=======================================================================================
+			// 1. Введення необхідних даних
+
+			// * Генерація рандомного масиву
+			const randomNumArr = Array.from({ length: 30 }, () => Math.floor(Math.random() * 30) + 1);
+
+			// ** Рандомний масиву
+			// const randomNumArr = [5, 22, 1, 25, 27, 11, 3, 20, 5, 7, 5, 4, 8, 12, 16, 22, 20, 9, 12, 6, 12, 10, 11, 11, 17, 9, 16, 28, 13, 3];
+
+			// *** Перемішаний масив від 1 до 30
+			// const randomNumArr = [26, 3, 16, 18, 15, 30, 7, 19, 14, 12, 8, 27, 1, 6, 28, 29, 13, 4, 11, 9, 2, 22, 25, 5, 20, 24, 10, 17, 21, 23];
+			//=======================================================================================
+
+			// 2. Обчислення результату
+
+			function insertionSortCount(arr) {
+				let swaps = 0;
+				let end = arr.length;
+
+				for (let i = 1; i < end; i++) {
+					let current = arr[i];
+					let j = i - 1;
+
+					while (j >= 0 && arr[j] > current) {
+						arr[j + 1] = arr[j];
+						j = j - 1;
+						swaps++;
+						document.write(`${arr}<br>`);
+					}
+
+					arr[j + 1] = current;
+				}
+
+				return swaps;
+			}
+
+			//=======================================================================================
+
+			// 3. Виведення результату
+			document.write(`
+			<table style="margin-top: 20px;">
+				<tr>
+					<td style="font-size:15px;">${randomNumArr}</td>
+				</tr>
+				<tr>
+					<td>Кількість обмінів: ${insertionSortCount(randomNumArr)}</td>
+				</tr>
+			</table>
+			`);
+		</script>
+		<button onclick="window.location.reload();" style="margin-top: 15px">Перегенерувати масив</button>
+	</body>
+</html>

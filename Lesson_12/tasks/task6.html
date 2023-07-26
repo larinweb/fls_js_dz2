@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L12 DZ task 6</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 6</h1>
+		<p>
+			Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я довжиною 5 символів і під яким
+			індексом.
+		</p>
+		<script>
+			"use strict";
+			//=======================================================================================
+			// 1. Введення необхідних даних
+			const namesArr = [
+				"Марія",
+				"Петро",
+				"Софія",
+				"Андрій",
+				"Катерина",
+				"Олександр",
+				"Олена",
+				"Анна",
+				"Михайло",
+				"Ольга",
+				"Олена",
+				"Володимир",
+				"Тетяна",
+				"Ярослав",
+				"Вікторія",
+				"Роман",
+				"Василь",
+				"Наталія",
+				"Роман",
+				"Юлія",
+			];
+			const targetLenght = 5;
+
+			//=======================================================================================
+
+			// 2. Обчислення результату
+
+			const sortedNamesArr = namesArr.sort((a, b) => a.length - b.length);
+
+			function nameBinarySearch(arr, target) {
+				let start = 0;
+				let end = arr.length - 1;
+				while (start <= end) {
+					const middle = Math.floor((start + end) / 2);
+					if (arr[middle].length === target) return middle;
+					if (arr[middle].length < target) start = middle + 1;
+					if (arr[middle].length > target) end = middle - 1;
+				}
+				return -1;
+			}
+
+			const resultIndex = nameBinarySearch(sortedNamesArr, targetLenght);
+
+			let res =
+				resultIndex !== -1 ? `Ім’я довжиною "${targetLenght}" символів знайдене за індексом ${resultIndex}.` : "Ім’я не знайдений в масиві.";
+
+			//=======================================================================================
+
+			// 3. Виведення результату
+			document.write(`
+			<table>
+				<tr>
+					<td>${res}</td>
+				</tr>
+			</table>
+			`);
+		</script>
+	</body>
+</html>
