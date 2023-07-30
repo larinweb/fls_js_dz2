@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L13 DZ task 6</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 6</h1>
+		<p>Через 20 секунд перейти на сайт ukr.net ( або ж ні :-) ). Для цього через 20 секунд після відкриття треба виконати команду</p>
+		<script>
+			"use strict";
+			let showMathTask = setTimeout(() => {
+				window.open("https://www.youtube.com/watch?v=59b-ko1baWU", "_blank");
+			}, 20000);
+			//========================================================================================================================================================
+			// Just for fun )))
+
+			function startTimer() {
+				let timeLeft = 20;
+
+				const timerElement = document.getElementById("timer");
+
+				const countdown = setInterval(() => {
+					timeLeft--;
+					timerElement.textContent = timeLeft;
+
+					if (timeLeft <= 0) {
+						clearInterval(countdown);
+					}
+				}, 1000);
+			}
+
+			// Запускаємо таймер при завантаженні сторінки
+			window.onload = function () {
+				startTimer();
+			};
+			//========================================================================================================================================================
+		</script>
+		<h3>
+			Are you ready?!<br />
+			<p id="timer">20</p>
+		</h3>
+	</body>
+</html>

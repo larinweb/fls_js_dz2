@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L13 DZ task 5</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 5</h1>
+		<p>Тренажер додавання. Кожні 10 секунд користувачу задають випадковий приклад з додавання двох цифр і робиться перевірка.</p>
+		<script>
+			"use strict";
+			function genRandomNum() {
+				return Math.floor(Math.random() * 10) + 1;
+			}
+
+			let showMathTask = setInterval(() => {
+				const randomNum1 = genRandomNum();
+				const randomNum2 = genRandomNum();
+				const correctAnswer = randomNum1 + randomNum2;
+
+				const userAnswer = prompt(`${randomNum1} + ${randomNum2}`);
+
+				if (userAnswer === null) {
+					alert("Ви скасували відповідь");
+					clearInterval(showMathTask);
+				} else {
+					const parsedUserAnswer = parseInt(userAnswer);
+					if (!isNaN(parsedUserAnswer)) {
+						if (parsedUserAnswer === correctAnswer) {
+							alert("Відповідь правильна! Молодець!");
+						} else {
+							alert(`Відповідь неправильна. Правильна відповідь: ${correctAnswer}`);
+						}
+					}
+				}
+			}, 10000);
+		</script>
+	</body>
+</html>

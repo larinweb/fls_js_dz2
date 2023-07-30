@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L13 DZ task 2</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 2</h1>
+		<p>Реалізувати бінарний пошук (розглядали на попередніх уроках) з використанням рекурсивного алгоритму.</p>
+		<script>
+			"use strict";
+			//=======================================================================================
+			// 1. Введення необхідних даних
+
+			// Приклад використання:
+			const sortedArr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+			const targetElement = parseInt(prompt("Введіть шукане число", "0"));
+
+			//=======================================================================================
+			// 2. Обчислення результату
+
+			// Функція для бінарного пошуку
+			function binaryRecSearch(arr, target, left, right) {
+				if (left > right) {
+					return -1; // Елемент не знайдено і/або його не існує в заданому масиві
+				}
+
+				const mid = Math.floor((left + right) / 2);
+
+				if (arr[mid] === target) return mid;
+				else if (arr[mid] < target) return binaryRecSearch(arr, target, mid + 1, right);
+				return binaryRecSearch(arr, target, left, mid - 1);
+			}
+
+			let res = binaryRecSearch(sortedArr, targetElement, 0, sortedArr.length - 1);
+
+			let message = res !== -1 ? `Шуканий елемент ${targetElement} знайдено під індексом ${res}` : `Елемент ${targetElement} не знайдений`;
+
+			//=======================================================================================
+
+			// 3. Виведення результату
+			document.write(`
+			<table>
+				<tr>
+					<td>${message}</td>
+				</tr>
+			</table>
+			`);
+		</script>
+	</body>
+</html>

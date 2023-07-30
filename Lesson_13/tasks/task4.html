@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L13 DZ task 4</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 4</h1>
+		<p>
+			З використанням замикань розробити ітератор, тобто функцію, що буде поступово за окремими викликами видавати по одній букві наперед
+			заданого слова. З використанням нього розробити гру «Прекладач». Виводимо для користувача опис цього слова і по одну букву користувач
+			вводить переклад цього слова. Підрахувати кількість вгаданих букв.
+		</p>
+		<script>
+			"use strict";
+			// 1. Введення необхідних даних
+
+			const givenWord = "Ukraine";
+
+			// 2. Обчислення результату
+
+			const start = confirm("Гра ПЕРЕКЛАДАЧ!!!\nВгадайте перекладену назву нашої Неньки\n\nГотові?");
+
+			if (start) {
+				const translator = createTranslator(givenWord);
+				translator();
+			}
+
+			function createTranslator(word) {
+				let correctGuesses = 0;
+				let maxTry = 3;
+				let guessed = [];
+				let wrong = [];
+				word = word.toLowerCase();
+
+				function translateLetter() {
+					for (let i = 0; i < word.length && maxTry > 0; ) {
+						let userLetter = prompt("Введіть букву").toLowerCase();
+						console.log(userLetter);
+
+						if (userLetter === null) {
+							alert("Гра відмінена.");
+							return; // Зупиняємо гру, якщо користувач відмінив.
+						}
+
+						if (userLetter.length !== 1) {
+							alert("Будь ласка, введіть лише одну букву");
+							continue;
+						}
+
+						if (userLetter === word[i]) {
+							correctGuesses++;
+							guessed.push(userLetter);
+							i++;
+						} else {
+							alert("Не вірно");
+							maxTry--;
+							wrong.push(userLetter);
+						}
+					}
+					document.write(`
+						<table>
+							<tr>
+								<td>Кількість вгаданих букв: ${correctGuesses}</td>
+							</tr>
+							<tr>
+								<td>Невірні букви: ${wrong.join()}</td>
+							</tr>
+							<tr>
+								<td>Вгадані букви: ${guessed.join()}	</td>
+							</tr>
+						</table>
+					`);
+
+					if (correctGuesses === word.length) {
+						alert("Вітаємо! Ви вгадали всі букви.");
+					} else {
+						alert("Гра завершена. Спробуйте ще раз!");
+					}
+				}
+				return translateLetter;
+			}
+		</script>
+	</body>
+</html>

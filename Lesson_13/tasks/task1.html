@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L13 DZ task 1</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 1</h1>
+		<p>
+			Нехай , де . Визначити .<br />
+			Розв'язати з використанням рекурсивних і нерекурсивних алгоритмів
+		</p>
+		<script>
+			"use strict";
+			//=======================================================================================
+			// 1. Введення необхідних даних
+
+			//=======================================================================================
+			// 2. Обчислення результату
+
+			// Рішення через нерекурсивний алгоритм
+			function calcUsualX(i) {
+				if (i === 0) return 1;
+				let sum = 1;
+				for (let j = 1; j <= i; j++) {
+					sum += 2 * j;
+				}
+				return sum;
+			}
+			console.log(calcUsualX(10));
+
+			// Рішення з використанням рекурсії
+			function calcRecursiveX(i) {
+				if (i === 0) return 1;
+				else return calcRecursiveX(i - 1) + 2 * i;
+			}
+			console.log(calcRecursiveX(10));
+
+			//=======================================================================================
+
+			// 3. Виведення результату
+			document.write(`
+			<table>
+				<tr>
+					<td>Рішення через звичайний алгоритм:</td>
+					<td>${calcUsualX(10)}</td>
+				</tr>
+				<tr>
+					<td>Рішення з використанням рекурсії:</td>
+					<td>${calcRecursiveX(10)}</td>
+				</tr>
+			</table>
+			`);
+		</script>
+	</body>
+</html>
