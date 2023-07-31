@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L14 DZ task 2</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 2</h1>
+		<p>Розробити функцію, у яку передають об`єкт (день, місяць, рік). Визначити, який буде рік через N місяців.</p>
+		<script>
+			"use strict";
+			//=======================================================================================
+			// 1. Введення необхідних даних
+
+			let userMonth = parseInt(prompt("Введіть кількість місяців"));
+			if (isNaN(userMonth) || userMonth === 0) {
+				throw new Error("Введено невірну кількість місяців.");
+			}
+
+			let currentDate = {
+				day: new Date().getDate(),
+				month: new Date().getMonth(),
+				year: new Date().getFullYear(),
+			};
+
+			//=======================================================================================
+			// 2. Обчислення результату
+			const getFutureYear = ({ month, year }, userMonth) => year + Math.floor((month + userMonth) / 12);
+			const futureYear = getFutureYear(currentDate, userMonth);
+
+			//=======================================================================================
+
+			// 3. Виведення результату
+			document.write(`
+			<table>
+				<tr>
+					<td>Через ${userMonth} місяців буде ${futureYear} рік</td>
+				</tr>
+			</table>
+			`);
+		</script>
+	</body>
+</html>

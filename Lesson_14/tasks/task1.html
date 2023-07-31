@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L14 DZ task 1</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 1</h1>
+		<p>
+			Описати масив об'єктів – сайтів розроблених компанією з такими властивостями<br />
+			----- Властивості ------<br />
+			назва компанії на час розробки (назву періодично змінюють)<br />
+			власник компанії<br />
+			спонсори (масив спонсорів)<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;* прізвище спонсора<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;* ім’я спонсора<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;* сума вкладень спонсора<br />
+			рік випуску<br />
+			вартість сайту<br /><br />
+			Знайти:
+		</p>
+		<script>
+			"use strict";
+			//========================================================================================
+			// 1. Введення необхідних даних
+
+			let companyWebsites = [
+				{
+					projBrand: "Galya Inc.",
+					projOwner: "Baba Galya",
+					projSponsors: [
+						{ firstName: "Alan", lastName: "Ahoe", deposit: 10000 },
+						{ firstName: "Billie", lastName: "Bowns", deposit: 20000 },
+					],
+					projYear: 2004,
+					projCost: 1000,
+				},
+				{
+					projBrand: "Taras Company",
+					projOwner: "Ded Taras",
+					projSponsors: [
+						{ firstName: "Clave", lastName: "Cimons", deposit: 30000 },
+						{ firstName: "Dave", lastName: "Down", deposit: 40000 },
+					],
+					projYear: 2008,
+					projCost: 200000,
+				},
+				{
+					projBrand: "ZSU Corp.",
+					projOwner: "ZVF",
+					projSponsors: [
+						{ firstName: "Evgen", lastName: "Evgenovich", deposit: 50000 },
+						{ firstName: "Filin", lastName: "Filonovich", deposit: 60000 },
+					],
+					projYear: 2022,
+					projCost: 300000,
+				},
+			];
+
+			//========================================================================================
+			// 2. Обчислення результатів
+
+			// *** 1 загальну вартість усіх сайтів
+			function task1(arr) {
+				return arr.reduce((sum, prop) => sum + prop.projCost, 0);
+			}
+
+			// *** 2 кількість сайтів, що було зроблено між 2000 та 2009 рр.
+			function task2(arr) {
+				return arr.filter((prop) => prop.projYear >= 2000 && prop.projYear <= 2009).length;
+			}
+
+			// *** 3 кількість сайтів, де сума спонсорських вкладень була більшою за 100000
+			function task3(arr) {
+				return arr.filter((prop) => prop.projSponsors.reduce((sum, sponsor) => sum + sponsor.deposit, 0) >= 100000).length;
+			}
+
+			// *** 4 створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)
+
+			function task4(arr) {
+				return arr.reduce((acc, val) => [...acc, ...val.projSponsors.map((sponsor) => sponsor.firstName + " " + sponsor.lastName)], []);
+			}
+
+			// *** 5 знайти рік, коли прибуток був найбільшим
+
+			function task5(arr) {
+				// maxYear = accumulator
+				// currentYear = item
+				let maxProfitYear = arr.reduce((maxYear, currentYear) => {
+					if (currentYear.projCost > maxYear.projCost) {
+						return currentYear;
+					} else {
+						return maxYear;
+					}
+				}, arr[0]);
+
+				return [maxProfitYear.projCost, maxProfitYear.projYear];
+			}
+
+			// *** 6 упорядкувати список за спаданням прибутку
+
+			let companyWebsites_6 = JSON.parse(JSON.stringify(companyWebsites));
+
+			function task6(arr) {
+				return arr.sort((a, b) => b.projCost - a.projCost);
+			}
+
+			console.log(task6(companyWebsites_6));
+
+			// *** 7 Створити 2 окремих списки з копіями об'єктів, що містять сайти з вартість до 10000 і більше 10000
+
+			function task7(arr) {
+				return {
+					under10K: arr.filter((obj) => obj.projCost <= 10000),
+					over10K: arr.filter((obj) => obj.projCost > 10000),
+				};
+			}
+
+			console.log(task7(companyWebsites));
+
+			//========================================================================================
+
+			// 3. Виведення результату
+			document.write(`
+						<table>
+							<tr>
+								<td>1) загальну вартість усіх сайтів</td>
+								<td>${task1(companyWebsites)}</td>
+							</tr>
+							<tr>
+								<td>2) кількість сайтів, що було зроблено між 2000 та 2009 рр.</td>
+								<td>${task2(companyWebsites)}</td>
+							</tr>
+							<tr>
+								<td>3) кількість сайтів, де сума спонсорських вкладень була більшою за 100000</td>
+								<td>${task3(companyWebsites)}</td>
+							</tr>
+							<tr>
+								<td>4) створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)</td>
+								<td>${task4(companyWebsites)}</td>
+							</tr>
+							<tr>
+								<td>5) знайти рік, коли прибуток був найбільшим</td>
+								<td>${task5(companyWebsites)}</td>
+							</tr>
+							<tr>
+								<td>6) упорядкувати список за спаданням прибутку</td>
+								<td>Результат у консолі</td>
+							</tr>
+							<tr>
+								<td>7) Створити 2 окремих списки з копіями об'єктів, що містять сайти з вартість до 10000 і більше 10000</td>
+								<td>Результат у консолі</td>
+							</tr>
+						</table>
+						`);
+		</script>
+	</body>
+</html>
