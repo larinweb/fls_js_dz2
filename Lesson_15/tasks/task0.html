@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L15 DZ task 0</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 0</h1>
+		<p>
+			Дано два об'єкта. Обидва містять масив цілих чисел. При цьому у одному з них є функція знаходження суми, а у іншому – функція для
+			знаходження добутку тих, які знаходяться між заданими мінімальним і максимальних значенням. Використати обидва методи стосовно обидвох
+			об'єктів (використати call, apply)
+		</p>
+		<script>
+			"use strict";
+			//========================================================================================
+			const obj1 = {
+				arr: [10, 25, 6, 42, 7, 16, 0, 38, 12, 30, 24, 8, 39, 9, 22, 2, 18], //sum = 308
+				getSum: function () {
+					return this.arr.reduce((sum, num) => sum + num, 0);
+				},
+			};
+
+			const obj2 = {
+				arr: [1, 32, 29, 35, 21, 33, 11, 19, 40, 4, 43, 14, 37, 15, 20, 26, 41], //sum = 421
+				getProduct: function (min, max) {
+					return this.arr.filter((num) => num >= min && num <= max).reduce((product, num) => product * num, 1);
+				},
+			};
+
+			let obj1Sum = obj1.getSum();
+			let obj2Sum = obj1.getSum.call(obj2);
+			let obj2Product = obj2.getProduct(10, 25);
+			let obj1Product = obj2.getProduct.apply(obj1, [10, 25]);
+			//========================================================================================
+
+			// 3. Виведення результату
+			document.write(`
+				<table>
+					<tr>
+						<td>Сума першого об'єкта:</td>
+						<td>${obj1Sum}</td>
+					</tr>
+					<tr>
+						<td>Сума другого об'єкта:</td>
+						<td>${obj2Sum}</td>
+					</tr>
+					<tr>
+						<td>Добуток у діапазоні першого об'єкта:</td>
+						<td>${obj1Product}</td>
+					</tr>
+					<tr>
+						<td>Добуток у діапазоні другого об'єкта:</td>
+						<td>${obj2Product}</td>
+					</tr>
+				</table>
+			`);
+		</script>
+	</body>
+</html>

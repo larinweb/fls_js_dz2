@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L15 DZ task 3</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 3</h1>
+		<p>
+			Розробити клас MultChecker для перевірки таблиці множення<br />
+			Поля(властивості)<br />
+			Число, яке перевіряємо (наприклад, перевірка частини таблиці множення на 7)<br />
+			Кількість правильних відповідей<br />
+			Кількість неправильних відповідей<br />
+			Методи<br />
+			Генерування прикладу (метод випадковим чином визначає друге число, перше число фіксоване)<br />
+			Перевірка правильності вказаної відповіді<br />
+			render<br />
+		</p>
+		<script>
+			"use strict";
+			//========================================================================================
+			class MultChecker {
+				constructor(numberToCheck) {
+					this.numberToCheck = numberToCheck;
+					this.correctAnswers = 0;
+					this.incorrectAnswers = 0;
+				}
+
+				generateRandomExample() {
+					const randomNumber = Math.floor(Math.random() * 10) + 1;
+					const randomExampleResult = this.numberToCheck * randomNumber;
+					return { randomNumber, randomExampleResult };
+				}
+
+				checkExample() {
+					const { randomNumber, randomExampleResult } = this.generateRandomExample();
+					const userInput = prompt(`Скільки буде: ${this.numberToCheck} * ${randomNumber}`);
+					const userAnswer = parseInt(userInput);
+
+					if (userInput === null) {
+						throw new Error("Перевірку скасовано.");
+						// alert("Перевірку скасовано.");
+						// return false;
+						// ПИТАННЯ ДО МЕНТОРА !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+						// Як перервати перевірку так щоб вона переривалась лише при натисканні "Відміна" а не ще й тоді коли введена невірна відповідь?
+					}
+
+					if (isNaN(userAnswer) || userAnswer < 0) {
+						alert("Будь ласка, введіть коректне додатне числове значення.");
+						return false;
+					}
+
+					if (userAnswer === randomExampleResult) {
+						alert("вірно");
+						this.correctAnswers++;
+						return true;
+					} else {
+						alert("Не вірно");
+						this.incorrectAnswers++;
+						return false;
+					}
+				}
+
+				render() {
+					const result = `
+						Вірних відповідей: ${this.correctAnswers}<br>
+						Невірних відповідей: ${this.incorrectAnswers}
+						`;
+					return result;
+				}
+			}
+
+			let check1 = new MultChecker(7);
+			for (let i = 0; i < 5; i++) {
+				check1.checkExample();
+			}
+
+			//========================================================================================
+
+			// 3. Виведення результату
+			document.write(`
+				<table>
+					<tr>
+						<td>${check1.render()}</td>
+					</tr>
+				</table>
+			`);
+		</script>
+	</body>
+</html>

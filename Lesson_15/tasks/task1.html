@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L15 DZ task 1</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 1</h1>
+		<p>
+			Створити об'єкт «Тир». У масиві зберігаються 1, якщо у цьому квадраті є заєць і 0 в іншому випадку. Тир Поля(властивості) Масив, у якому
+			зберігається поле з зайцями Методи (дії) Метод пострілу (задається позиція пострілу) Виведення ігрового поля
+		</p>
+		<script>
+			"use strict";
+			//========================================================================================
+
+			const tirSize = parseInt(prompt("Введіть довжину тиру"));
+
+			class Tir {
+				// Конструктор, ініціалізує об'єкт "Тир"
+				constructor(fieldArrLength) {
+					this.length = fieldArrLength;
+					this.totalAttempts = Math.floor(this.length / 2); // Розраховуємо кількість спроб (половина довжини тиру)
+					this.tirField = this.generateField(); // Створюємо поле тиру з зайцями
+					this.attempts = this.totalAttempts; // Зберігаємо поточну кількість спроб, що залишилась
+					this.hits = 0; // Кількість влучань
+				}
+
+				// Метод для генерації поля тиру з зайцями
+				generateField() {
+					let rabbits = this.totalAttempts; // Встановлюємо кількість зайців, яка дорівнює кількості спроб
+					const gameField = new Array(this.length).fill(0); // Створюємо масив з нулями, який представляє поле тиру
+
+					// Розставляємо зайців по випадкових позиціях у масиві gameField
+					for (let i = 0; i < rabbits; i++) {
+						const randomIndex = Math.floor(Math.random() * gameField.length);
+						if (gameField[randomIndex] === 0) {
+							gameField[randomIndex] = 1; // Замінюємо 0 на 1, представляючи зайця в цій позиції
+						} else {
+							i--; // Якщо випадкова позиція вже містить зайця, повторюємо ітерацію, щоб розмістити ще одного зайця
+						}
+					}
+					return gameField; // Повертаємо згенерований масив
+				}
+
+				// Метод для здійснення пострілу
+				makeShot() {
+					if (this.attempts <= 0) {
+						console.log("Спроби закінчилися.");
+						return;
+					}
+
+					const hit = prompt(`Введіть позицію для пострілу (0 - ${this.length - 1}):`, "1");
+					if (hit === null) {
+						console.log("Гру перервано.");
+						this.attempts = 0;
+					} else {
+						const parsedHit = parseInt(hit);
+						if (isNaN(parsedHit) || parsedHit < 0 || parsedHit >= this.length) {
+							console.log("Некоректна позиція для пострілу.");
+						} else {
+							this.attempts--;
+							if (this.tirField[parsedHit] === 1) {
+								console.log("Uraaaaaa! Зайця впольовано!");
+								this.hits++;
+							} else {
+								console.log("Ooops! Зайця не знайдено.");
+							}
+						}
+					}
+				}
+
+				// Метод для здійснення спроб пострілів до закінчення спроб
+				shotTry() {
+					do {
+						this.makeShot();
+					} while (this.attempts > 0);
+				}
+
+				// Метод для отримання результатів гри
+				getResults() {
+					const missedAttempts = this.totalAttempts - this.hits;
+					return `Гра завершена.<br> Ви влучили ${this.hits} разів із ${this.totalAttempts}.<br> Промахів: ${missedAttempts}.`;
+				}
+
+				// Метод для початку гри заново
+				playAgain() {
+					this.tirField = this.generateField(); // Генеруємо нове поле з зайцями
+					this.attempts = this.totalAttempts; // Перевстановлюємо кількість спроб на початкове значення
+					this.hits = 0; // Перевстановлюємо кількість влучань на початкове значення
+				}
+			}
+
+			let playTir = new Tir(tirSize);
+
+			// Цикл для здійснення гри до тих пір, поки є спроби
+			do {
+				playTir.shotTry();
+				if (playTir.attempts <= 0) {
+					// Після закінчення спроб, перевіряємо, чи бажає користувач зіграти ще раз
+					const playAgain = confirm("Спроби закінчились. Бажаєте спробувати ще раз?");
+					if (playAgain) {
+						playTir.playAgain();
+					}
+				}
+			} while (playTir.attempts > 0);
+
+			//========================================================================================
+
+			// 3. Виведення результату
+			document.write(`
+				<table>
+					<tr>
+						<td>${playTir.getResults()}</td>
+					</tr>
+				</table>
+			`);
+		</script>
+	</body>
+</html>

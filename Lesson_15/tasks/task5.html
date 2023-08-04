@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L15 DZ task 5</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 5</h1>
+		<p>
+			Розробити клас «Керівник танців»<br />
+			Поля<br />
+			Масив імен хлопців<br />
+			Масив імен дівчат<br />
+			Методи<br />
+			Метод випадкового вибору імені хлопця<br />
+			Метод випадкового вибору імені дівчини<br />
+			Метод виведення пари для танців<br />
+			Метод run , який ініціює через кожні 5 секунд виведення нової пари для танців
+		</p>
+		<script>
+			"use strict";
+			let boysDancerArr = ["Петро", "Сергій", "В'ячеслав"];
+			let girlsDancerArr = ["Тетяна", "Ярина", "Анастасія"];
+			class DanceDirector {
+				constructor(boys, girls) {
+					this.boys = boys;
+					this.girls = girls;
+					this.randomBoy = null;
+					this.randomGirl = null;
+				}
+
+				//__________ Метод випадкового вибору імені хлопця
+				getRandomBoy() {
+					this.randomBoy = this.boys[Math.floor(Math.random() * this.boys.length)];
+					return this.randomBoy;
+				}
+
+				//__________ Метод випадкового вибору імені дівчини
+				getRandomGirl() {
+					this.randomGirl = this.girls[Math.floor(Math.random() * this.girls.length)];
+					return this.randomGirl;
+				}
+
+				//__________ Метод виведення пари для танців
+				createDancePair() {
+					return this.randomBoy + " та " + this.randomGirl;
+				}
+
+				//__________ Метод run , який ініціює через кожні 5 секунд виведення нової пари для танців
+				run() {
+					setInterval(() => {
+						this.getRandomBoy();
+						this.getRandomGirl();
+						const dancingPair = this.createDancePair();
+						console.log(dancingPair);
+					}, 5000);
+				}
+			}
+
+			let dd = new DanceDirector(boysDancerArr, girlsDancerArr);
+
+			// 3. Виведення результату
+			document.write(`
+			<table>
+					<tr>
+							<td>1) Випадковий хлопець: </td>
+							<td>${dd.getRandomBoy()}</td>
+					</tr>
+					<tr>
+							<td>2) Випадкова дівчина: </td>
+							<td>${dd.getRandomGirl()}</td>
+					</tr>
+					<tr>
+							<td>3) Танцювальна пара: </td>
+							<td>${dd.createDancePair()}</td>
+					</tr>
+			</table>
+			`);
+
+			// Ініціюємо виведення нової пари кожні 5 секунд
+			dd.run();
+		</script>
+	</body>
+</html>

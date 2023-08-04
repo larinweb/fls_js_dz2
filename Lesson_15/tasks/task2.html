@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L15 DZ task 2</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 2</h1>
+		<p>
+			Створити об'єкт «Авто».<br />Поля(властивості)<br />
+			Марка Розмір бака Кількість наявних літрів Кількість місць Кількість пасажирів<br />
+			Методи (дії)<br />
+			Заправка на вказану кількість літрів. Виведення кількості пасажирів. Додавання пасажирів.Висадка пасажирів.
+		</p>
+		<script>
+			"use strict";
+			//========================================================================================
+
+			class Automobile {
+				// *** Опис полів
+				constructor(brand, tankSize, availableLiters, seatCount, passengerCount) {
+					this.brand = brand;
+					this.tankSize = tankSize;
+					this.availableLiters = availableLiters;
+					this.seatCount = seatCount;
+					this.passengerCount = passengerCount;
+				}
+				// *** Методи (дії)
+
+				// __________ 1) Заправка на вказану кількість літрів.
+				refuel() {
+					const availableForRefueling = this.tankSize - this.availableLiters;
+					const refuelAmount = parseInt(prompt(`Скільки літрів бажаєте заправити? У баку доступно ${availableForRefueling} літрів`));
+
+					if (isNaN(refuelAmount) || refuelAmount < 0) {
+						alert("Будь ласка, введіть коректне додатне числове значення.");
+						return this.availableLiters;
+					}
+
+					if (availableForRefueling < refuelAmount) {
+						throw new Error("Забагато. Бак переповниться");
+					} else {
+						this.availableLiters += refuelAmount;
+						return `${this.brand} заправлено на ${refuelAmount} літрів. Загальна кількість наявного палива: ${this.availableLiters} літрів з ${this.tankSize} літрів`;
+					}
+
+					// return this.availableLiters;
+				}
+
+				// __________ 2) Виведення кількості пасажирів.
+				showNumberOfPassengers() {
+					return this.passengerCount;
+				}
+
+				// __________ 3) Додавання пасажирів.
+				addNumberOfPassengers() {
+					const availableSeats = this.seatCount - this.passengerCount;
+					const numPassengersToAdd = parseInt(prompt(`Скільки пасажирів треба взяти. У салоні авто доступно ${availableSeats} місць`));
+					// const addPassengers = 2;
+
+					if (isNaN(numPassengersToAdd) || numPassengersToAdd < 0) {
+						alert("Будь ласка, введіть коректне додатне числове значення.");
+						return this.seatCount;
+					}
+
+					if (availableSeats < numPassengersToAdd) {
+						throw new Error("В салоні авто не вистачить місця");
+					} else {
+						this.passengerCount += numPassengersToAdd;
+						return `У ${this.brand} сіло ${numPassengersToAdd} пасажирів. Загальна кількість пасажирів: ${this.passengerCount} з ${this.seatCount}`;
+					}
+				}
+				// __________ 4) Висадка пасажирів.
+				decreaseNumberOfPassengers() {
+					const decreasePassengers = parseInt(prompt(`Скільки пасажирів треба висадити. У салоні авто зараз ${this.passengerCount} пасажирів`));
+
+					if (isNaN(decreasePassengers) || decreasePassengers < 0) {
+						alert("Будь ласка, введіть коректне додатне числове значення.");
+						return this.passengerCount;
+					}
+
+					if (decreasePassengers > this.passengerCount) {
+						throw new Error("Авто не стадіон - де стільки взяти :-)");
+					}
+					// return this.passengerCount - decreasePassengers;
+					this.passengerCount -= decreasePassengers;
+					return `Зсадили ${decreasePassengers} пасажирів. Загальна кількість пасажирів: ${this.passengerCount} з ${this.seatCount}`;
+				}
+
+				getCarInfo() {
+					return `Марка: ${this.brand}<br> Розмір бака: ${this.tankSize} літрів<br> Наявні літри: ${this.availableLiters} літрів<br> Кількість місць: ${this.seatCount}<br> Кількість пасажирів: ${this.passengerCount}`;
+				}
+			}
+
+			let auto1 = new Automobile("Subaru", 60, 20, 4, 2);
+			// console.log(auto1.getCarInfo());
+			// console.log(auto1.refuel());
+			// console.log(auto1.showNumberOfPassengers());
+			// console.log(auto1.addNumberOfPassengers());
+			// console.log(auto1.decreaseNumberOfPassengers());
+
+			//========================================================================================
+
+			// 3. Виведення результату
+			document.write(`
+				<table>
+					<tr>
+						<td>Інфо про авто</td>
+						<td>${auto1.getCarInfo()}</td>
+					</tr>
+					<tr>
+						<td>1) Після заправки у вашому баку</td>
+						<td>${auto1.refuel()}</td>
+					</tr>
+					<tr>
+						<td>2) В автомобілі</td>
+						<td>${auto1.showNumberOfPassengers()} пасажири</td>
+					</tr>
+					<tr>
+						<td>3) Додавання пасажирів.</td>
+						<td>${auto1.addNumberOfPassengers()} пасажирів</td>
+					</tr>
+					<tr>
+						<td>4) Висадка пасажирів.</td>
+						<td>${auto1.decreaseNumberOfPassengers()}</td>
+					</tr>
+				</table>
+			`);
+		</script>
+	</body>
+</html>

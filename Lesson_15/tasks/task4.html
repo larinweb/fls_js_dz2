@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L15 DZ task 4</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<style>
+			img {
+				max-width: 100%;
+			}
+		</style>
+		<h1>Задача 4</h1>
+		<p>
+			Розробити клас Banner<br />
+			Поля<br />
+			Масив об'єктів ( графічних зображень та посилань на сайти)<br />
+			Методи<br />
+			Метод випадкового вибору об'єкта (графічного зображення та посилання)<br />
+			Метод виведення випадкового банера
+		</p>
+		<script>
+			"use strict";
+			//========================================================================================
+			class Banner {
+				constructor(sourceArr) {
+					this.sourceArr = sourceArr;
+				}
+
+				//__________ Метод випадкового вибору об'єкта (графічного зображення та посилання)
+				getRandomObject() {
+					return this.sourceArr[Math.floor(Math.random() * this.sourceArr.length)];
+				}
+
+				// __________ Метод виведення випадкового банера
+				renderRandomBanner() {
+					const randomBanner = this.getRandomObject();
+					const randomBannerImage = `<img src="${randomBanner.image}" alt="${randomBanner.alt}">`;
+					const buildBanner = `<a href="${randomBanner.link}">${randomBannerImage}</a>`;
+					return buildBanner;
+				}
+			}
+
+			let sourceArr = [
+				{
+					image: "../img/dz15_img1.jpg",
+					link: "https://findtheinvisiblecow.com/",
+					alt: "Find the Invisible Cow",
+				},
+				{
+					image: "../img/dz15_img2.jpg",
+					link: "https://theuselessweb.com/",
+					alt: "The Useless Web",
+				},
+				{
+					image: "../img/dz15_img3.jpg",
+					link: "https://www.mapcrunch.com/",
+					alt: "MapCrunch",
+				},
+				{
+					image: "../img/dz15_img4.jpg",
+					link: "https://hackertyper.com/",
+					alt: "Hacker Typer",
+				},
+			];
+
+			let randomizedBanner = new Banner(sourceArr);
+
+			//========================================================================================
+
+			// 3. Виведення результату
+			document.write(`
+				${randomizedBanner.renderRandomBanner()}
+			`);
+		</script>
+	</body>
+</html>
