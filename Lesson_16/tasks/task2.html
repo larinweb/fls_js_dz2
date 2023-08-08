@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L16 DZ task 2</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 2</h1>
+		<p>
+			Створити клас TMoney для роботи з грошовими сумами.Сума повинна зберігатися у вигляді доларового еквіваленту: Методи<br />
+			додавання/вилучення грошової маси, вказуючи необхідну суму у гривнях<br />
+			визначення курсу долара, при якому сума у гривнях збільшиться на 100.<br />
+			Курс долара зберігати в окремому полі.
+		</p>
+		<script>
+			"use strict";
+			class Money {
+				#usdRate;
+				#usdBalance;
+
+				constructor(initUAHBalance, usdRate) {
+					if (initUAHBalance < 0 || usdRate <= 0) {
+						throw new Error("Помилка. Початкова сума не може бути меншою за нуль");
+					}
+					this.#usdRate = usdRate;
+					this.addFunds(initUAHBalance);
+					this.#usdBalance = initUAHBalance / usdRate;
+				}
+
+				// *** Сетер-гетер для долару
+				get UsdRate() {
+					return this.#usdRate;
+				}
+
+				set UsdRate(rate) {
+					if (rate <= 0) throw new Error("Курс долара має бути більше нуля");
+					this.#usdRate = rate;
+				}
+
+				// *** Сетер-гетер для балансу
+				get Balance() {
+					return this.#usdBalance * this.UsdRate;
+				}
+
+				set Balance(uahSum) {
+					if (uahSum < 0) throw new Error("Помилка. Початкова сума не може бути меншою за нуль");
+					this.#usdBalance = uahSum / this.UsdRate;
+				}
+
+				// *** Додавання до балансу грошової маси
+				addFunds(uahSum) {
+					if (uahSum <= 0) throw new Error("Курс долара має бути більше нуля");
+					this.#usdBalance += uahSum * this.UsdRate;
+				}
+
+				// *** Вилучення з балансу грошової маси
+				getMoney(uahSum) {
+					if (uahSum <= 0) throw new Error("Курс долара має бути більше нуля");
+					if (uahSum > this.Balance) throw new Error("Недостатньо грошей на рахунку");
+					this.#usdBalance -= uahSum * this.UsdRate;
+				}
+				// *** Визначення курсу долара, при якому сума у гривнях збільшиться на 100.
+				getTarget100Rate() {
+					if (this.#usdBalance !== 0) {
+						return (this.Balance + 100) / this.#usdBalance;
+					}
+					return Infinity;
+				}
+
+				// *** Перетворення об'єкту в рядковий формат
+				toString() {
+					return `Курс долара: ${this.#usdRate.toFixed(2)}грн,<hr> Доларовий баланс: ${this.#usdBalance.toFixed(
+						2
+					)}$,<hr> Гривневий баланс: ${this.Balance.toFixed(2)}грн,<hr>
+						Курс для збільшення на 100 грн: ${this.getTarget100Rate()}$`;
+				}
+			}
+			let currency = new Money(1000, 36.58);
+			// console.log(currency.toString());
+
+			//========================================================================================
+			document.write(`
+				<table>
+					<tr>
+						<td>${currency.toString()}</td>
+					</tr>
+				</table>
+			`);
+		</script>
+	</body>
+</html>

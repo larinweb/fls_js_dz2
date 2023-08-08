@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L16 DZ task 3</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 3</h1>
+		<p>
+			Об'єкт “Фірма” (використати члени-класи)<br /><br />
+			поля<br />
+			&nbsp;&nbsp;&nbsp;назва фірми;<br />
+			&nbsp;&nbsp;&nbsp;дата заснування (рік, місяць);<br />
+			&nbsp;&nbsp;&nbsp;послуги (назва послуги, вартість, термін виконання);<br />
+			&nbsp;&nbsp;&nbsp;адреси філіалів (країна, місто, вулиця, номер будинку);<br />
+			методи<br />
+			&nbsp;&nbsp;&nbsp;визначення кількості років існування фірми;<br />
+			&nbsp;&nbsp;&nbsp;виведення всіх філіалів фірми у вказаному місті;<br />
+			&nbsp;&nbsp;&nbsp;виведення на екран послуг, що можуть бути виконані за вказану суму грошей та вказаний термін часу;
+			<br /><br /><br />Результати в консолі
+		</p>
+		<script>
+			"use strict";
+
+			class Firma {
+				#brand;
+				#since;
+				constructor(firmData) {
+					this.Brand = firmData.brand;
+					this.Since = firmData.since;
+					this.services = firmData.services;
+					this.branches = firmData.branches;
+				}
+				// ___ Інкапсуляція ___
+
+				// ### Приватні поля Brand ###
+				get Brand() {
+					return this.#brand;
+				}
+
+				set Brand(newVal) {
+					if (typeof newVal !== "string") {
+						throw new Error("Назва фірми має бути строковим значенням.");
+					}
+					if (newVal === "") {
+						throw new Error("Назва не може бути пустим рядком.");
+					}
+					this.#brand = newVal;
+				}
+
+				// ### Приватні поля Since ###
+				get Since() {
+					return this.#since;
+				}
+
+				set Since(newVal) {
+					if (newVal === null || newVal === undefined) {
+						throw new Error("Дата заснування не може бути null або undefined.");
+					}
+					this.#since = newVal;
+				}
+
+				// ___ Методи ___
+
+				// *** Метод визначення кількості років існування фірми;
+				existenceYears() {
+					const currentYear = new Date().getFullYear(); // після попередньої задачі я вручну з датою не хочу  мати справ ... свят ...свят...свят ...
+					const sinceYear = parseInt(this.Since.split(".")[0]);
+					return currentYear - sinceYear;
+				}
+
+				// *** Метод виведення всіх філіалів фірми у вказаному місті;
+				showCityBranches(city) {
+					const filteredBranches = this.branches.filter((branch) => branch.branchesCity === city);
+					if (filteredBranches.length === 0) {
+						console.log(`У місті ${city} філіалів не знайдено.`);
+					} else {
+						console.log(`Філіали у місті ${city}:`);
+						filteredBranches.forEach((branch) => {
+							console.log(
+								`Країна: ${branch.branchesCountry}, Місто: ${branch.branchesCity}, Адреса: ${branch.branchesStreet}, ${branch.branchesHouse}`
+							);
+						});
+					}
+				}
+
+				// *** Метод виведення на екран послуг, що можуть бути виконані за вказану суму грошей та вказаний термін часу;
+				calcAvailableServices(cost, term) {
+					const availableServices = this.services.filter((service) => service.servCost <= cost && service.servTerm <= term);
+					if (availableServices.length === 0) {
+						console.log(`На жаль, за вказану суму грошей та термін ${term} днів послуг не знайдено.`);
+					} else {
+						console.log(`Доступні послуги за ${cost} грн та ${term} днів:`);
+						availableServices.forEach((service) => {
+							console.log(`Послуга: ${service.servName}, Вартість: ${service.servCost}, Термін виконання: ${service.servTerm} днів`);
+						});
+					}
+					return;
+				}
+
+				// *** Метод виводу;
+				toString() {
+					return `Фірма: ${this.Brand}, Рік заснування: ${this.Since}`;
+				}
+			}
+
+			let firm1 = [
+				{
+					brand: "LVS Corp.",
+					since: "1987.04",
+					services: [
+						{
+							servName: "Послуга 1",
+							servCost: 1000,
+							servTerm: 10, //days
+						},
+						{
+							servName: "Послуга 2",
+							servCost: 2000,
+							servTerm: 20, //days
+						},
+						{
+							servName: "Послуга 3",
+							servCost: 3000,
+							servTerm: 30, //days
+						},
+					],
+					branches: [
+						{
+							branchesCountry: "Україна",
+							branchesCity: "Київ",
+							branchesStreet: "Головна",
+							branchesHouse: 18,
+						},
+						{
+							branchesCountry: "Україна",
+							branchesCity: "Дніпро",
+							branchesStreet: "Центральна",
+							branchesHouse: 22,
+						},
+						{
+							branchesCountry: "Україна",
+							branchesCity: "Київ",
+							branchesStreet: "Бокова",
+							branchesHouse: 172,
+						},
+					],
+				},
+			];
+
+			let atm = new Firma(firm1[0]);
+			console.log(atm.toString(1500, 15));
+			console.log("Кількість років існування фірми:", atm.existenceYears());
+			atm.showCityBranches("Київ");
+			atm.calcAvailableServices(1500, 15);
+		</script>
+	</body>
+</html>

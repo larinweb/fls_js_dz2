@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L16 DZ task 1</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 1</h1>
+		<p>
+			Створити клас TDate для роботи із датами у форматі “день.місяць.рік”. Дата представляється структурою із трьома полями. Реалізувати методи
+			збільшення/зменшення дати на певну кількість днів, місяців чи років. Введення та виведення дати реалізувати за допомогою методу toString.
+		</p>
+		<script>
+			"use strict";
+			//
+			//
+			// шо б мене ... я цю задачу 2 дні робив ... мозок зібрав речі і пішов від мене ....
+			//
+			//
+			class TDate {
+				sourceDateInput;
+				day;
+				month;
+				year;
+				// це значення які в жодному разі не повинні бути змінені для коректних обрахувань - тому і захищаю їх
+				#daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+				#monthsInYear = 12;
+
+				constructor(day, month, year) {
+					this.day = day;
+					this.month = month;
+					this.year = year;
+					this.sourceDateInput = `${day}.${month}.${year}`; // Зберігаємо введену дату у змінну sourceDateInput
+				}
+
+				sourceDate() {
+					if (!this.isValidDate()) {
+						throw new Error("Некоректна початкова дата");
+					}
+					return this.sourceDateInput; // Повертаємо збережену дату
+				}
+
+				// Перевіряє, чи є високосним рік
+				isLeapYear() {
+					return (this.year % 4 === 0 && this.year % 100 !== 0) || this.year % 400 === 0;
+				}
+
+				// Перевіряє, чи дата є коректною (день, місяць та рік у валідних межах)
+				isValidDate() {
+					if (this.year < 1 || this.month < 1 || this.month > this.#monthsInYear || this.day < 1 || this.day > this.getDaysInMonth()) {
+						return false;
+					}
+					return true;
+				}
+
+				// Повертає кількість днів у поточному місяці
+				getDaysInMonth() {
+					if (this.month === 2 && this.isLeapYear()) {
+						return 29;
+					}
+					return this.#daysInMonth[this.month - 1];
+				}
+
+				// Додає задану кількість днів до дати, оброблюючи перевищення днів у місяці та переходи на наступні місяці
+				addDays(days) {
+					this.day += days;
+					// Поки day більше кількості днів у місяці, зменшуємо day на кількість днів у місяці і додаємо 1 місяць до дати
+					while (this.day > this.getDaysInMonth()) {
+						this.day -= this.getDaysInMonth();
+						this.addMonths(1);
+					}
+					// Поки day менше 1, зменшуємо day на кількість днів у місяці і віднімаємо 1 місяць від дати.
+					while (this.day < 1) {
+						this.addMonths(-1);
+						this.day += this.getDaysInMonth();
+					}
+				}
+
+				// Додає задану кількість місяців до дати, оброблюючи перевищення місяців у році та переходи на наступні роки
+				addMonths(months) {
+					const totalMonths = this.year * this.#monthsInYear + this.month - 1 + months;
+					this.year = Math.floor(totalMonths / this.#monthsInYear);
+					this.month = (totalMonths % this.#monthsInYear) + 1;
+				}
+
+				// Додає задану кількість років до дати
+				addYears(years) {
+					this.year += years;
+				}
+
+				// Додає задану кількість днів, місяців та років до дати, оброблюючи всі можливі перевищення
+				addTime(daysToAdd = 0, monthsToAdd = 0, yearsToAdd = 0) {
+					const totalMonths = this.year * this.#monthsInYear + this.month - 1 + monthsToAdd;
+					this.year = Math.floor(totalMonths / this.#monthsInYear) + yearsToAdd;
+					this.month = (totalMonths % this.#monthsInYear) + 1;
+					this.addDays(daysToAdd);
+
+					if (!this.isValidDate()) {
+						throw new Error("Некоректна дата");
+					}
+				}
+
+				// Запитує в користувача кількість днів, місяців та років для зміни і викликає відповідні методи
+				performOperation() {
+					const day = parseInt(prompt("Кількість днів для зміни (додає за замовченням):", "0"));
+					const month = parseInt(prompt("Кількість місяців для зміни (додає за замовченням):", "0"));
+					const year = parseInt(prompt("Кількість років для зміни (додає за замовченням):", "0"));
+
+					this.addTime(day, month, year);
+				}
+
+				formatValue(value) {
+					return value < 10 ? `0${value}` : `${value}`;
+				}
+
+				toString() {
+					const formattedDay = this.formatValue(this.day);
+					const formattedMonth = this.formatValue(this.month);
+					return `${formattedDay}.${formattedMonth}.${this.year}`;
+				}
+			}
+
+			// Введення початкової дати для демо, і легшої відладки (захисту від невірного вводу нема)
+			const dateInput = prompt("Введіть початкову дату у форматі dd.mm.yyyy", "01.01.2000");
+			const [dd, mm, yy] = dateInput.split(".").map((val) => parseInt(val, 10));
+
+			let res = new TDate(dd, mm, yy);
+			res.performOperation();
+			console.log(res.toString());
+
+			//========================================================================================
+
+			// 3. Виведення результату
+			document.write(`
+				<table>
+					<tr>
+						<td>Початкова дата:</td>
+						<td>${res.sourceDate()}</td>
+					</tr>
+					<tr>
+						<td>Обчисленна дата:</td>
+						<td>${res.toString()}</td>
+					</tr>
+				</table>
+			`);
+		</script>
+	</body>
+</html>

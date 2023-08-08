@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L16 DZ task 4</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 4</h1>
+		<p>
+			Створити клас TBankomat, який моделює роботу банкомата.<br />
+			поля:<br />для зберігання кількості купюр кожного із номіналів від 5 до 200 гривень.<br />
+			методи:<br />
+			знаходження максимальної та мінімальної сум, які може видати банкомат<br />
+			зняття деякої суми.
+		</p>
+		<script>
+			"use strict";
+			class TBankomat {
+				#user;
+				#existing_bills;
+				constructor() {
+					this.#user = null;
+					// ### Приватні поля наявних купюр ###
+					this.#existing_bills = [
+						{
+							value: 5,
+							amount: 30,
+						},
+						{
+							value: 10,
+							amount: 20,
+						},
+						{
+							value: 20,
+							amount: 10,
+						},
+						{
+							value: 50,
+							amount: 5,
+						},
+						{
+							value: 100,
+							amount: 2,
+						},
+						{
+							value: 200,
+							amount: 1,
+						},
+					];
+				}
+
+				// ___ Інкапсуляція ___
+				get ExistingBills() {
+					// типу Read Only база користувачів
+					return this.#existing_bills;
+				}
+				// ### Приватні поля User ###
+				get Users() {
+					// типу Read Only база користувачів
+					return [
+						"Slava",
+						"Nastya", // ім'я це абстрактне представлення номерів карток
+					];
+				}
+
+				get User() {
+					return this.#user;
+				}
+
+				set User(userID) {
+					const userValid = this.Users.includes(userID);
+					if (userValid) {
+						this.#user = userID;
+					} else {
+						throw new Error("Користувача не існує");
+					}
+				}
+
+				// ___ Методи ___
+
+				// *** Метод для знаходження максимальної суми в банкоматі, тобто максимум
+				maxWithdraw() {
+					let totalBalance = 0;
+					for (const bill of this.ExistingBills) {
+						totalBalance += bill.value * bill.amount;
+					}
+					return totalBalance;
+				}
+				// *** Метод для знаходження мінімальної суми в банкоматі
+				minWithdraw() {
+					let minAmount = Infinity;
+
+					for (const bill of this.ExistingBills) {
+						if (bill.amount > 0 && bill.value < minAmount) {
+							minAmount = bill.value;
+						}
+					}
+					return minAmount === Infinity ? 0 : minAmount;
+				}
+
+				// *** Метод для зняття деякої суми з банкомату
+				withdraw(amount) {
+					if (!this.User) {
+						return "Спершу встановіть користувача.";
+					}
+
+					// Перевіримо, чи є в банкоматі достатньо коштів для видання суми
+					const totalBalance = this.maxWithdraw();
+					if (amount > totalBalance) {
+						return "Недостатньо коштів у банкоматі.";
+					}
+
+					if (amount <= 0) {
+						return "Сума має бути більше нуля.";
+					}
+
+					if (amount % 5 !== 0) {
+						return "Банкомат не може видати таку суму.";
+					}
+
+					const sortedBills = this.ExistingBills.sort((a, b) => b.value - a.value);
+					let remainingAmount = amount;
+
+					for (const bill of sortedBills) {
+						while (remainingAmount >= bill.value && bill.amount > 0) {
+							remainingAmount -= bill.value;
+							bill.amount -= 1;
+						}
+					}
+
+					if (remainingAmount === 0) {
+						return `Операція успішна. Видано ${amount} грн.`;
+					} else {
+						return "Банкомат не може видати таку суму.";
+					}
+				}
+
+				toString() {
+					if (!this.User) {
+						return "Банкомат: Немає встановленого користувача.";
+					}
+
+					const userBalance = this.maxWithdraw();
+					const billsInfo = this.ExistingBills.map((bill) => `${bill.value} грн: ${bill.amount}`);
+					const billsInfoString = billsInfo.join(", ");
+
+					return `Банкомат: Користувач - ${this.User}, Залишок - ${userBalance} грн, Наявні купюри - ${billsInfoString}.`;
+				}
+			}
+			let atm = new TBankomat();
+			let loginData = prompt("Введіть ім'я зареєстрованого користувача (Slava або Nastya)", "Slava");
+			console.log((atm.User = loginData));
+			let withdrawSum = parseInt(prompt("Введіть суму яку хочете зняти з рахунку", "5"));
+			console.log(atm.withdraw(withdrawSum));
+			console.log(`Максимальна доступна сума для зняття: ${atm.maxWithdraw()}`);
+			console.log(`Мінімальна доступна сума для зняття: ${atm.minWithdraw()}`);
+			// console.log(atm.toString());
+			document.write(`${atm.toString()}`);
+		</script>
+	</body>
+</html>
