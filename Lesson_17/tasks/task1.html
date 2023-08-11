@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L17 DZ task 1</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 1</h1>
+
+		<p>
+			Створити клас, що дозволяє виконувати такі операції над масивами: знаходження кількості додатних, кількості від’ємних, кількість входжень
+			деякого числа (статичні методи)
+		</p>
+
+		<script>
+			"use strict";
+			//=======================================================================================
+
+			class MathActions {
+				static countPositives(arr) {
+					return arr.reduce((count, num) => (num > 0 ? count + 1 : count), 0);
+				}
+
+				static countNegatives(arr) {
+					return arr.reduce((count, num) => (num < 0 ? count + 1 : count), 0);
+				}
+
+				static countOccurrence(arr, target) {
+					return arr.reduce((count, num) => (num === target ? count + 1 : count), 0);
+				}
+
+				static toString(arr) {
+					const positiveCount = MathActions.countPositives(arr);
+					const negativeCount = MathActions.countNegatives(arr);
+
+					return `Масив: [${arr.join(", ")}]\nКількість додатних чисел: ${positiveCount}\nКількість від'ємних чисел: ${negativeCount}`;
+				}
+			}
+
+			// Приклад використання
+			const numArr = [2, -5, 10, -3, 2, 0, 7, -2, 2, 44, -2, 1, 89, 3, -5, 0];
+
+			console.log(MathActions.toString(numArr));
+			//======================================================================================
+		</script>
+	</body>
+</html>

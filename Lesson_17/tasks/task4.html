@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L17 DZ task 4</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 4</h1>
+		<p>
+			Особиста бібліотека. Картотека домашньої бібліотеки: дані книги (автори (піб, рік народження, короткий опис), назва книги, жанр,
+			видавництво (назва, реєстраційний номер, рік засування)).<br />
+			Реалізувати розділи бібліотеки, організувати додавання/вилучення книг та вибір книг за назвою, за ПІБ автора, за видавництвом.
+		</p>
+
+		<script>
+			"use strict";
+
+			// Клас, який представляє книгу
+			class Book {
+				static idCounter = 1; // Статичний лічильник для унікальних ID книг
+
+				constructor({ author, title, genre, publisher }) {
+					this.id = "book" + Book.idCounter++; // Генеруємо унікальний ID для книги
+					this.author = new Author(author); // Ініціалізуємо автора
+					this.title = title; // Назва книги
+					this.genre = genre; // Жанр книги
+					this.section = genre; // Секція/розділ, який відповідає жанру
+					this.publisher = new Publisher(publisher); // Ініціалізуємо видавника
+				}
+			}
+
+			// Клас, який представляє бібліотеку
+			class Library {
+				constructor(books = []) {
+					this.books = books; // Масив книг в бібліотеці
+				}
+
+				// Додати нову книгу до бібліотеки
+				addBook(book) {
+					this.books.push(book);
+				}
+
+				// Знаходження книги за назвою
+				findBookByTitle(title) {
+					return this.books.find((b) => b.title === title);
+				}
+
+				// Видалення книги за назвою
+				removeBookByTitle(input) {
+					this.books = this.books.filter((b) => b.title !== input);
+				}
+
+				// Знаходження книги за ID
+				findBookById(id) {
+					return this.books.find((b) => b.id === id);
+				}
+
+				// Видалення книги за ID
+				removeBookByID(input) {
+					this.books = this.books.filter((b) => b.id !== input);
+				}
+
+				// Знаходження книг за ім'ям автора
+				findBookByAuthor(author) {
+					return this.books.filter((b) => b.author.name === author);
+				}
+
+				// Знаходження книг за ім'ям видавництва
+				findBookByPublisher(publisher) {
+					return this.books.filter((b) => b.publisher.name === publisher);
+				}
+
+				// Знаходження книг за розділом/секцією
+				getBookBySection(section) {
+					return this.books.filter((b) => b.section === section);
+				}
+
+				// Виведення інформації про всі книги в бібліотеці
+				toString() {
+					return this.books.reduce((acc, book) => {
+						return (
+							acc +
+							[
+								`Назва: ${book.title}`,
+								`Автор: ${book.author}`,
+								`Жанр: ${book.genre}`,
+								`Видавництво: ${book.publisher}`,
+								"-----------------------------------",
+							].join("\n") +
+							"\n"
+						);
+					}, "Бібліотека містить наступні книги:\n");
+				}
+			}
+
+			// Клас, який представляє автора
+			class Author {
+				constructor({ name, birthYear, description }) {
+					this.name = name; // Ім'я автора
+					this.birthYear = birthYear; // Рік народження автора
+					this.description = description; // Опис автора
+				}
+
+				// Виведення інформації про автора
+				toString() {
+					return `${this.name} ${this.birthYear} року народження. ${this.description} `;
+				}
+			}
+
+			// Клас, який представляє видавництво
+			class Publisher {
+				constructor({ name, ISBN, yearEstablished }) {
+					this.name = name; // Ім'я видавництва
+					this.ISBN = ISBN; // ISBN книги
+					this.yearEstablished = yearEstablished; // Рік заснування видавництва
+				}
+
+				// Виведення інформації про видавництво
+				toString() {
+					return `Видавництво: ${this.name}, код книги: ${this.ISBN}, рік видавництва ${this.yearEstablished} `;
+				}
+			}
+
+			// Ініціалізація набору книг
+			let librarySet = [
+				// Ініціалізація книг з вкладеними об'єктами для автора і видавництва
+
+				// new Book({
+				// 	authorName: "Макс Кідрук",
+				// 	birthYear: 1984,
+				// 	description: "український письменник",
+				// 	title: "Колонія",
+				// 	genre: "Наукова фантастика",
+				// 	publisherName: "Бородатий Тамарин",
+				// 	ISBN: 9786179526701,
+				// 	yearEstablished: 2022,
+				// 	section: "Наукова фантастика",
+				// }
+
+				// ПИТАННЯ ДО МЕНТОРА - ПЛОСКИЙ ЧИ ВКЛАДЕНИЙ? Чи не переускладнив (чи навпаки спростив?) я з вкладеним (можливо на проді данні в такому вигляді не приходять?)?
+
+				new Book({
+					author: { name: "Макс Кідрук", birthYear: 1984, description: "Український письменник" },
+					title: "Колонія",
+					genre: "Наукова фантастика",
+					publisher: {
+						name: "Бородатий Тамарин",
+						ISBN: 9786179526701,
+						yearEstablished: 2022,
+					},
+				}),
+
+				new Book({
+					author: { name: "Роберт М. Вегнер", birthYear: 1981, description: "Польський письменник" },
+					title: "Оповістки з Меекханського прикордоння",
+					genre: "Фентезі",
+					publisher: {
+						name: "РМ",
+						ISBN: 9789669173874,
+						yearEstablished: 2019,
+					},
+				}),
+
+				new Book({
+					author: { name: "Павло Дерев'янко", birthYear: 1988, description: "Український письменник" },
+					title: "Аркан вовків",
+					genre: "Фентезі",
+					publisher: {
+						name: "Дім Химер",
+						ISBN: 9789669787002,
+						yearEstablished: 2022,
+					},
+				}),
+
+				new Book({
+					author: { name: "Робін Гобб", birthYear: 1952, description: "Американська письменниця" },
+					title: "Учень убивці",
+					genre: "Сучасна іноземна проза",
+					publisher: {
+						name: "Клуб Сімейного Дозвілля",
+						ISBN: 9786171254107,
+						yearEstablished: 2018,
+					},
+				}),
+			];
+			const myLibrary = new Library(librarySet);
+
+			// Тестові перевірки
+			// Тут можна додати, видалити або знайти конкретні книги в бібліотеці та вивести їх інформацію
+
+			// 1. Вивести всю бібліотеку
+			console.log(myLibrary);
+			console.log(myLibrary.toString());
+
+			// 2. Додати нову книгу
+			const newBook = new Book({
+				author: { name: "Тестовий Автор", birthYear: 2000, description: "Тестовий опис" },
+				title: "Тестова книга",
+				genre: "Тестовий жанр",
+				publisher: {
+					name: "Тестове видавництво",
+					ISBN: 1234567890,
+					yearEstablished: 2023,
+				},
+			});
+			const newBook2 = new Book({
+				author: { name: "Тестовий Автор 2", birthYear: 2222, description: "Тестовий опис 2" },
+				title: "Тестова книга 2",
+				genre: "Тестовий жанр 2",
+				publisher: {
+					name: "Тестове видавництво 2",
+					ISBN: 22222222222222,
+					yearEstablished: 2111,
+				},
+			});
+
+			myLibrary.addBook(newBook);
+			console.log("Після додавання нової книги:\n", myLibrary);
+
+			// 3. Видалити книгу
+			myLibrary.removeBookByTitle("Учень убивці");
+			console.log("Після видалення книги:\n", myLibrary);
+
+			// 4. Знайти книгу за назвою
+			const foundTitle = myLibrary.findBookByTitle("Аркан вовків");
+			console.log("Знайдена книга за назвою 'Учень убивці':\n", foundTitle);
+
+			// 5. Знайти книги за ім'ям автора
+			const foundAuthor = myLibrary.findBookByAuthor("Роберт М. Вегнер");
+			console.log("Знайдені книги автора 'Роберт М. Вегнер':\n", foundAuthor);
+
+			// 6. Знайти книги за видавництвом
+			const foundPublisher = myLibrary.findBookByPublisher("Бородатий Тамарин");
+			console.log("Знайдені книги видавництва 'Бородатий Тамарин':\n", foundPublisher);
+
+			// 7. Знайти книги за розділом
+			const foundSection = myLibrary.getBookBySection("Фентезі");
+			console.log("Знайдені книги розділу 'Фентезі':\n", foundSection);
+		</script>
+	</body>
+</html>

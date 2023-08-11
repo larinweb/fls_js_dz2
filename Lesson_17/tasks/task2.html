@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L17 DZ task 2</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<h1>Задача 2</h1>
+		<p>Створити службове авто (водій, марка, номер). Створити клас таким чином, щоб можна було створити тільки один екземпляр цього класу.</p>
+
+		<script>
+			"use strict";
+			//=======================================================================================
+
+			class CompanyCar {
+				static #companyCar = null;
+
+				constructor(driver, brand, license) {
+					if (CompanyCar.#companyCar) {
+						return CompanyCar.#companyCar;
+					}
+					this.driver = driver;
+					this.brand = brand;
+					this.license = license;
+					CompanyCar.#companyCar = this;
+				}
+
+				getDriver() {
+					return this.driver;
+				}
+
+				toString() {
+					return `Водій ${this.driver} керує службовим авто марки ${this.brand} з номерами ${this.license}`;
+				}
+			}
+
+			// Приклад використання
+			const driver = new CompanyCar("В'ячеслав", "Subaru", "LVS4444");
+			console.log(driver);
+			console.log(driver.toString());
+			//======================================================================================
+		</script>
+	</body>
+</html>
