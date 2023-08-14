@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L18 DZ task 5</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- ====================================================================================== -->
+		<style>
+			.sandbox.t5 {
+				display: flex;
+				margin: 0 auto;
+				width: 100%;
+				max-width: 30rem;
+				flex-direction: column;
+			}
+
+			.sandbox.t5 label {
+				flex-direction: column;
+				font-size: 1.25rem;
+				align-items: flex-start;
+				padding-bottom: 1rem;
+			}
+			.sandbox label input[type="number"] {
+				width: 100%;
+				margin-top: 0.625rem;
+				margin-left: 0;
+			}
+			.sandbox.t5 .demo_table {
+				text-align: center;
+			}
+		</style>
+
+		<!-- ====================================================================================== -->
+
+		<h1>Задача 5</h1>
+		<p>Користувач задає кількість рядків і стовпців. Відобразити таблицю, у клітинках якої знаходяться числа 1, 2, 3, …</p>
+		<div class="sandbox t5">
+			<form action="#">
+				<label>Введіть кількість рядків <input type="number" id="input_rows" /></label>
+				<label>Введіть кількість стовпців <input type="number" id="input_cols" /></label>
+				<button type="button" id="create_table">Створити таблицю</button>
+			</form>
+		</div>
+
+		<!-- ====================================================================================== -->
+
+		<script>
+			"use strict";
+			// *** Отримуємо і зберігаємо данні
+			const rowNum = document.getElementById("input_rows");
+			const colNum = document.getElementById("input_cols");
+			const sandbox = document.querySelector(".sandbox.t5");
+
+			// *** Обчислення
+			const createTable = () => {
+				const rows = parseInt(rowNum.value);
+				const cols = parseInt(colNum.value);
+				let count = 1;
+
+				// Перевірки на помилки
+				if (rows <= 0 || cols <= 0) {
+					alert("Будь ласка, введіть коректні значення.");
+					return;
+				}
+
+				// Очищення попередньої таблиці
+				const oldTable = sandbox.querySelector(".demo_table");
+				if (oldTable) oldTable.remove();
+
+				const tableEl = document.createElement("table");
+				tableEl.classList.add("demo_table");
+
+				// Створюємо таблицю
+				for (let i = 0; i < rows; i++) {
+					const trEl = document.createElement("tr");
+					for (let j = 0; j < cols; j++) {
+						const tdEl = document.createElement("td");
+						tdEl.innerText = `${count}`;
+						trEl.append(tdEl);
+						count++;
+					}
+					tableEl.append(trEl);
+				}
+				sandbox.append(tableEl);
+			};
+
+			// *** Отримання кнопки та обробка
+			document.getElementById("create_table").onclick = createTable;
+		</script>
+
+		<!-- ====================================================================================== -->
+	</body>
+</html>

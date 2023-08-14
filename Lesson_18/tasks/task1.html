@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L18 DZ task 1</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- ====================================================================================== -->
+
+		<style>
+			.sandbox .calculator {
+				display: grid;
+				gap: 1rem;
+			}
+			.calc_buttons {
+				display: flex;
+				justify-content: space-between;
+				gap: 2rem;
+			}
+			.calc_buttons .calc-btn {
+				margin: 0;
+				flex: 1;
+			}
+		</style>
+
+		<!-- ====================================================================================== -->
+
+		<h1>Задача 1</h1>
+		<p>Розробити калькулятор</p>
+		<div class="sandbox">
+			<div class="calculator">
+				<label for="fn">Перше число <input type="text" id="fn" value="0" /></label>
+				<label for="sn">Друге число <input type="text" id="sn" value="0" /></label>
+				<div class="calc_buttons">
+					<button type="button" class="calc-btn" data-operation="+">Додати</button>
+					<button type="button" class="calc-btn" data-operation="-">Відняти</button>
+					<button type="button" class="calc-btn" data-operation="*">Помножити</button>
+					<button type="button" class="calc-btn" data-operation="/">Поділити</button>
+				</div>
+				<label for="res">Результат<input type="text" id="res" disabled /></label>
+			</div>
+		</div>
+
+		<!-- ====================================================================================== -->
+
+		<script>
+			"use strict";
+			const res = document.getElementById("res");
+			const fnInput = document.getElementById("fn");
+			const snInput = document.getElementById("sn");
+
+			const calcAction = () => {
+				const firstNum = parseFloat(fnInput.value);
+				const secondNum = parseFloat(snInput.value);
+
+				if (isNaN(firstNum) || isNaN(secondNum)) {
+					res.value = "Введіть коректні числа!";
+					return;
+				}
+
+				const operator = event.target.getAttribute("data-operation");
+
+				switch (operator) {
+					case "+":
+						res.value = firstNum + secondNum;
+						break;
+					case "-":
+						res.value = firstNum - secondNum;
+						break;
+					case "*":
+						res.value = firstNum * secondNum;
+						break;
+					case "/":
+						if (secondNum !== 0) {
+							res.value = (firstNum / secondNum).toFixed(2);
+						} else {
+							res.value = "Ділення на нуль!";
+						}
+						break;
+					default:
+						throw new Error("Невідома операція");
+				}
+			};
+
+			window.onload = () => {
+				const buttons = document.querySelectorAll(".calc-btn");
+				buttons.forEach((button) => (button.onclick = calcAction));
+			};
+		</script>
+
+		<!-- ====================================================================================== -->
+	</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L18 DZ task 6</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- ====================================================================================== -->
+		<style>
+			.sandbox.t6 {
+				display: flex;
+				margin: 0;
+				width: 100%;
+				max-width: 30rem;
+				flex-direction: column;
+			}
+			.sandbox.t6 label {
+				flex-direction: column;
+				font-size: 1.25rem;
+				align-items: flex-start;
+				padding-bottom: 1rem;
+			}
+			.sandbox.t6 input[type="number"] {
+				margin-top: 0.625rem;
+				margin-left: 0;
+				max-width: 4.375rem;
+				padding: 0.125rem 0 0.125rem 0.625rem;
+				text-align: center;
+			}
+			.sandbox.t6 .grades_table td {
+				padding: 0;
+				border: 0;
+			}
+			.sandbox.t6 .average_grade {
+				border: 0;
+			}
+		</style>
+
+		<!-- ====================================================================================== -->
+
+		<h1>Задача 6</h1>
+		<p>
+			Користувач задає кількість оцінок і натискає на кнопку «get table». В результаті формується таблиця з input, куди користувач вводить
+			оцінки. Після цього натискає на кнопку “get sum” і знаходить середнє значення.
+		</p>
+		<div class="sandbox t6">
+			<form action="#">
+				<label>Кількість оцінок <input type="number" id="grades_amount" /></label>
+				<button type="button" id="create_table_btn">Створити таблицю</button>
+			</form>
+		</div>
+
+		<!-- ====================================================================================== -->
+
+		<script>
+			"use strict";
+
+			// Отримання елементів для створення таблиці
+			const gradesAmount = document.getElementById("grades_amount");
+			const createTableBtn = document.getElementById("create_table_btn");
+			const sandbox = document.querySelector(".sandbox.t6");
+
+			// Обробник події для кнопки створення таблиці
+			createTableBtn.onclick = () => {
+				// Отримуємо кількість колонок для таблиці з оцінками
+				const cols = parseInt(gradesAmount.value);
+
+				// Перевірка коректності введення кількості колонок
+				if (cols <= 0) {
+					alert("Будь ласка, введіть коректні значення.");
+					return;
+				}
+
+				// Створення елементів таблиці
+				const tableEl = document.createElement("table");
+				tableEl.classList.add("grades_table");
+				const trEl = document.createElement("tr");
+
+				for (let i = 0; i < cols; i++) {
+					const tdEl = document.createElement("td");
+					const gradesInput = document.createElement("input");
+					gradesInput.type = "number";
+					gradesInput.min = "1"; // Мінімальне значення
+					gradesInput.max = "12"; // Максимальне значення
+					gradesInput.classList.add("grade");
+					tdEl.append(gradesInput);
+					trEl.append(tdEl);
+				}
+
+				tableEl.append(trEl);
+				sandbox.append(tableEl);
+
+				// Створення кнопки для розрахунку середнього балу
+				const sumBtn = document.createElement("button");
+				sumBtn.type = "button";
+				sumBtn.classList.add("sum_btn");
+				sumBtn.innerText = "Отримати середній бал";
+
+				// ***___________________________________________
+				// Питання до ментор?
+				// Анонімна функція ОК чи краще присвоїти змінну ???????????
+				//---------------------
+				// const averageGrade = () => {}
+				// sumBtn.onclick = averageGrade;
+				// ***___________________________________________
+				sumBtn.onclick = () => {
+					// Збір усіх введених оцінок
+					const allGrades = document.querySelectorAll(".grade");
+					let gradesSum = 0;
+					let validGradesCount = 0;
+
+					allGrades.forEach((grade) => {
+						const val = parseInt(grade.value);
+						if (!isNaN(val) && val >= 1 && val <= 12) {
+							gradesSum += val;
+							validGradesCount++;
+						} else {
+							throw new Error("Один або кілька введених балів не відповідають 12-бальній системі. Будь ласка, введіть оцінки від 1 до 12.");
+							// ___________________________________________
+							//
+							// Питання до ментор?-------------АБО КРАЩЕ ALERT???????????
+							// ___________________________________________
+							// alert("Один або кілька введених балів не відповідають 12-бальній системі. Будь ласка, введіть оцінки від 1 до 12.");
+							return; // Виходимо з функції, якщо одна з оцінок не відповідає 12-бальній системі
+						}
+					});
+
+					const average = gradesSum / validGradesCount;
+
+					// Виведення результату
+					let resultField = document.querySelector(".average_grade");
+					if (resultField) {
+						resultField.remove();
+					}
+
+					resultField = document.createElement("h1");
+					resultField.classList.add("average_grade");
+					sandbox.append(resultField);
+
+					resultField.textContent = "Середній бал: " + average.toFixed(2);
+				};
+
+				sandbox.append(sumBtn);
+			};
+		</script>
+
+		<!-- ====================================================================================== -->
+	</body>
+</html>

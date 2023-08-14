@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L18 DZ task 2</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- ====================================================================================== -->
+		<style>
+			.sandbox.t2 .converter {
+				display: flex;
+				flex-direction: column;
+				gap: 2rem;
+				margin: 0 auto;
+				max-width: 31.25rem;
+				width: 100%;
+			}
+			.sandbox.t2 button {
+				margin-right: 0;
+			}
+			.sandbox.t2 label {
+				flex-direction: column;
+				font-size: 1.625rem;
+			}
+			.sandbox.t2 label input[type="text"] {
+				width: 100%;
+				margin-top: 0.625rem;
+				margin-left: 0;
+			}
+		</style>
+
+		<!-- ====================================================================================== -->
+
+		<h1>Задача 2</h1>
+		<p>Зробити конвертер валют (курси валют – константи у скрипті)</p>
+		<div class="sandbox t2">
+			<div class="converter">
+				<label>Сума в гривнях <input type="text" id="input_UAH" /></label>
+				<button type="button" id="cur_conv_btn">Конвертувати</button>
+				<label>Сума в євро <input type="text" id="res_EUR" disabled /></label>
+				<label>Сума в доларах <input type="text" id="res_USD" disabled /></label>
+			</div>
+		</div>
+
+		<!-- ====================================================================================== -->
+
+		<script>
+			"use strict";
+			const inputUAH = document.getElementById("input_UAH");
+
+			const resEUR = document.getElementById("res_EUR");
+			const resUSD = document.getElementById("res_USD");
+
+			const rateEUR = 41;
+			const rateUSD = 36.6;
+
+			const calcAction = () => {
+				const uah = parseFloat(inputUAH.value);
+
+				if (isNaN(uah)) {
+					inputUAH.value = "Введіть коректні числа!";
+					return;
+				}
+
+				resEUR.value = (uah / rateEUR).toFixed(2) + " €";
+				resUSD.value = (uah / rateUSD).toFixed(2) + " $";
+			};
+
+			window.onload = () => {
+				const buttons = (document.getElementById("cur_conv_btn").onclick = calcAction);
+			};
+		</script>
+
+		<!-- ====================================================================================== -->
+	</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L18 DZ task 7</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- ====================================================================================== -->
+		<style>
+			.sandbox.t7 {
+				display: flex;
+				margin: 0;
+				width: 100%;
+				max-width: 30rem;
+				flex-direction: column;
+			}
+			.trip_wrapper {
+				display: grid;
+				grid-auto-flow: column;
+				grid-template-columns: 1fr 1fr 1fr;
+				grid-template-rows: 1fr;
+				gap: 2rem;
+			}
+			.trip_form {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+			}
+			.trip_section {
+				padding-bottom: 20px;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.trip_section label {
+				flex-direction: row-reverse;
+				justify-content: flex-end;
+				align-self: flex-start;
+				margin-bottom: 0.625rem;
+			}
+			.trip_section label input {
+				margin-right: 1rem;
+			}
+		</style>
+
+		<!-- ====================================================================================== -->
+
+		<h1>Задача 7</h1>
+		<p>
+			Подорож складається з 3 етапів. На кожному етапі користувач може вибрати один з видів транспорту (авто, автобус, літак - випадаючий
+			список), харчування (сніданок, обід, вечеря – checkbox) та одного з 3-х гідів(використати - radio buttons). Ціни визначте самі.
+			Підрахувати загальну вартість.
+		</p>
+		<div class="sandbox t7">
+			<form action="" class="trip_form" method="dialog">
+				<div class="trip_wrapper">
+					<div id="trip_stage_1" class="trip_stages">
+						<h4>Етап 1</h4>
+						<div class="trip_transports_section trip_section">
+							<select name="transports" id="trip_stage_1_transport" class="transports_select">
+								<option value="5000">авто</option>
+								<option value="1000">автобус</option>
+								<option value="15000">літак</option>
+							</select>
+						</div>
+						<div class="trip_food_section trip_section">
+							<label>
+								Сніданок
+								<input type="checkbox" class="food_checkbox" value="100" />
+							</label>
+							<label>
+								Обід
+								<input type="checkbox" class="food_checkbox" value="200" />
+							</label>
+							<label>
+								Вечеря
+								<input type="checkbox" class="food_checkbox" value="150" />
+							</label>
+						</div>
+						<div class="guide_section trip_section">
+							<label class="guides guide_1">
+								Гід №1
+								<input type="radio" name="guides1" value="1000" class="guides" />
+							</label>
+							<label class="guides guide_2">
+								Гід №2
+								<input type="radio" name="guides1" value="3000" class="guides" />
+							</label>
+							<label class="guides guide_3">
+								Гід №3
+								<input type="radio" name="guides1" value="5000" class="guides" />
+							</label>
+						</div>
+					</div>
+					<!-- ================================================================================ -->
+
+					<div id="trip_stage_2" class="trip_stages">
+						<h4>Етап 2</h4>
+						<div class="trip_transports_section trip_section">
+							<select name="transports" id="trip_stage_2_transport" class="transports_select">
+								<option value="4200">авто</option>
+								<option value="650">автобус</option>
+								<option value="12000">літак</option>
+							</select>
+						</div>
+						<div class="trip_food_section trip_section">
+							<label>Сніданок <input type="checkbox" class="food_checkbox" value="300" /></label>
+							<label>Обід <input type="checkbox" class="food_checkbox" value="270" /></label>
+							<label>Вечеря <input type="checkbox" class="food_checkbox" value="180" /></label>
+						</div>
+						<div class="guide_section trip_section">
+							<label class="guides guide_1">
+								Гід №1
+								<input type="radio" name="guides2" value="200" class="guides" />
+							</label>
+							<label class="guides guide_2">
+								Гід №2
+								<input type="radio" name="guides2" value="500" class="guides" />
+							</label>
+							<label class="guides guide_3">
+								Гід №3
+								<input type="radio" name="guides2" value="800" class="guides" />
+							</label>
+						</div>
+					</div>
+					<!-- ================================================================================ -->
+
+					<div id="trip_stage_3" class="trip_stages">
+						<h4>Етап 3</h4>
+						<div class="trip_transports_section trip_section">
+							<select name="transports" id="trip_stage_3_transport" class="transports_select">
+								<option value="8000">авто</option>
+								<option value="3600">автобус</option>
+								<option value="37000">літак</option>
+							</select>
+						</div>
+						<div class="trip_food_section trip_section">
+							<label>Сніданок <input type="checkbox" class="food_checkbox" value="100" /></label>
+							<label>Обід <input type="checkbox" class="food_checkbox" value="200" /></label>
+							<label>Вечеря <input type="checkbox" class="food_checkbox" value="150" /></label>
+						</div>
+						<div class="guide_section trip_section">
+							<label class="guides guide_1">
+								Гід №1
+								<input type="radio" name="guides3" value="2500" class="guides" />
+							</label>
+							<label class="guides guide_2">
+								Гід №2
+								<input type="radio" name="guides3" value="3600" class="guides" />
+							</label>
+							<label class="guides guide_3">
+								Гід №3
+								<input type="radio" name="guides3" value="4700" class="guides" />
+							</label>
+						</div>
+					</div>
+				</div>
+				<button type="submit" id="calc_trip_button">Підрахувати</button>
+				<h1 id="trip_price_result"></h1>
+			</form>
+		</div>
+
+		<!-- ====================================================================================== -->
+
+		<script>
+			"use strict";
+			const calcTripBtn = document.getElementById("calc_trip_button");
+			const resultField = document.getElementById("trip_price_result");
+
+			// *** Функція для знаходження суми вартості транспорту
+			const getTransportsCost = () => {
+				const transportsCostArr = document.querySelectorAll(".transports_select");
+				let sum = 0;
+				for (const select of transportsCostArr) {
+					sum += parseInt(select.value);
+				}
+				return sum;
+			};
+
+			// *** Функція для знаходження суми вартості їжи
+			const getFoodCost = () => {
+				const foodCostArr = document.querySelectorAll(".food_checkbox");
+				let sum = 0;
+				for (const checkbox of foodCostArr) {
+					sum += checkbox.checked ? parseInt(checkbox.value) : 0;
+				}
+				return sum;
+			};
+
+			// *** Функція для знаходження суми вартості послуг гіда
+			const getGuideCost = () => {
+				const guideCostArr = document.querySelectorAll(".guides");
+				let sum = 0;
+				for (const guide of guideCostArr) {
+					sum += guide.checked ? parseInt(guide.value) : 0;
+				}
+				return sum;
+			};
+
+			// *** Функція для знаходження суми усіх обраних послуг і її вивід
+			calcTripBtn.onclick = () => (resultField.textContent = getTransportsCost() + getFoodCost() + getGuideCost());
+
+			//
+			////
+			//////
+		</script>
+
+		<!-- ====================================================================================== -->
+	</body>
+</html>

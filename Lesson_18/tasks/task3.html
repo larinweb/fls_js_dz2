@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L18 DZ task 3</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- ====================================================================================== -->
+		<style>
+			.sandbox.t3 {
+				display: flex;
+				flex-direction: column;
+				gap: 2rem;
+				margin: 0 auto;
+				width: 100%;
+				max-width: 30rem;
+			}
+			.sandbox button {
+				margin-right: 0;
+			}
+			.sandbox.t3 label {
+				flex-direction: column;
+				font-size: 1.625rem;
+				align-items: flex-start;
+				padding-bottom: 1rem;
+			}
+			.sandbox label input[type="text"] {
+				width: 100%;
+				margin-top: 0.625rem;
+				margin-left: 0;
+			}
+		</style>
+
+		<!-- ====================================================================================== -->
+
+		<h1>Задача 3</h1>
+		<p>Користувач задає рік народження. Визначити кількість років користувача.</p>
+		<div class="sandbox t3">
+			<form action="#">
+				<label>Введіть рік народження <input type="text" id="year_of_birth" /></label>
+				<label>Вік користувача <input type="text" id="user_age" disabled /></label>
+				<button type="submit" id="calc_age_btn">Порахувати вік</button>
+			</form>
+		</div>
+
+		<!-- ====================================================================================== -->
+
+		<script>
+			"use strict";
+			// *** Отримуємо і зберігаємо данні
+			const yearOfBirth = document.getElementById("year_of_birth");
+			const userAge = document.getElementById("user_age");
+			const currentYear = 2023;
+
+			// *** Обчислення
+			const calcUserAge = (event) => {
+				event.preventDefault(); // щоб завадити перезавантаженню сторінки по єнтеру
+				
+				const userInput = parseInt(yearOfBirth.value);
+
+				// Перевірки на помилки
+				if (isNaN(userInput)) {
+					yearOfBirth.value = "Введіть коректні числа!";
+					return;
+				}
+				if (userInput.toString().length !== 4 || userInput > currentYear) {
+					yearOfBirth.value = "Введіть рік у форматі 4 цифри";
+					return;
+				}
+
+				// Присвоєння результату
+				userAge.value = currentYear - userInput;
+			};
+
+			// *** Отримання кнопки та обробка
+			window.onload = () => {
+				const buttons = (document.getElementById("calc_age_btn").onclick = calcUserAge);
+			};
+		</script>
+
+		<!-- ====================================================================================== -->
+	</body>
+</html>

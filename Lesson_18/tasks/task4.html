@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L18 DZ task 4</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- ====================================================================================== -->
+		<style>
+			.sandbox.t4 {
+				display: flex;
+				flex-direction: row;
+				margin: 0 auto;
+				width: 100%;
+				max-width: 40rem;
+			}
+			.wish_line {
+				border: 0.15rem solid #3c6;
+				padding: 0.75rem;
+				border-radius: 0.375rem;
+				flex: 1;
+				text-align: center;
+			}
+		</style>
+
+		<!-- ====================================================================================== -->
+
+		<h1>Задача 4</h1>
+		<p>
+			Наперед задано у скрипті масив зі списком бажань. Після завантаження сторінки випадковим чином вибираються 3 і відображаються у окремих
+			div (їх треба створити і додати на сторінку)
+		</p>
+		<div class="sandbox t4">
+			
+		</div>
+
+		<!-- ====================================================================================== -->
+
+		<script>
+			"use strict";
+			const wishArr = ["Солоденьке", "Попити", "Поспати", "Погуляти", "мацква палає", "Грошенят", "Спокій"];
+
+			const getRandomWishes = (arr, count) => {
+				const randomWishes = [];
+				const tempArr = [...arr];
+
+				for (let i = 0; i < count; i++) {
+					const randomIndex = Math.floor(Math.random() * tempArr.length);
+					randomWishes.push(tempArr[randomIndex]);
+					tempArr.splice(randomIndex, 1); // видаляємо вже обраний елемент, щоб уникнути повторення
+				}
+				return randomWishes;
+			};
+
+			const randomWishes = getRandomWishes(wishArr, 3);
+			const sandbox = document.querySelector(".sandbox.t4");
+
+			randomWishes.forEach((wish) => {
+				const createDiv = document.createElement("div");
+				createDiv.classList.add("wish_line");
+				const textNode = document.createTextNode(wish);
+				createDiv.append(textNode);
+				sandbox.append(createDiv);
+			});
+		</script>
+
+		<!-- ====================================================================================== -->
+	</body>
+</html>

@@ -7,12 +7,13 @@
 body {
 	background: #455a64 url('imges/bg.webp') 0 0 repeat;
 	color: #FBC02D;
-	font: 20px 'Courier New', Courier, monospace;
-	padding: 0 20px 100px;
+	font: 1.25rem 'Courier New', Courier, monospace;
+	padding: 0 1.25rem 6.25rem;
 }
 
 a,
-button {
+button,
+.trs {
 	color: #E57373;
 	text-decoration: none;
 	transition: all 0.25s ease 0s;
@@ -25,7 +26,7 @@ button:hover {
 }
 
 ol {
-	padding: 0 25px;
+	padding: 0 1.5625rem;
 	list-style: none;
 }
 
@@ -34,18 +35,18 @@ ol {
 }
 
 ol li {
-	border: 1px solid #263238;
-	margin-bottom: 15px;
-	border-radius: 10px;
-	padding: 15px;
+	border: 0.0625rem solid #263238;
+	margin-bottom: 0.9375rem;
+	border-radius: 0.625rem;
+	padding: 0.9375rem;
 }
 
 ol h3 {
-	margin: 5px 5px 15px;
+	margin: 0.3125rem 0.3125rem 0.9375rem;
 }
 
 ol p {
-	padding: 0 15px;
+	padding: 0 0.9375rem;
 	margin: 0;
 }
 
@@ -53,13 +54,13 @@ ol a,
 button {
 	display: inline-block;
 	color: #E57373;
-	height: 55px;
-	line-height: 58px;
-	border-radius: 6px;
+	height: 3.4375rem;
+	line-height: 3.625rem;
+	border-radius: 0.375rem;
 	background: #263238;
-	padding: 0 15px;
+	padding: 0 0.9375rem;
 	font-weight: normal;
-	font-size: 36px;
+	font-size: 2.25rem;
 }
 
 ol a:hover,
@@ -69,17 +70,17 @@ button:hover {
 }
 
 button {
-	line-height: 55px;
+	line-height: 3.4375rem;
 	appearance: none;
 	border: none;
 	font: inherit;
-	margin: 0 15px 15px 0;
+	margin: 0 0.9375rem 0.9375rem 0;
 }
 
 .result_body h1,
 .result__body h1 {
 	color: #3c6;
-	border-bottom: 2px solid #5C6BC0;
+	border-bottom: 0.125rem solid #5C6BC0;
 
 }
 
@@ -95,6 +96,45 @@ button {
 .result__body tr,
 .result__body th,
 .result__body td {
-	padding: 8px 15px;
-	border: 2px solid #00838F;
+	padding: 0.5rem 0.9375rem;
+	border: 0.125rem solid #00838F;
+}
+
+.sandbox {
+	max-width: 75rem;
+	margin: 0 auto;
+	display: grid;
+	gap: 1rem;
+}
+
+.sandbox label {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.sandbox input[type="text"],
+.sandbox input[type="number"],
+.sandbox select {
+	margin-left: 0.9375rem;
+	border-radius: 0.625rem;
+	border: 0.125rem solid #5c6bc0;
+	font-size: 1.25rem;
+	padding: 0.625rem 1.25rem;
+	outline: none;
+	transition: all 0.25s ease 0s;
+	color: #3f4f57;
+	flex-grow: 1;
+}
+
+.sandbox select {
+	margin-left: 0;
+}
+
+.sandbox label input[type="text"]:disabled {
+	background: #fff;
+}
+
+.sandbox label input[type="text"]:focus {
+	border-color: #3c6;
 }
