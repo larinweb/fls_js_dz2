@@ -44,7 +44,8 @@
 				constructor() {
 					this.snowflakeElement = this.createSnowFlake();
 					this.speed = Math.random() * 3 + 1; // Швидкість сніжинки випадково обирається від 1 до 4
-					this.currentTop = 0;
+					this.currentTop = Math.random() * window.innerHeight; // Рандомна стартова позиція
+					this.snowflakeElement.style.top = `${this.currentTop}px`; // Встановлюємо це значення як початкову позицію для елемента
 					document.body.append(this.snowflakeElement);
 				}
 
