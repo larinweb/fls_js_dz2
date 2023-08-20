@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L19 DZ task 1</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			.sandbox .hlo {
+				transition: all 0.3s ease 0s;
+			}
+			.red-text {
+				color: #ef5350;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 1</h1>
+		<p>Дано 10 рядків тексту «Hello!» у окремих div. При кліку на якийсь із них усі наступні повинні бути зафарбовані у червоний колір.</p>
+		<div class="sandbox">
+			<div class="hlo">Hello</div>
+			<div class="hlo">Hello</div>
+			<div class="hlo">Hello</div>
+			<div class="hlo">Hello</div>
+			<div class="hlo">Hello</div>
+			<div class="hlo">Hello</div>
+			<div class="hlo">Hello</div>
+			<div class="hlo">Hello</div>
+			<div class="hlo">Hello</div>
+			<div class="hlo">Hello</div>
+		</div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			"use strict";
+			const lines = document.querySelectorAll(".hlo");
+
+			lines.forEach((el, index) => {
+				el.onclick = () => {
+					for (let i = index; i < lines.length; i++) {
+						lines[i].classList.add("red-text");
+					}
+				};
+			});
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

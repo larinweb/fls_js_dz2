@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L19 DZ task 3</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			.sandbox {
+				transition: all 0.5s ease 0s;
+			}
+			.num_list {
+				display: flex;
+				gap: 2rem;
+				flex-wrap: wrap;
+				border: 2px solid #3c6;
+				padding: 1rem;
+				border-radius: 0.375rem;
+				transition: all 0.5s ease 0s;
+			}
+
+			.num_list li {
+				flex: 1;
+				max-width: 3.0625rem;
+				margin-bottom: 0;
+				text-align: center;
+				font-size: 0.875rem;
+				color: #fff;
+				background: transparent;
+			}
+			.action_btn {
+				margin: 0;
+				justify-content: center;
+			}
+			.even-list {
+				background: #33cc66;
+			}
+
+			.odd-list {
+				background: #f44336;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 3</h1>
+		<p>
+			Дано 5 випадковим чином згенерованих нумерованих списків з рандомними числами (кількість елементів у списку випадкова від 1 до 10,
+			елементи випадкові – від 1 до 100). При натисненні на кнопку нумеровані списки з парною кількістю елементів зафарбувати у зелений колір,
+			інші у червоний.
+		</p>
+		<div class="sandbox"></div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			"use strict";
+
+			class ListGen {
+				constructor(amount, uptolist, uptonum) {
+					this.amount = amount; // Кількість списків
+					this.uptolist = uptolist; // Верхня межа кількості елементів у списку
+					this.uptonum = uptonum; // Верхня межа значень елементів списку
+				}
+
+				// Генерація випадкового числа в заданому діапазоні
+				randomizer(upto) {
+					return Math.floor(Math.random() * upto) + 1;
+				}
+
+				// Рендер елементів списку з випадковими числами
+				render() {
+					const olList = document.createElement("ol");
+					olList.classList.add("num_list");
+
+					const numItems = this.randomizer(this.uptolist);
+					for (let i = 0; i < numItems; i++) {
+						const liItem = document.createElement("li");
+						olList.appendChild(liItem);
+						liItem.innerText = this.randomizer(this.uptonum);
+					}
+
+					this.container.appendChild(olList); // Додаємо весь список до контейнера
+				}
+
+				// Створення кнопки для зміни кольорів
+				createColorButton() {
+					const actionBtn = document.createElement("button");
+					actionBtn.type = "button";
+					actionBtn.classList.add("action_btn");
+					actionBtn.innerText = "Тиць";
+					this.container.appendChild(actionBtn);
+
+					// Зміна кольорів списків при натисканні на кнопку
+					actionBtn.onclick = () => {
+						this.colorizeLists();
+					};
+				}
+
+				// Зміна кольорів списків в залежності від кількості елементів
+				colorizeLists() {
+					const lists = document.querySelectorAll(".num_list");
+					lists.forEach((list) => {
+						if (list.children.length % 2 === 0) {
+							list.classList.add("even-list");
+						} else {
+							list.classList.add("odd-list");
+						}
+					});
+				}
+
+				// Рендер заданої кількості списків
+				renderLists() {
+					for (let i = 0; i < this.amount; i++) {
+						this.render();
+					}
+				}
+
+				// Ініціалізація класу при завантаженні сторінки
+				initialize(containerSelector) {
+					this.container = document.querySelector(containerSelector);
+					this.renderLists();
+					this.createColorButton();
+				}
+			}
+
+			window.onload = () => {
+				const lists = new ListGen(5, 10, 100);
+				lists.initialize(".sandbox");
+			};
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

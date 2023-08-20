@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L19 DZ task 4</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			.sandbox {
+				grid-template-columns: 1fr 1fr 1fr;
+				gap: 2rem;
+			}
+
+			.table-container {
+				margin-bottom: 1.25rem;
+			}
+			.highlight {
+				border: 0.25rem solid #f44336;
+			}
+			table {
+				border-collapse: collapse;
+			}
+			td {
+				width: 3.125rem;
+				height: 3.125rem;
+				text-align: center;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 4</h1>
+		<p>
+			Дано 3 таблиці розмірності 3*3 з випадковими числами. Якщо відбувається клік на якійсь із клітинок, то до відповідної таблиці додається
+			червона рамка (спробуйте додати можливість відображення кількості кліків біля назви таблиці з використанням відповідно доданого для цього
+			атрибута).
+		</p>
+		<div class="sandbox"></div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			"use strict";
+
+			class Table {
+				constructor(id) {
+					this.id = id;
+					this.clicks = 0;
+					this.element = this.createTable();
+				}
+
+				createTable() {
+					const tableContainer = document.createElement("div");
+					tableContainer.classList.add("table-container");
+					const tableTitle = document.createElement("h3");
+					tableTitle.textContent = `Таблиця ${this.id}`;
+					tableContainer.appendChild(tableTitle);
+					const table = document.createElement("table");
+					// додавання обробника подій прямо тут
+					table.onclick = () => this.handleTableClick(table, tableTitle);
+					for (let i = 0; i < 3; i++) {
+						const row = table.insertRow();
+						for (let j = 0; j < 3; j++) {
+							const cell = row.insertCell();
+							cell.textContent = Math.floor(Math.random() * 100);
+						}
+					}
+					tableContainer.appendChild(table);
+					return tableContainer;
+				}
+
+				handleTableClick(table, title) {
+					this.clicks++;
+					table.classList.add("highlight");
+					title.textContent = `Таблиця ${this.id} (Кліки: ${this.clicks})`;
+				}
+			}
+
+			const sandbox = document.querySelector(".sandbox");
+			const tables = [new Table(1), new Table(2), new Table(3)];
+
+			for (let table of tables) {
+				sandbox.appendChild(table.element);
+			}
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

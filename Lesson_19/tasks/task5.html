@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L19 DZ task 5</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			.sandbox {
+				grid-template-columns: repeat(auto-fill, minmax(20rem, 21.875rem));
+				justify-content: space-evenly;
+				background: #ccc;
+				padding: 1rem;
+				border-radius: 0.5rem;
+			}
+			.card_cell {
+				background: #fff;
+				padding: 1rem;
+				border-radius: 0.6rem;
+				display: flex;
+				flex-direction: column;
+				position: relative;
+				transition: all 0.3s ease 0s;
+				border: 0.375rem solid rgba(0, 0, 0, 0);
+			}
+			.selected_prod {
+				border-color: #3c6;
+			}
+			.card_img_box {
+				text-align: center;
+				margin: 2rem;
+			}
+			.card_img_box img {
+				max-width: 100%;
+			}
+			.card_labels {
+				position: absolute;
+				top: 0.3rem;
+				left: 0.3rem;
+				z-index: 9999;
+				display: flex;
+				flex-direction: column;
+				gap: 0.3rem;
+				align-items: flex-start;
+			}
+			.card_promo,
+			.card_discount {
+				border-radius: 0.5rem;
+				font-size: 0.75rem;
+				padding: 0.1875rem 0.5rem;
+				font-weight: 700;
+				letter-spacing: 0.125rem;
+				color: #fff;
+			}
+			.card_promo {
+				background: #3f51b5;
+			}
+			.card_discount {
+				background: #f44336;
+			}
+			.card_title {
+				margin: 0 0 1rem;
+				font-weight: 700;
+				color: #37474f;
+			}
+			.card_title:hover {
+				color: #4caf50;
+			}
+			.card_price {
+				color: #37474f;
+				margin-bottom: 1rem;
+				font-weight: 700;
+			}
+
+			.card_code {
+				font-size: 0.6rem;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 5</h1>
+		<p>
+			Відображаємо картки товарів, які користувач може вибирати. Вибраний товар має зелену рамку (при кліку робити toogle з класом вибраного
+			елемента)
+		</p>
+		<div class="sandbox"></div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			"use strict";
+			class ProdCart {
+				// constructor({ link, promo, discount, imgSrc, title, price, code }) {
+				// 	this.link = link;
+				// 	this.promo = promo;
+				// 	this.discount = discount;
+				// 	this.imgSrc = imgSrc;
+				// 	this.title = title;
+				// 	this.price = price;
+				// 	this.code = code;
+				// }
+
+				constructor(options) {
+					Object.assign(this, options);
+				}
+
+				makeSelected(item) {
+					item.classList.toggle("selected_prod");
+				}
+
+				createCard() {
+					const createProdCell = document.createElement("div");
+					createProdCell.className = "card_cell";
+					createProdCell.onclick = () => this.makeSelected(createProdCell);
+
+					const createProdLabels = document.createElement("div");
+					createProdLabels.className = "card_labels";
+					createProdCell.append(createProdLabels);
+
+					if (this.promo) {
+						const createProdPromo = document.createElement("div");
+						createProdPromo.className = "card_promo";
+						createProdPromo.innerText = this.promo;
+						createProdLabels.append(createProdPromo);
+					}
+
+					if (typeof this.discount === "number") {
+						const createProdDiscount = document.createElement("div");
+						createProdDiscount.className = "card_discount";
+						createProdDiscount.innerText = `-${this.discount}%`;
+						createProdLabels.append(createProdDiscount);
+					}
+
+					const createProdImgContainer = document.createElement("a");
+					createProdImgContainer.href = this.link;
+					createProdImgContainer.className = "card_img_box";
+					createProdCell.append(createProdImgContainer);
+
+					const createProdImg = document.createElement("img");
+					createProdImg.src = this.imgSrc;
+					createProdImg.alt = this.title;
+					createProdImg.className = "card_img";
+					createProdImgContainer.append(createProdImg);
+
+					const createProdTitle = document.createElement("a");
+					createProdTitle.href = this.link;
+					createProdTitle.className = "card_title";
+					createProdTitle.innerText = this.title;
+					createProdCell.append(createProdTitle);
+
+					const createProdPrice = document.createElement("div");
+					createProdPrice.className = "card_price";
+					const priceFormatted = this.price.toLocaleString("uk-UA");
+					createProdPrice.innerText = `${priceFormatted}₴`;
+					createProdCell.append(createProdPrice);
+
+					const createProdCode = document.createElement("div");
+					createProdCode.className = "card_code";
+					createProdCode.innerText = `Артикул: ${this.code}`;
+					createProdCell.append(createProdCode);
+
+					return createProdCell;
+				}
+
+				render(containerSelector) {
+					const cardElement = this.createCard();
+					if (containerSelector) {
+						document.querySelector(containerSelector).append(cardElement);
+					}
+				}
+			}
+			const prodDataSet = [
+				{
+					link: "https://f.ua/ua/hewlett-packard/hp-250-g8-15-6-ag-intel-i3-1115g4-4-500-int-w10p-2w9a9ea.html",
+					imgSrc: "../img/prod_1.jpg",
+					promo: "Back to School",
+					title: "Ноутбук для дому HP 250 G8 (2W9A9EA)",
+					price: 25999,
+					code: "61692-7036780",
+				},
+				{
+					link: "https://f.ua/ua/lenovo/lenovo-ideapad-1-15ijl7-15-6fhd-ag-intel-pen-n6000-8-256f-int-dos-grey-82lx0073ra.html",
+					imgSrc: "../img/prod_2.jpg",
+					promo: "Back to School",
+					discount: 12,
+					title: "Ноутбук LENOVO IdeaPad 1 15IJL7 (82LX0073RA)",
+					price: 12999,
+					code: "61692-9223521",
+				},
+				{
+					link: "https://f.ua/ua/hewlett-packard/hp-250-g8-15-6-ag-intel-i3-1115g4-4-500-int-w10p-2w9a9ea.html",
+
+					imgSrc: "../img/prod_1.jpg",
+					promo: "Back to School",
+					title: "Ноутбук ASUS Vivobook 14X M1403QA-LY127 (90NB0Y12-M007U0) Blue",
+					price: 25999,
+					code: "61692-10229008",
+				},
+				{
+					link: "https://f.ua/ua/msi/raider-17-qhd-043-intel-i9-13980hx-64gb-f2tb-nvd4090-16-w11-chorniy-raider-ge78hx-13vi-209ua.html",
+					imgSrc: "../img/prod_4.jpg",
+					discount: 8,
+					title: "Ігровий ноутбук MSI Raider GE78HX 13VI Core Black (GE78HX_13VI-209UA)",
+					price: 207269,
+				},
+			];
+			window.onload = () => {
+				prodDataSet.forEach((data) => new ProdCart(data).render(".sandbox"));
+			};
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

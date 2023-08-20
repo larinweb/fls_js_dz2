@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L19 DZ task 6</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			.sandbox {
+				grid-template-columns: 1fr 1fr;
+				transition: all 0.3s ease 0s;
+				gap: 2rem;
+			}
+			.list_box {
+				border: 0.125rem solid #607d8b;
+				border-radius: 0.375rem;
+				padding: 1rem;
+			}
+			.list_title {
+				margin: 0 0 2rem;
+			}
+			.list_main {
+				padding: 0;
+				margin: 0;
+				display: flex;
+				flex-direction: column;
+			}
+			.list_item {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				border: 0.125rem solid #607d8b;
+				border-radius: 0.375rem;
+				margin-bottom: 0.8rem;
+				padding: 0.5rem;
+				align-items: center;
+			}
+			#selected_list_content .list_item {
+				flex-direction: row-reverse;
+			}
+			.list_arrow {
+				font-size: 1.8rem;
+				color: #3c6;
+			}
+			.list_arrow:hover {
+				color: #a5d6a7;
+				animation: shake 0.8s linear infinite;
+			}
+			.red_arrow {
+				color: #ef5350;
+			}
+			.red_arrow:hover {
+				color: #e98483;
+			}
+
+			@keyframes list_arrow {
+				0%,
+				100% {
+					transform: translateX(0);
+				}
+
+				25% {
+					transform: translateX(-0.1875rem);
+				}
+
+				75% {
+					transform: translateX(0.1875rem);
+				}
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 6</h1>
+		<p>
+			Дано список спортсменів. Потрібно сформувати список тих, які будуть брати участь у змаганні. При цьому є два стовпці. В одному відображені
+			всі спортсмени, в іншому – список тих, хто був вибраний. При натисканні на зелену стрілку спортсмен переміщається у список для змагань.
+			При натисканні на червону стрілку спортсмен переміщається у загальний список.
+		</p>
+		<div class="sandbox"></div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			"use strict";
+
+			class SportsmenChooser {
+				constructor(namesArr, title1, title2) {
+					this.namesArr = namesArr;
+					this.title1 = title1;
+					this.title2 = title2;
+				}
+
+				// Метод створення DOM-елемента для стовпця (списку) з заданим заголовком
+				columnSet(title) {
+					const colBox = document.createElement("div");
+					colBox.classList.add("list_box");
+
+					const colTitle = document.createElement("h4");
+					colTitle.classList.add("list_title");
+					colTitle.innerText = title;
+					colBox.append(colTitle); // Додавання заголовка до стовпця
+
+					return colBox; // Повертаємо створений DOM-елемент стовпця
+				}
+
+				// Метод для переміщення спортсмена між списками після кліку на стрілку
+				moveSportsperson(event) {
+					const listItem = event.target.parentElement; // Беремо батьківський елемент клікнутої кнопки (li елемент)
+					const arrowButton = listItem.querySelector(".list_arrow"); // Знаходимо кнопку-стрілку в цьому елементі
+
+					// Перевіряємо, в якому саме списку знаходиться спортсмен
+					if (listItem.parentElement.id === "general_list_content") {
+						// Якщо в основному списку - переміщаємо його в список вибраних
+						document.getElementById("selected_list_content").append(listItem);
+						arrowButton.innerText = "<-";
+					} else {
+						// Якщо в списку вибраних - переміщаємо назад
+						document.getElementById("general_list_content").append(listItem);
+						arrowButton.innerText = "->";
+					}
+
+					// Зміна стилю кнопки, щоб виділити переміщений елемент
+					arrowButton.classList.toggle("red_arrow");
+				}
+
+				// Метод для створення кнопки, яка переміщає спортсмена між списками
+				createArrowElement(parentId) {
+					const colListArrow = document.createElement("button");
+					colListArrow.type = "button";
+					colListArrow.classList.add("list_arrow", "button_unstyled");
+					colListArrow.innerText = "->"; // Початкове значення напрямку стрілки
+
+					// Додавання обробника подій для переміщення спортсмена - забіг трошки наперед з addEventListener, адже з onclick баги вилазили і я змучивсь розбиратись
+					colListArrow.addEventListener("click", this.moveSportsperson.bind(this)); // Важливо прив'язати контекст!
+
+					return colListArrow; // Повертаємо створену кнопку
+				}
+
+				// Метод для створення і заповнення списку спортсменами
+				listFill(namesArr, parentId) {
+					const colList = document.createElement("ul");
+					colList.classList.add("list_main");
+					colList.id = `${parentId}_content`; // Встановлюємо ідентифікатор для списку
+
+					// Проходимося по кожному спортсмену та додаємо його до списку
+					for (const name of namesArr) {
+						const colListItem = document.createElement("li");
+						colListItem.classList.add("list_item");
+						colListItem.innerText = name; // Встановлюємо ім'я спортсмена
+
+						// Створюємо та додаємо кнопку для переміщення спортсмена до елемента списку
+						const arrowElement = this.createArrowElement(parentId);
+						colListItem.append(arrowElement);
+
+						colList.append(colListItem); // Додаємо елемент списку до головного списку
+					}
+
+					return colList; // Повертаємо заповнений список
+				}
+
+				// Головний метод для відображення списків на сторінці
+				render(containerSelector) {
+					const container = document.querySelector(containerSelector); // Знаходимо контейнер на сторінці за селектором
+
+					// Створення та відображення першого списку (основного)
+					const col1 = this.columnSet(this.title1);
+					col1.id = "general_list";
+					const list1 = this.listFill(this.namesArr, col1.id);
+					col1.append(list1);
+					container.append(col1);
+
+					// Створення та відображення другого списку (вибраних спортсменів)
+					// За замовчуванням він буде порожнім
+					const col2 = this.columnSet(this.title2);
+					col2.id = "selected_list";
+					const list2 = this.listFill([], col2.id);
+					col2.append(list2);
+					container.append(col2);
+				}
+			}
+
+			const ukrainianAthletes = [
+				"Яна Клочкова",
+				"Лілія Подкопаєва",
+				"Ольга Харлан",
+				"Олександр Усик",
+				"Сергій Бубка",
+				"Василь Вірастюк",
+				"Ярослав Орловський",
+				"Катерина Бондаренко",
+				"Марина Бех-Романчук",
+			];
+
+			window.onload = () => {
+				new SportsmenChooser(ukrainianAthletes, "Загальний список", "Обрані для змагання").render(".sandbox");
+			};
+		</script>
+		<!-- =========================================================================== -->
+	</body>
+</html>
