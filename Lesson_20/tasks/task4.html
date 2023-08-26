@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L20 DZ task 4</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			.sandbox {
+				transition: all 0.3s ease 0s;
+				row-gap: 2rem;
+			}
+			.line {
+				display: flex;
+				flex-direction: row;
+				height: 45px;
+				align-items: center;
+				justify-content: space-around;
+			}
+			.line button {
+				margin: 0;
+				padding: 0 1.5rem;
+				height: 100%;
+			}
+			.result {
+				padding: 2rem 0 0;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 4</h1>
+		<p>
+			На сторінці міститься певна кількість кнопок і інпутів. Підраховувати загальну кількість кліків окремо на кнопках і окремо на інпутах.
+		</p>
+		<div class="sandbox"></div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			class DemoHandler {
+				constructor(cnt) {
+					this.demo = cnt
+					this.btnClicks = 0
+					this.inputClicks = 0
+					cnt.addEventListener('click', this.countClicks.bind(this))
+					this.createResultElement()
+					this.result()
+				}
+				countClicks(event) {
+					if (event.target.tagName === 'BUTTON') {
+						this.btnClicks++
+					}
+					if (event.target.tagName === 'INPUT') {
+						this.inputClicks++
+					}
+					this.result()
+				}
+
+				createResultElement() {
+					const res = document.createElement('div')
+					res.classList.add('result')
+					this.demo.after(res)
+					this.res = res
+					const inputRes = document.createElement('div')
+					const btnRes = document.createElement('div')
+					this.inputRes = inputRes
+					this.btnRes = btnRes
+					this.res.append(inputRes, btnRes)
+				}
+
+				result() {
+					this.inputRes.innerHTML = `Інпутів натицяно: <b>${this.inputClicks}</b>`
+					this.btnRes.innerHTML = `Кнопок натицяно: <b>${this.btnClicks}</b>`
+				}
+			}
+
+			class GenDemo {
+				constructor(text) {
+					this.text = text
+					this.container = document.querySelector('.sandbox')
+					this.formHandler = new DemoHandler(this.container)
+				}
+
+				createLineEl() {
+					const line = document.createElement('div')
+					line.classList.add('line')
+					const btnEl = document.createElement('button')
+					btnEl.textContent = `${this.text} ${this.number}`
+					const inputEl = document.createElement('input')
+					inputEl.type = 'text'
+					line.append(btnEl, inputEl)
+					this.container.append(line)
+				}
+				render(count) {
+					for (let i = 0; i < count; i++) {
+						this.number = i + 1
+						this.createLineEl()
+					}
+				}
+			}
+			const demoInstances = new GenDemo('Тиць')
+			demoInstances.render(5)
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L20 DZ task 3</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			.sandbox {
+				transition: all 0.3s ease 0s;
+			}
+			#dzForm {
+				display: grid;
+				gap: 2rem;
+				grid-template-columns: repeat(2, auto);
+			}
+			#dzForm label {
+				display: flex;
+				justify-content: space-between;
+				text-transform: capitalize;
+				min-width: 0;
+			}
+			#dzForm input {
+				margin: 0;
+				max-width: 60%;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 3</h1>
+		<p>
+			На формі вводять 7 числових значень (вік, зріст, вага, заробітна плата, стаж, номер відділу, порядковий номер). Додати подію обробки події
+			click на форму і якщо клік на внутрішньому input, то автоматично замінювати значення його на 0. Використати делегування
+		</p>
+		<div class="sandbox" id="form_container"></div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			class FormHandler {
+				constructor(formId) {
+					this.form = document.getElementById(formId)
+					this.form.addEventListener('click', this.actionOnFormClick.bind(this))
+				}
+				actionOnFormClick(event) {
+					if (event.target.tagName === 'INPUT') {
+						event.target.value = 0
+					}
+				}
+			}
+
+			class FormCreator {
+				constructor(id) {
+					this.container = document.getElementById('form_container')
+					this.form = document.createElement('form')
+					this.form.id = id
+					this.inputs = ['age', 'height', 'weight', 'salary', 'experience', 'department', 'number']
+
+					this.inputs.forEach((inputName) => {
+						const label = document.createElement('label')
+						label.innerHTML = inputName
+						const input = document.createElement('input')
+						input.type = 'number'
+						input.name = inputName
+						input.value = Math.floor(Math.random() * 100)
+						label.append(input)
+						this.form.append(label)
+					})
+
+					this.container.append(this.form)
+					this.formHandler = new FormHandler(id)
+				}
+			}
+			const myTestForm = new FormCreator('dzForm')
+			// console.log(myCustomForm)
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

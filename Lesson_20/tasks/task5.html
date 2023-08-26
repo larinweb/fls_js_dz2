@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L20 DZ task 5</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			.sandbox {
+				transition: all 0.3s ease 0s;
+			}
+			#employeeList {
+				list-style: none;
+				padding: 0 1rem;
+			}
+			#employeeList li.li_el {
+				text-transform: capitalize;
+			}
+			#employeeList li.filtered {
+				color: #3c6;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 5</h1>
+		<p>Динамічний пошук. Є список працівників і поле пошуку. При введенні відображаються усі, які містять вказаний фрагмент</p>
+		<div class="sandbox" id="container">
+			<ul id="employeeList">
+				<!-- Сюди буде виводитись список працівників -->
+			</ul>
+		</div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+
+			class NameInput {
+				constructor(containerSelector) {
+					this.wrap = document.querySelector(containerSelector)
+					this.nameInput = this.createNameInput()
+					this.wrap.prepend(this.nameInput)
+					// Прив'язка обробника події до методу onChange
+					this.onChange = this.onChange.bind(this)
+					// Додавання обробника події введення тексту до елементу input
+					this.nameInput.addEventListener('input', this.onChange)
+				}
+
+				// Метод для створення елементу input
+				createNameInput() {
+					const input = document.createElement('input')
+					input.type = 'text'
+					input.placeholder = "Введіть ім'я для пошуку"
+					input.id = 'nameInput'
+					return input
+				}
+
+				// Метод, який викликається при зміні значення input
+				onChange() {
+					// Створення об'єкту кастомної події 'changeInput' із деталями
+					const changeInput = new CustomEvent('changeInput', {
+						detail: {
+							name: this.nameInput.value,
+						},
+					})
+					// Генерація події на контейнері
+					this.wrap.dispatchEvent(changeInput)
+				}
+			}
+
+			class NameFilter {
+				constructor(employeeNames, containerSelector) {
+					this.employeeNames = employeeNames.map((name) => name.toLowerCase())
+
+					this.el = document.querySelector(containerSelector)
+					this.employeeList = document.getElementById('employeeList')
+					this.addListItems(this.employeeNames)
+
+					// Прив'язка обробника події до методу onInputChange
+					this.onInputChange = this.onInputChange.bind(this)
+				}
+
+				// Метод для додавання елементів списку працівників
+				addListItems(names) {
+					names.forEach((name) => {
+						const li = document.createElement('li')
+						li.textContent = name
+						li.classList.add('li_el')
+						this.employeeList.append(li)
+					})
+				}
+
+				// Метод для відображення працівників, що містять введений текст
+				showEmployeesContaining(name) {
+					const searchTerm = name.toLowerCase()
+
+					// Отримання всіх елементів списку працівників
+					const employeeListItems = this.employeeList.querySelectorAll('li')
+
+					employeeListItems.forEach((item) => {
+						const employeeName = item.textContent.toLowerCase()
+						const display = employeeName.includes(searchTerm) ? 'block' : 'none'
+						item.style.display = display
+						item.classList.toggle('filtered', display === 'block')
+					})
+
+					if (searchTerm === '') {
+						employeeListItems.forEach((item) => {
+							item.classList.remove('filtered')
+						})
+					}
+				}
+
+				// Метод, який викликається при зміні значення імені в інпуті
+				onInputChange(event) {
+					// Отримання введеного імені з події
+					const selectedName = event?.detail.name
+					// Виклик методу для відображення працівників що містять введений текст
+					this.showEmployeesContaining(selectedName)
+				}
+			}
+
+			const employeeNames = [
+				'Вячеслав',
+				'Марія',
+				'Олександр',
+				'Софія',
+				'Олена',
+				'Петро',
+				'Ольга',
+				'Василь',
+				'Анна',
+				'Микола',
+				'Юрій',
+				'Оксана',
+				'Тарас',
+				'Наталія',
+				'Сергій',
+			]
+
+			// Створення екземпляра NameInput для інпуту з ім'ям
+			const nameInput = new NameInput('#container')
+			// Створення екземпляра NameFilter для фільтрації списку
+			const nameSelector = new NameFilter(employeeNames, '#container')
+			// Додавання обробника події введення імені до інпуту
+			nameInput.wrap.addEventListener('changeInput', nameSelector.onInputChange)
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

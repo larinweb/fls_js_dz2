@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L20 DZ task 1</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				height: 100vh;
+				overflow: hidden;
+				background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+			}
+			.star8 {
+				background: #fff;
+				position: absolute;
+				top: 0;
+				/* transition: all 0.1s ease 0s; */
+				border-radius: 50%;
+				text-align: center;
+				transform: rotate(20deg);
+				box-shadow: 0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 1</h1>
+		<p>
+			Сіяючи зорі. Вказана кількість зірочок повинна з’являтися у випадковій частині екрану. Кожна зірка (це екземпляр класу Star) з певним
+			кроком і інтервалом збільшується від мінімального до максимального розміру. Як тільки досягнути максимального розміру зірочка повинна
+			з’являтися у іншій випадковій позиції.
+		</p>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			class Star {
+				constructor(minSize, maxSize) {
+					this.minSize = minSize
+					this.maxSize = maxSize
+					this.size = Math.random() * this.maxSize + this.minSize
+					this.speed = Math.random() * 1
+					this.currentTop = Math.random() * window.innerHeight
+					this.currentLeft = Math.random() * window.innerWidth
+					this.createStar()
+				}
+
+				createStar() {
+					const op = Math.random() * 1 + 0.35
+					this.starEl = document.createElement('div')
+					this.starEl.classList.add('star8')
+					this.starEl.style.width = `${this.size}px`
+					this.starEl.style.height = `${this.size}px`
+					this.starEl.style.opacity = `${op}`
+					this.updatePosition()
+					document.body.append(this.starEl)
+				}
+
+				updatePosition() {
+					this.starEl.style.top = `${this.currentTop}px`
+					this.starEl.style.left = `${this.currentLeft}px`
+				}
+
+				grow() {
+					if (this.size <= this.maxSize) {
+						this.size += this.speed
+						this.starEl.style.width = `${this.size}px`
+						this.starEl.style.height = `${this.size}px`
+					} else {
+						this.size = this.minSize
+						this.currentLeft = Math.random() * (window.innerWidth - this.size)
+						this.currentTop = Math.random() * (window.innerHeight - this.size)
+						this.updatePosition()
+					}
+				}
+			}
+
+			class StarSky {
+				constructor(starsAmount, starMinSize, starMaxSize) {
+					this.starMinSize = starMinSize
+					this.starMaxSize = starMaxSize
+					this.starsArr = []
+
+					for (let i = 0; i < starsAmount; i++) {
+						this.starsArr.push(new Star(this.starMinSize, this.starMaxSize))
+					}
+
+					setInterval(this.animateStars.bind(this), 50)
+				}
+
+				animateStars() {
+					for (const star of this.starsArr) {
+						star.grow()
+					}
+				}
+			}
+
+			new StarSky(20, 10, 50)
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

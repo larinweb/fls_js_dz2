@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L20 DZ task 2</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				position: relative;
+				width: 100vw;
+				height: 100vh;
+				overflow: hidden;
+			}
+			.sandbox {
+				transition: all 0.3s ease 0s;
+			}
+			.tank {
+				display: block;
+				background: url(./img/vedro.png) no-repeat 50% 50%;
+				background-size: cover;
+				width: 4.25rem;
+				height: 9.375rem;
+				position: absolute;
+				top: 0;
+				cursor: pointer;
+				/* width: 68px;
+				height: 150px; */
+			}
+			.explosion {
+				background-image: url(./img/bang.png);
+				background-size: contain;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 2</h1>
+		<p>
+			Байрактар. З верхньої частини екрану у випадковій позиції по горизонталі з’являються танки, які їдуть вниз. При кліку на танк він вибухає
+			і зникає з екрану.
+		</p>
+		<div class="sandbox" id="tank_field"></div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			class TankGame {
+				constructor(maxTanks, speedY) {
+					this.container = document.body
+					this.tankArr = []
+					this.maxTanks = maxTanks
+					this.speedY = speedY
+					this.container.addEventListener('click', this.onTankClick.bind(this))
+					this.updateContainerHeight()
+					this.startGame()
+				}
+
+				updateContainerHeight() {
+					this.container.style.height = window.innerHeight + 'px'
+				}
+
+				createTank() {
+					if (this.tankArr.length < this.maxTanks) {
+						const tankEl = document.createElement('div')
+						tankEl.classList.add('tank')
+
+						this.container.append(tankEl)
+						const tankWidth = tankEl.offsetWidth
+						tankEl.style.left = `${Math.random() * (window.innerWidth - tankWidth)}px`
+						this.tankArr.push({ element: tankEl, position: 0 })
+						this.moveTank(this.tankArr[this.tankArr.length - 1])
+					}
+				}
+
+				moveTank(tank) {
+					tank.interval = setInterval(() => {
+						tank.position += this.speedY * 10
+
+						if (tank.position >= window.innerHeight - tank.element.offsetHeight) {
+							clearInterval(tank.interval)
+							this.container.removeChild(tank.element)
+							this.tankArr = this.tankArr.filter((t) => t !== tank)
+						} else {
+							tank.element.style.top = `${tank.position}px`
+						}
+					}, 100)
+				}
+
+				onTankClick(event) {
+					const target = event.target
+					const tankIndex = this.tankArr.findIndex((t) => t.element === target)
+
+					if (tankIndex !== -1) {
+						const tank = this.tankArr[tankIndex]
+						clearInterval(tank.interval)
+						target.classList.add('explosion')
+						setTimeout(() => {
+							this.container.removeChild(target)
+							this.tankArr.splice(tankIndex, 1) // Видалення за індексом
+						}, 300)
+					}
+				}
+
+				startGame() {
+					this.gameInterval = setInterval(this.createTank.bind(this), 500)
+				}
+			}
+
+			const game = new TankGame(5, 2) // Максимальна кількість танків: 5, Швидкість: 5
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>
