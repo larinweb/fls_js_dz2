@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L21 DZ task 1</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 1</h1>
+		<p>
+			Створити клас Client<br />
+			На основі цього класу створити клас GoldenClient
+		</p>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+
+			class Client {
+				constructor(clientID, clientName, clientBalance) {
+					this.clientID = clientID
+					this.clientName = clientName
+					this.clientBalance = clientBalance
+				}
+
+				addMoney(amount) {
+					return (this.clientBalance += amount)
+				}
+
+				getMoney(amount) {
+					if (amount <= this.clientBalance) {
+						return (this.clientBalance -= amount)
+					} else {
+						throw new Error('Недостатньо грошей на рахунку')
+					}
+				}
+
+				toString() {
+					return `У клієнта ${this.clientName} (id ${this.clientID}) на рахунку ${this.clientBalance}$`
+				}
+			}
+
+			class GoldenClient extends Client {
+				constructor(clientID, clientName, clientBalance, clientCreditLimit, creditFee) {
+					super(clientID, clientName, clientBalance)
+					this.clientCreditLimit = clientCreditLimit
+					this.creditFee = creditFee
+				}
+
+				getCreditFee(credit) {
+					if (credit <= this.clientCreditLimit) {
+						return credit * (this.creditFee / 100)
+					} else {
+						throw new Error('Перевищено кредитний ліміт')
+					}
+				}
+
+				toString() {
+					return `${super.toString()}, Ліміт кредиту: ${this.clientCreditLimit}$ Відсоток за використання кредиту: ${this.creditFee}%`
+				}
+			}
+			const gClient1 = new GoldenClient(44, 'Слава', 400000, 8000000, 5)
+			console.log(gClient1)
+			console.log(gClient1.toString())
+			document.write(`${gClient1} <br> Пеня за використання кредиту в розмірі, наприклад 50000$: ${gClient1.getCreditFee(50000)}$`)
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

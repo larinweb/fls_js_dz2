@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L21 DZ task 4</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.5s ease 0s;
+			}
+			.sandbox #check_btn {
+				margin: 0;
+				justify-content: center;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 4</h1>
+		<p>
+			Користувач задає місяць навчання учня (перевіряти чи є числом, чи від 1 до 12, чи не канікули) та оцінку (перевіряти чи є числом, чи від 1
+			до 100). Вивести чи зможе він виправити оцінку (якщо оцінка погана і це не останній місяць у семестрі) . Обробку усіх помилок зробити з
+			використанням відповідних класів.
+		</p>
+		<div class="sandbox">
+			<label class="user_input">
+				<b>Місяць</b>
+				<input type="text" id="user_month" />
+			</label>
+			<label class="user_input">
+				<b>Оцінка</b>
+				<input type="text" id="user_score" />
+			</label>
+			<button id="check_btn">Тиць</button>
+		</div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			// ***  Загальні помилки - класи
+			class IsNullError extends Error {
+				constructor() {
+					super()
+					this.message = 'Поле не може бути порожнім'
+					this.name = 'IsNullError'
+				}
+			}
+
+			class IsNotNumberError extends Error {
+				constructor() {
+					super()
+					this.message = 'Введені данні не є число'
+					this.name = 'IsNotNumberError'
+				}
+			}
+
+			class IsNegativeNumberError extends Error {
+				constructor() {
+					super()
+					this.message = "Не може бути від'ємним"
+					this.name = 'IsNegativeNumberError'
+				}
+			}
+
+			// *** Помилки місяця - класи
+
+			class IsMonthNumberError extends Error {
+				constructor() {
+					super()
+					this.message = 'Невірний номер місяця'
+					this.name = 'IsMonthNumberError'
+				}
+			}
+
+			class IsVacationError extends Error {
+				constructor() {
+					super()
+					this.message = 'Це місяць канікул'
+					this.name = 'IsVacationError'
+				}
+			}
+
+			// *** Помилки оцінки - класи
+			class IsScoreRangeError extends Error {
+				constructor() {
+					super()
+					this.message = 'Невірна оцінка, треба від 1 до 100 балів'
+					this.name = 'IsScoreRangeError'
+				}
+			}
+
+			class IsScoreFixError extends Error {
+				constructor() {
+					super()
+					this.message = 'Оцінку виправити не можливо'
+					this.name = 'IsScoreFixError'
+				}
+			}
+
+			class Checker {
+				validate() {
+					try {
+						const userMonthInput = document.getElementById('user_month').value
+						const userScoreInput = document.getElementById('user_score').value
+
+						// ***
+						// Загальні помилки - трай
+
+						// Перевірка на порожні поля
+						if (userMonthInput === '' || userScoreInput === '') throw new IsNullError()
+
+						const userMonth = parseInt(userMonthInput)
+						const userScore = parseInt(userScoreInput)
+
+						// Перевірка, чи введені числа
+						if (isNaN(userMonth) || isNaN(userScore)) throw new IsNotNumberError()
+
+						// Перевірка, чи введені від'ємні
+						if (userMonth < 0 || userScore < 0) throw new IsNegativeNumberError()
+
+						// ***
+						// Помилки місяця - трай
+
+						// Перевірка, чи місяць в межах 1-12
+						if (userMonth < 1 || userMonth > 12) throw new IsMonthNumberError()
+
+						// Перевірка, чи місяць не є канікулами
+						if (userMonth >= 6 && userMonth <= 8) throw new IsVacationError()
+
+						// ***
+						// Помилки оцінки - трай
+
+						// Перевірка оцінки
+						if (userScore < 1 || userScore > 100) throw new IsScoreRangeError()
+
+						// Якщо оцінка погана і не останній місяць у семестрі, можна виправити
+						if (userScore < 60 && (userMonth === 5 || userMonth === 12)) throw new IsScoreFixError()
+						console.log('Дані коректні.')
+					} catch (err) {
+						if (
+							err instanceof IsNullError ||
+							err instanceof IsNotNumberError ||
+							err instanceof IsMonthNumberError ||
+							err instanceof IsVacationError ||
+							err instanceof IsNegativeNumberError ||
+							err instanceof IsScoreRangeError ||
+							err instanceof IsScoreFixError
+						) {
+							console.error(err.message)
+						} else {
+							console.error('Помилка: ', err)
+						}
+					}
+				}
+			}
+			document.getElementById('check_btn').addEventListener('click', () => {
+				const checker = new Checker()
+				checker.validate()
+			})
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

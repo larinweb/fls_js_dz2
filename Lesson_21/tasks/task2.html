@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L21 DZ task 2</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 2</h1>
+		<p>
+			Створити клас Bank, у якому зберігається масив клієнтів. Виконати такі операції<br />
+			Вивести усіх простих клієнтів;<br />
+			Вивести усіх клієнтів GoldenClient;<br />
+			Знати сумарну кількість грошей на рахунку;
+		</p>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+
+			class Client {
+				constructor(clientID, clientName, clientBalance) {
+					this.clientID = clientID
+					this.clientName = clientName
+					this.clientBalance = clientBalance
+				}
+
+				addMoney(amount) {
+					return (this.clientBalance += amount)
+				}
+
+				getMoney(amount) {
+					if (amount <= this.clientBalance) {
+						return (this.clientBalance -= amount)
+					} else {
+						throw new Error('Недостатньо грошей на рахунку')
+					}
+				}
+
+				toString() {
+					return `У клієнта ${this.clientName} (id ${this.clientID}) на рахунку ${this.clientBalance}$`
+				}
+			}
+
+			class GoldenClient extends Client {
+				constructor(clientID, clientName, clientBalance, clientCreditLimit, creditFee) {
+					super(clientID, clientName, clientBalance)
+					this.clientCreditLimit = clientCreditLimit
+					this.creditFee = creditFee
+				}
+
+				getCreditFee(credit) {
+					if (credit <= this.clientCreditLimit) {
+						return credit * (this.creditFee / 100)
+					} else {
+						throw new Error('Перевищено кредитний ліміт')
+					}
+				}
+
+				toString() {
+					return `${super.toString()}, Ліміт кредиту: ${this.clientCreditLimit}$ Відсоток за використання кредиту: ${this.creditFee}%`
+				}
+			}
+
+			class Bank {
+				constructor() {
+					this.clients = []
+				}
+
+				addClient(client) {
+					this.clients.push(client)
+				}
+
+				getRegularClients() {
+					return this.clients.filter((client) => !(client instanceof GoldenClient))
+				}
+
+				getGoldenClients() {
+					return this.clients.filter((client) => client instanceof GoldenClient)
+				}
+
+				getTotalBalance() {
+					return this.clients.reduce((acc, client) => acc + client.clientBalance, 0)
+				}
+			}
+			const bank = new Bank()
+
+			const client1 = new Client(1, 'Софія', 100000)
+			const client2 = new GoldenClient(2, 'Настя', 2000000, 5000000, 2)
+			const client3 = new Client(3, 'Іван', 100500)
+
+			bank.addClient(client1)
+			bank.addClient(client2)
+			bank.addClient(client3)
+
+			console.log('Прості клієнти:')
+			bank.getRegularClients().forEach((client) => console.log(client.toString()))
+
+			console.log('\n Клієнти GoldenClient:')
+			bank.getGoldenClients().forEach((client) => console.log(client.toString()))
+
+			console.log('\n Сумарна кількість грошей на рахунках клієнтів:', bank.getTotalBalance())
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

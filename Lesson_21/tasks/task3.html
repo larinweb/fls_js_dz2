@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L21 DZ task 3</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			[class*='_obj'] {
+				transition: all 0.4s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 3</h1>
+		<p>Розробити Класи: House,Dog,Bird<br />Подумайте яким має бути спільний клас предок.</p>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			class SourceData {
+				constructor(axisX = 0, axisY = 0, imgPath, interval) {
+					this.axisX = axisX
+					this.axisY = axisY
+					this.imgPath = imgPath
+					this.interval = interval
+				}
+				getRandomVal(minVal, maxVal) {
+					return Math.floor(Math.random() * maxVal) + minVal
+				}
+
+				intervalChange(el) {
+					setInterval(() => {
+						this.elAction(el)
+					}, this.interval)
+				}
+
+				render() {
+					const name = this.constructor.name.toLowerCase()
+					const obj_wrap = document.createElement('div')
+					obj_wrap.classList.add(name + '_obj')
+					obj_wrap.style.position = 'absolute'
+					document.body.append(obj_wrap)
+
+					const obj_img = document.createElement('img')
+					obj_img.classList.add(name + '_img')
+					obj_img.setAttribute('src', this.imgPath)
+					obj_img.setAttribute('alt', name + ' image')
+					obj_wrap.append(obj_img)
+
+					this.intervalChange(obj_wrap)
+					obj_wrap.style.top = this.axisY + 'px'
+					obj_wrap.style.left = this.axisX + 'px'
+					return obj_wrap
+				}
+			}
+			class House extends SourceData {
+				constructor(axisX, axisY, imgPath, interval, minVal, maxVal) {
+					super(axisX, axisY, imgPath, interval)
+					this.minVal = minVal
+					this.maxVal = maxVal
+				}
+				elAction(el) {
+					el.style.transform = `scale(${this.getRandomVal(this.minVal, this.maxVal)})`
+				}
+			}
+
+			class Dog extends SourceData {
+				constructor(axisX, axisY, imgPath, interval, minVal, maxVal) {
+					super(axisX, axisY, imgPath, interval)
+					this.minVal = minVal
+					this.maxVal = maxVal
+				}
+				elAction(el) {
+					el.style.left = this.getRandomVal(this.minVal, this.maxVal) + 'px'
+				}
+			}
+
+			class Bird extends SourceData {
+				constructor(axisX, axisY, imgPath, interval, minVal, maxVal) {
+					super(axisX, axisY, imgPath, interval)
+					this.minVal = minVal
+					this.maxVal = maxVal
+				}
+				elAction(el) {
+					el.style.left = this.getRandomVal(this.minVal, this.maxVal) + 'px'
+					el.style.top = this.getRandomVal(this.minVal, this.maxVal) + 'px'
+				}
+			}
+			const house = [
+				new House(100, 100, './img/house_icon.svg', 500, 1, 4),
+				new Dog(155, 355, './img/dog_icon.svg', 400, 150, 350),
+				new Bird(255, 255, './img/duck_icon.svg', 600, 150, 350),
+			]
+			house.forEach((e) => {
+				e.render()
+			})
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

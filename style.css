@@ -139,7 +139,7 @@ button {
 }
 
 .sandbox {
-	max-width: 75rem;
+	max-width: 60rem;
 	margin: 0 auto;
 	display: grid;
 	gap: 1rem;
