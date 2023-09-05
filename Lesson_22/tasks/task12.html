@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L22 DZ task 12</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 12</h1>
+		<p>Сформувати масив з 1000 елементів від 1 до 800. Порівняти час сортування бульбашкою і вставкою.</p>
+		<div class="sandbox">
+			<h3 id="res1"></h3>
+			<h3 id="res2"></h3>
+		</div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+
+			const unsortedArr = Array.from({ length: 1000 }, () => Math.floor(Math.random() * 800) + 1)
+
+			// Функція для сортування методом "бульбашкою"
+			const sortByBubble = (arr) => {
+				const startBubbleSort = new Date()
+				const n = arr.length
+				let swap
+				do {
+					swap = false
+					for (let i = 0; i < n - 1; i++) {
+						if (arr[i] > arr[i + 1]) {
+							;[arr[i], arr[i + 1]] = [arr[i + 1], arr[i]]
+							swap = true
+						}
+					}
+				} while (swap)
+				const endBubbleSort = new Date()
+				return (endBubbleSort - startBubbleSort) / 1000
+			}
+			const sortingBubbleTime = sortByBubble([...unsortedArr])
+			console.log(`Час сортування бульбашкою: ${sortingBubbleTime} секунд`)
+			document.getElementById('res1').innerHTML = `Час сортування бульбашкою: ${sortingBubbleTime} секунд`
+
+			// Функція для сортування методом вставки
+			const sortByInsert = (arr) => {
+				const startInsertSort = new Date()
+				const n = arr.length
+				for (let i = 1; i < n; i++) {
+					let current = arr[i]
+					let j = i - 1
+					while (j >= 0 && arr[j] > current) {
+						arr[j + 1] = arr[j]
+						j = j - 1
+					}
+
+					arr[j + 1] = current
+				}
+				const endInsertSort = new Date()
+				return (endInsertSort - startInsertSort) / 1000
+			}
+
+			const sortingInsertTime = sortByInsert([...unsortedArr])
+			console.log(`Час сортування вставкою: ${sortingInsertTime} секунд`)
+			document.getElementById('res2').innerHTML = `Час сортування вставкою: ${sortingInsertTime} секунд`
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

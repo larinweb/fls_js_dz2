@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L22 DZ task 2</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 2</h1>
+		<p>Вивести дату у форматі “місяць – рік – вихідний/робочий”</p>
+		<div class="sandbox">
+			<h2 id="res"></h2>
+		</div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			// const ttl = () => {
+			// 	let dayType
+			// 	const curMonth = new Date().getMonth()
+			// 	const curYear = new Date().getFullYear()
+			// 	const curTime = new Date().getDay()
+			// 	switch (curTime) {
+			// 		case 1:
+			// 		case 2:
+			// 		case 3:
+			// 		case 4:
+			// 		case 5:
+			// 			dayType = 'робочий!'
+			// 			break
+			// 		default:
+			// 			dayType = 'вихідний'
+			// 	}
+			// 	let res = `${curMonth} місяць, ${curYear} рік, ${dayType} день`
+			// 	document.getElementById('res').innerHTML = res
+			// 	console.log(res)
+			// }
+			const ttl = () => {
+				const curDate = new Date()
+				const options = { year: 'numeric', month: 'long' }
+				const formattedDate = curDate.toLocaleDateString('uk-UA', options)
+
+				const weekdayNum = curDate.getDay() // Отримуємо числове представлення дня тижня (0 - неділя, 1 - понеділок, і т. д.)
+				let isWeekend = false
+
+				if (weekdayNum === 0 || weekdayNum === 6) {
+					isWeekend = true
+				}
+
+				document.getElementById('res').textContent = `${formattedDate} ${isWeekend ? 'вихідний' : 'робочий'}`
+			}
+			window.onload = ttl
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

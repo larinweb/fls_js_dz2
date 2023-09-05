@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L22 DZ task 7</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 7</h1>
+		<p>Користувач бере авто на вказану кількість годин. Визначити кінцевий час повернення.</p>
+		<div class="sandbox">
+			<label for="rent_time">
+				<span>На скільки годин орендуєте машину</span>
+				<input type="text" id="rent_time" />
+			</label>
+			<h2 id="res"></h2>
+		</div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+
+			// Отримуємо елементи DOM для подальшого використання
+			const rentTime = document.getElementById('rent_time') // Отримуємо поле для вводу часу оренди
+			const resWrap = document.getElementById('res') // Отримуємо контейнер для результату
+
+			// Функція для автоматичного обчислення закінчення оренди
+			const autoRetire = () => {
+				// Отримуємо числове значення з поля вводу
+				const rentHours = parseInt(rentTime.value)
+
+				// Перевіряємо, чи введене значення є числом і більше нуля
+				if (isNaN(rentHours) || rentHours <= 0) {
+					resWrap.textContent = 'Введіть коректний час оренди.'
+					return
+				}
+
+				// Створюємо об'єкт дати та додаємо до нього введений час
+				const date = new Date()
+				date.setHours(date.getHours() + rentHours)
+
+				// Форматуємо дату та виводимо результат в контейнер
+				const formattedDate = `Ваш час оренди скінчиться: ${date.toLocaleDateString('uk-UA', {
+					day: 'numeric',
+					month: 'long',
+				})} о ${date.toLocaleTimeString('uk-UA', {
+					hour: 'numeric',
+					minute: 'numeric',
+					hour12: false,
+				})} (${date.toLocaleDateString('uk-UA', {
+					weekday: 'long',
+				})})`
+				resWrap.textContent = formattedDate
+			}
+
+			// Додаємо обробник події для поля вводу, щоб автоматично викликати функцію autoRetire
+			rentTime.addEventListener('input', autoRetire)
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

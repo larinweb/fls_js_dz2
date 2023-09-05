@@ -153,6 +153,7 @@ button {
 
 .sandbox input[type="text"],
 .sandbox input[type="number"],
+.sandbox input[type="date"],
 .sandbox select {
 	margin-left: 0.9375rem;
 	border-radius: 0.625rem;

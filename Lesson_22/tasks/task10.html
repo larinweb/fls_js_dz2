@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L22 DZ task 10</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 10</h1>
+		<p>
+			Дано дата виробництва йогурту (вводимо рік, місяць, день) та кількість днів придатності. Визначити чи є він придатним на даний момент.
+		</p>
+		<div class="sandbox">
+			<h2 id="res"></h2>
+		</div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			// const checkFresh = (year, month, day, expiryDate) => {
+			// 	const currentDate = new Date()
+			// 	const productionDate = new Date(year, month - 1, day)
+			// 	let res
+			// 	productionDate.setDate(productionDate.getDate() + expiryDate)
+			// 	if (currentDate <= productionDate) {
+			// 		res = 'Цей йогурт ще придатний'
+			// 	} else {
+			// 		res = 'Цей йогурт вже не придатний'
+			// 	}
+			// 	return res
+			// }
+
+			const checkFresh = (year, month, day, expiryDate) =>
+				new Date() <= new Date(year, month - 1, day + expiryDate) ? 'Цей йогурт ще придатний' : 'Цей йогурт вже не придатний'
+
+			document.getElementById('res').innerText = checkFresh(2022, 4, 1, 60)
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

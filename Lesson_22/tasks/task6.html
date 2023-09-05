@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L22 DZ task 6</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 6</h1>
+		<p>Користувач іде у відпустку на 56 днів. Визначити дату на момент його повернення.</p>
+		<div class="sandbox">
+			<input type="text" id="vac_days" value="56" />
+			<h2 id="res"></h2>
+		</div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+
+			// Отримуємо елементи DOM для подальшого використання
+			const vacDaysInput = document.getElementById('vac_days') // Отримуємо поле для вводу кількості днів відпустки
+			const resultElement = document.getElementById('res') // Отримуємо контейнер для результату
+
+			// Функція для розрахунку дати повернення після відпустки
+			const calculateReturnDate = () => {
+				// Отримуємо числове значення з поля вводу
+				const vacation = parseInt(vacDaysInput.value, 10)
+
+				// Перевіряємо, чи введене значення є числом і більше нуля
+				if (isNaN(vacation) || vacation <= 0) {
+					resultElement.textContent = 'Введіть коректне число днів відпустки.'
+					return
+				}
+
+				// Створюємо об'єкт дати та додаємо до нього кількість днів відпустки
+				const curDate = new Date()
+				curDate.setDate(curDate.getDate() + vacation)
+
+				// Встановлюємо локаль для української мови
+				const options = { year: 'numeric', month: 'long', day: 'numeric' }
+				const ukrainianDate = curDate.toLocaleDateString('uk-UA', options)
+
+				// Виводимо результат в контейнер
+				resultElement.textContent = `Після відпустки на ${vacation} днів, він повернеться у ${ukrainianDate}`
+			}
+
+			// Додаємо обробник події для поля вводу, щоб автоматично викликати функцію calculateReturnDate
+			vacDaysInput.addEventListener('input', calculateReturnDate)
+
+			// Викликаємо функцію один раз при завантаженні сторінки
+			calculateReturnDate()
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L22 DZ task 8</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+			#user_answer {
+				margin: 0;
+			}
+			.correct,
+			.wrong {
+				color: #fff;
+			}
+			.correct {
+				background: #3c6;
+			}
+			.wrong {
+				background: #ef5350;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 8</h1>
+		<p>Задаємо користувачу задачу з додавання двох чисел. Визначити скільки секунд було використано для розв'язання задачі.</p>
+		<div class="sandbox">
+			<p>Розв'яжіть задачу: <span id="math_q"></span></p>
+			<input type="number" name="user_answer" id="user_answer" />
+			<h3 id="message"></h3>
+		</div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+
+			// Функція для генерації випадкових чисел x та y
+			const generateRandomNumbers = () => ({
+				x: Math.floor(Math.random() * 10) + 1, // Генеруємо від 1 до 10 включно
+				y: Math.floor(Math.random() * 10) + 1, // Генеруємо від 1 до 10 включно
+			})
+
+			const userCalc = () => {
+				// Отримуємо випадкові числа для завдання
+				const { x, y } = generateRandomNumbers()
+
+				// Запам'ятовуємо час початку виконання завдання
+				const start = new Date()
+
+				// Отримуємо доступ до HTML-елементів
+				const messageEl = document.getElementById('message')
+				const userIn = document.getElementById('user_answer')
+
+				// Обчислюємо правильну відповідь
+				const res = x + y
+
+				// Виводимо математичне завдання користувачу
+				document.getElementById('math_q').innerText = `${x} + ${y}`
+
+				// Додаємо слухача події введення тексту користувачем
+				userIn.addEventListener('input', () => {
+					// Отримуємо введену користувачем відповідь і перетворюємо її на ціле число
+					const userAnswer = parseInt(userIn.value)
+
+					// Перевіряємо, чи відповідь користувача правильна
+					const isCorrect = userAnswer === res
+
+					// Додаємо або видаляємо класи для візуального підсвічування
+					userIn.classList.toggle('correct', isCorrect)
+					userIn.classList.toggle('wrong', !isCorrect)
+
+					// Якщо поле вводу порожнє, видаляємо класи
+					if (userIn.value === '') {
+						userIn.classList.remove('correct', 'wrong')
+					}
+
+					// Отримуємо час завершення і обчислюємо тривалість виконання завдання
+					const end = new Date()
+					const timeCount = (end - start) / 1000
+
+					// Виводимо повідомлення про результат
+					messageEl.innerText = isCorrect ? `Вірно! Рішення зайняло: ${timeCount} секунд` : `Не вірно! Втрачено часу: ${timeCount} секунд`
+				})
+			}
+
+			userCalc()
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

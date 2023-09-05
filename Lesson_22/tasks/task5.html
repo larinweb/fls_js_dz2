@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L22 DZ task 5</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+			#user_bd {
+				margin: 0 0 1rem;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 5</h1>
+		<p>Користувач вводить дату народження. Визначити, скільки йому повних років.</p>
+		<div class="sandbox">
+			<form action="#" method="dialog" id="user_bd_form">
+				<input type="date" name="" id="user_bd" />
+				<button type="submit" class="button">Тиць</button>
+			</form>
+			<h2 id="result"></h2>
+		</div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+
+			// Функція для розрахунку віку на основі введеної дати народження
+			const calculateAge = () => {
+				const userBD = new Date(document.getElementById('user_bd').value) // Отримуємо введену дату народження користувача з поля вводу
+				const curDate = new Date() // Отримуємо поточну дату
+				const age = curDate.getFullYear() - userBD.getFullYear() // Обчислюємо вік, віднявши рік народження від поточного року
+				document.getElementById('result').textContent = `Вам ${age} років` // Виводимо результат в контейнер
+			}
+
+			// Обробник події для форми (відправки форми)
+			const form = document.getElementById('user_bd_form') // Отримуємо форму за її ідентифікатором
+			form.addEventListener('submit', (el) => {
+				el.preventDefault() // Забороняємо стандартну поведінку відправки форми
+				calculateAge() // Викликаємо функцію для розрахунку віку
+			})
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

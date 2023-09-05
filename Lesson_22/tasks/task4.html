@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L22 DZ task 4</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 4</h1>
+		<p>Вивести назву дня</p>
+		<div class="sandbox">
+			<h2 id="res"></h2>
+		</div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			const dayTtl = () => {
+				document.getElementById('res').textContent = new Date().toLocaleDateString('uk-UA', { weekday: 'long' })
+			}
+			window.onload = dayTtl
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

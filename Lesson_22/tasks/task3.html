@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L22 DZ task 3</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 3</h1>
+		<p>Визначити поточну пору року</p>
+		<div class="sandbox">
+			<h2 id="res"></h2>
+		</div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			const getCurrentSeason = () => {
+				const curDate = new Date()
+				const currentMonth = curDate.getMonth() + 1 // Додав +1, оскільки getMonth повертає значення від 0 до 11.
+
+				if (currentMonth >= 3 && currentMonth <= 5) {
+					return 'Весна'
+				} else if (currentMonth >= 6 && currentMonth <= 8) {
+					return 'Літо'
+				} else if (currentMonth >= 9 && currentMonth <= 11) {
+					return 'Осінь'
+				} else {
+					return 'Зима'
+				}
+			}
+
+			document.getElementById('res').textContent = `Поточна пора року: ${getCurrentSeason()}`
+			console.log(`Поточна пора року: ${getCurrentSeason()}`)
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L22 DZ task 1</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 1</h1>
+		<p>Визначити привітання у залежності від часу доби (Доброго дня, Доброго ранку, Доброго вечора)</p>
+		<div class="sandbox">
+			<h2 id="greetings_title">&nbsp;</h2>
+		</div>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			const ttl = () => {
+				let greetings
+				const curTime = new Date().getHours()
+				switch (true) {
+					case curTime >= 7 && curTime < 12:
+						greetings = 'Доброго ранку!'
+						break
+					case curTime >= 12 && curTime < 18:
+						greetings = 'Доброго дня!'
+						break
+					default:
+						greetings = 'Доброго вечора, ми з України'
+				}
+				document.getElementById('greetings_title').innerHTML = greetings
+				console.log(greetings)
+			}
+			window.onload = ttl
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>
