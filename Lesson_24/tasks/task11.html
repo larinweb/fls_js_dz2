@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L24 DZ task 11</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 11</h1>
+		<p>
+			Користувач може змінювати колір фону, що вибирає користувач з використанням. Зберігати цей колір i відновлювати при наступному відкритті.
+			Також зберігати i відображати кількість змін протягом одного сеансу.
+		</p>
+		<input type="color" id="color_input" />
+		<h4 id="change_count"></h4>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			const storageEl = window.sessionStorage
+			let changeCount = parseInt(storageEl.getItem('changeCount')) || 0
+			const bodyEl = document.body
+			const colorInput = document.getElementById('color_input')
+			const resEl = document.getElementById('change_count')
+
+			const updatePage = (selectedColor) => {
+				bodyEl.style.background = selectedColor
+				resEl.innerHTML = changeCount
+				storageEl.setItem('changeCount', changeCount)
+			}
+
+			colorInput.addEventListener('change', (event) => {
+				const selectedColor = event.target.value
+				storageEl.setItem('color_input', selectedColor)
+				changeCount++
+				updatePage(selectedColor)
+			})
+
+			if (storageEl.getItem('color_input')) {
+				updatePage(storageEl.getItem('color_input'))
+			}
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

@@ -53,6 +53,12 @@ ol p {
 	margin: 0;
 }
 
+ol h3 p {
+	margin-top: 1rem;
+	font-weight: normal;
+	font-size: 1.25rem;
+}
+
 ol a,
 button {
 	/* display: inline-block */
@@ -66,6 +72,15 @@ button {
 	font-weight: 400;
 	font-size: 2.25rem;
 	justify-content: space-between;
+}
+
+ol h3 a {
+	letter-spacing: 0.125rem;
+}
+
+ol h3 a span {
+	letter-spacing: normal;
+
 }
 
 .button_unstyled {

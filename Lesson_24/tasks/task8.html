@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L24 DZ task 8</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 8</h1>
+		<p>Дано масив студентів (піб, курс, факультет). Підрахувати кількість різних факультетів, та кількість студентів кожного з курсів.</p>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			const studentsArr = [
+				{ name: 'Іванов', course: 1, faculty: 'Факультет інформатики' },
+				{ name: 'Петров', course: 2, faculty: 'Факультет інформатики' },
+				{ name: 'Сидоров', course: 3, faculty: 'Факультет фізики' },
+				{ name: 'Коваленко', course: 1, faculty: 'Факультет історії' },
+				{ name: 'Лисенко', course: 2, faculty: 'Факультет інформатики' },
+				{ name: 'Бондаренко', course: 4, faculty: 'Факультет хімії' },
+				{ name: 'Шевченко', course: 1, faculty: 'Факультет історії' },
+				{ name: 'Гончаренко', course: 2, faculty: 'Факультет історії' },
+				{ name: 'русня', course: 'дно', faculty: 'Факультет ходіння на дно' },
+			]
+
+			// Кількість різних факультетів
+			const facultyNum = new Set(studentsArr.map((el) => el.faculty)).size
+			console.log(facultyNum + ` різних факультету`)
+
+			// Кількість студентів кожного з курсів
+			const courseMap = new Map()
+			studentsArr.forEach((st) => courseMap.set(st.course, (courseMap.get(st.course) ?? 0) + 1))
+			courseMap.forEach((val, key) => console.log(`${key} курс: ${val} студент`))
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

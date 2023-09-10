@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L24 DZ task 10</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 10</h1>
+		<p>
+			Дано два списки прізвищ студентів, що відвідують гуртки з математики i історії. Підрахувати скільки студентів з гуртка з історії також
+			відвідують гурток з математики. Також підрахувати скільки всього студентів відвідують хоча б один гурток.
+		</p>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			const historyClubUsers = ['Іванов', 'Петров', 'Кідрук', 'Пупкін']
+			const mathClubUsers = ['Іванов', 'Петров', 'Смирнов', 'Пупкін']
+
+			const crossAttend = historyClubUsers.filter((el) => mathClubUsers.includes(el)).length
+			console.log(`Кількість студентів, які відвідують обидва гуртки: ${crossAttend}`)
+
+			const totalClubUsers = new Set([...historyClubUsers, ...mathClubUsers]).size
+			console.log(`Загальна кількість студентів, які відвідують хоча б один гурток: ${totalClubUsers}`)
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

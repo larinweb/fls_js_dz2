@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L24 DZ task 7</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 7</h1>
+		<p>
+			Дано інформацію про відвідувачів деякого сайту (для кожного відвідувача зберігається логін). Підрахувати для кожного клієнта кількість
+			відвідувань.
+		</p>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			const loginsArr = [
+				{ id: '951753', login: 'Nagibator666' },
+				{ id: '582258', login: 'Gosha_KVA' },
+				{ id: '693369', login: 'Ivan' },
+				{ id: '741147', login: 'GigaChat' },
+				{ id: '951753', login: 'Nagibator666' },
+				{ id: '741147', login: 'GigaChat' },
+				{ id: '147741', login: 'Username' },
+				{ id: '852258', login: 'Cvetocheck' },
+				{ id: '741147', login: 'GigaChat' },
+				{ id: '369963', login: 'Zavala4Life' },
+				{ id: '852258', login: 'Cvetocheck' },
+				{ id: '741147', login: 'GigaChat' },
+				{ id: '369963', login: 'Zavala4Life' },
+				{ id: '147741', login: 'Username' },
+				{ id: '693369', login: 'Ivan' },
+				{ id: '582258', login: 'Gosha_KVA' },
+				{ id: '471147', login: '_Shuren_' },
+				{ id: '147741', login: 'Username' },
+				{ id: '852258', login: 'Cvetocheck' },
+				{ id: '369963', login: 'Zavala4Life' },
+				{ id: '258852', login: 'Exo_Stranger' },
+				{ id: '147741', login: 'Username' },
+				{ id: '693369', login: 'Ivan' },
+				{ id: '852258', login: 'Cvetocheck' },
+				{ id: '582258', login: 'Gosha_KVA' },
+			]
+
+			const visitCounts = new Map()
+
+			loginsArr.forEach((user) => {
+				visitCounts.set(user.login, (visitCounts.get(user.login) ?? 0) + 1)
+			})
+			visitCounts.forEach((val, key) => {
+				console.log(`${key}: ${val} відвідування`)
+			})
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L24 DZ task 12</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 12</h1>
+		<p>
+			Зберігати у пам'яті список справ, які користувачу треба виконати (зберігати у localStorage). Періодично випадковим чином вибирати якусь з
+			справ i виводити користувачу (з використанням confirm). Якщо користувач натискає на «Ок», то видаляти цю задачу.
+		</p>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			class TaskManager {
+				constructor() {
+					this.tasks = this.loadTasksFromLS()
+					this.startRandomTaskInterval()
+				}
+
+				loadTasksFromLS() {
+					return JSON.parse(localStorage.getItem('tasks')) || []
+				}
+
+				saveTasksToLS() {
+					localStorage.setItem('tasks', JSON.stringify(this.tasks))
+				}
+
+				add(task) {
+					this.tasks.push(task)
+					this.saveTasksToLS()
+				}
+
+				remove(task) {
+					const index = this.tasks.indexOf(task)
+					if (index !== -1) {
+						this.tasks.splice(index, 1)
+						this.saveTasksToLS()
+					}
+				}
+
+				getRandomInterval(min, max) {
+					return Math.floor(Math.random() * max) + min
+				}
+
+				showRandomTask() {
+					if (this.tasks.length > 0) {
+						const randomIndex = Math.floor(Math.random() * this.tasks.length)
+						const randomTask = this.tasks[randomIndex]
+						const isDone = confirm(`Завдання: ${randomTask}\nВиконане?`)
+						if (isDone) {
+							this.remove(randomTask)
+						}
+					}
+				}
+
+				startRandomTaskInterval() {
+					this.intervalId = setInterval(() => this.showRandomTask(), this.getRandomInterval(3000, 6000))
+				}
+
+				stopTaskInterval() {
+					clearInterval(this.intervalId)
+				}
+			}
+
+			const taskManager = new TaskManager()
+
+			// Додаємо справи до списку при завантаженні сторінки
+			;['Зробити покупки22', 'Виконати домашні завдання', 'Підготуватися до заняття', 'Зустріч з другом', 'Подивитися фільм'].forEach(
+				(task) => {
+					taskManager.add(task)
+				}
+			)
+
+			// Зупиняємо випадкове виведення після 60 секунд (для демонстрації)
+			setTimeout(() => {
+				taskManager.stopTaskInterval()
+			}, 60000)
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

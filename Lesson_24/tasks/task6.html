@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L24 DZ task 6</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 6</h1>
+		<p>Дано масив книг (назва, рік видання, автор). Підрахувати кількість книг для кожного автора.</p>
+
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			const booksArr = [
+				{ title: 'Книга 1', year: 2005, author: 'Автор 1' },
+				{ title: 'Книга 2', year: 2010, author: 'Автор 2' },
+				{ title: 'Книга 3', year: 2015, author: 'Автор 3' },
+				{ title: 'Книга 4', year: 2020, author: 'Автор 4' },
+				{ title: 'Книга 5', year: 2008, author: 'Автор 1' },
+				{ title: 'Книга 6', year: 2012, author: 'Автор 2' },
+				{ title: 'Книга 7', year: 2017, author: 'Автор 3' },
+				{ title: 'Книга 8', year: 2021, author: 'Автор 4' },
+				{ title: 'Книга 9', year: 2007, author: 'Автор 1' },
+			]
+			const bookPerAuthor = new Map()
+			booksArr.forEach((book) => {
+				bookPerAuthor.set(book.author, (bookPerAuthor.get(book.author) ?? 0) + 1)
+			})
+			console.log('Кількість книг кожного автора:', bookPerAuthor)
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>
