@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L25 DZ task 2</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 2</h1>
+		<p>
+			Дано Shop -- клас, що містить список товарів (масив об'єктів класу Product (назва, ціна, кількість одиниць)). Додати можливість ітератора
+			до класу Shop, щоб при ітеруванні для кожного елемента виводився рядок «товар-загальна вартість»
+		</p>
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			class Product {
+				constructor(name, price, quantity) {
+					Object.assign(this, { name, price, quantity })
+				}
+
+				getTotalPrice() {
+					return this.price * this.quantity
+				}
+			}
+
+			class Shop {
+				constructor() {
+					this.productsArr = []
+				}
+
+				addProduct(name, price, quantity) {
+					this.productsArr.push(new Product(name, price, quantity))
+				}
+
+				*[Symbol.iterator]() {
+					for (const prodEl of this.productsArr) {
+						yield `${prodEl.name} - ${prodEl.getTotalPrice()}`
+					}
+				}
+			}
+
+			const myShop = new Shop()
+			myShop.addProduct('Чай', 100, 2)
+			myShop.addProduct('Масло', 150, 3)
+			myShop.addProduct('Хліб', 50, 8)
+
+			for (const product of myShop) {
+				console.log(product)
+			}
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

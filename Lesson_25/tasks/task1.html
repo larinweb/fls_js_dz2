@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L25 DZ task 1</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+			#t1_wrap {
+				padding: 1.25rem;
+				border: 2px solid #adadad;
+				border-radius: 10px;
+			}
+			#t1_res {
+				display: flex;
+				flex-direction: column;
+				gap: 2rem;
+			}
+			#t1_res input {
+				height: 3.4375rem;
+				border-radius: 0.375rem;
+				font-size: 1.25rem;
+				padding-left: 1rem;
+			}
+			#t1_res button {
+				margin: 0;
+			}
+			#t1_wrap h3 {
+				margin-bottom: 0;
+				padding: 0;
+				color: #3c6;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 1</h1>
+		<p>
+			Дано клас PhoneNumber. Створити функцію перетворення до string, при якому на основі номера виводиться оператор (050…. -> MTC, 096… ->
+			Kyivstar, ….)
+		</p>
+		<div id="t1_wrap">
+			<label id="t1_res" for="num_in">
+				Введіть номер для визначення оператора:
+				<input type="number" id="num_in" value="" placeholder="Введіть номер повністю або тільки код оператора" />
+				<button id="check_btn">Перевірити</button>
+			</label>
+			<h3 id="res"></h3>
+		</div>
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+
+			const inputEl = document.getElementById('num_in')
+			const resEl = document.getElementById('res')
+			const checkBtn = document.getElementById('check_btn')
+
+			class PhoneNumber {
+				constructor(num) {
+					this.num = num.toString().padEnd(10, 'x') // Перетворення та доповнення номера до 10 символів
+				}
+
+				// Метод, який визначає, як об'єкт поводить себе при приведенні до різних типів
+				[Symbol.toPrimitive](hint) {
+					const operatorCodes = {
+						'050': 'Vodafone',
+						'066': 'Vodafone',
+						'095': 'Vodafone',
+						'099': 'Vodafone',
+						'067': 'Kyivstar',
+						'068': 'Kyivstar',
+						'096': 'Kyivstar',
+						'097': 'Kyivstar',
+						'098': 'Kyivstar',
+						'063': 'Life',
+						'073': 'Life',
+						'093': 'Life',
+					}
+
+					const code = this.num.slice(0, 3) // Отримання перших трьох цифр номера
+					const operator = operatorCodes[code] || 'Невідомий оператор' // Визначення оператора за кодом
+
+					switch (hint) {
+						case 'string':
+							return `${this.num} - ${operator}` // Виведення як рядок
+						case 'number':
+							return parseInt(this.num) // Виведення як число
+						default:
+							return `+38${this.num}` // Виведення за замовчуванням
+					}
+				}
+			}
+
+			const defOperator = () => {
+				const res = new PhoneNumber(inputEl.value)
+				resEl.innerHTML = res
+			}
+
+			// Обробка події натискання клавіші "Enter" у полі вводу
+			inputEl.addEventListener('keyup', (event) => {
+				if (event.key === 'Enter') {
+					defOperator()
+				}
+			})
+
+			// Обробка події кліку на кнопку "Перевірити"
+			checkBtn.addEventListener('click', defOperator)
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>

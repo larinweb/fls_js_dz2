@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LVS_UA L25 DZ task 3</title>
+		<link rel="stylesheet" href="../../style.css" />
+	</head>
+	<body class="result__body">
+		<!-- =========================================================================== -->
+
+		<style>
+			body {
+				transition: all 0.3s ease 0s;
+			}
+		</style>
+
+		<!-- =========================================================================== -->
+
+		<h1>Задача 3</h1>
+		<p>Створити генератор, який би випадковим чином поступово генерував вказану кількість парних чисел.</p>
+		<!-- =========================================================================== -->
+
+		<script>
+			'use strict'
+			class RandomNumGenerator {
+				constructor(min, max) {
+					this.min = min
+					this.max = max
+				}
+				genRandomEvenNum() {
+					let randomNum = Math.floor(Math.random() * this.max) + this.min + 1
+					if (randomNum % 2 !== 0) {
+						randomNum++
+					}
+					return randomNum
+				}
+				*genRandomEvenNumbers(count) {
+					for (let i = 0; i < count; i++) {
+						yield this.genRandomEvenNum()
+					}
+				}
+			}
+			const generator = new RandomNumGenerator(1, 100) //
+			const generatedNumbers = [...generator.genRandomEvenNumbers(10)]
+
+			console.log(generatedNumbers)
+		</script>
+
+		<!-- =========================================================================== -->
+	</body>
+</html>
